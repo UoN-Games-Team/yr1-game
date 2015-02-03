@@ -1,5 +1,6 @@
 package com.djammr.westernknights.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.djammr.westernknights.WKGame;
 
 import java.util.HashMap;
@@ -31,10 +32,12 @@ public class ScreenManager {
     public void setScreen(String screen) {
         if (!screen.equals("loading") && !currentScreen.equals("loading")) game.setScreen(registeredScreens.get("loading"));
         if (registeredScreens.containsKey(screen)) {
-            WKGame.logger.logDebug("Setting screen: " + screen);
+            WKGame.logger.logDebug("Loading Screen: " + screen);
             prevScreen = currentScreen;
             currentScreen = screen;
+            // TODO: Continue to run the loading screen render method
             registeredScreens.get(screen).load();
+            WKGame.logger.logDebug("Setting Screen: " + screen);
             game.setScreen(registeredScreens.get(screen));
         } else {
             WKGame.logger.logError("Screen does not exist! Use addScreen()", new NullPointerException());

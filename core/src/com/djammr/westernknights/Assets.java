@@ -14,6 +14,11 @@ public class Assets {
     // Add all asset paths here and reference when loading assets
     public static String testTexture = "images/test.png";
 
+    // Test Level
+    public static String lvlsProject = "levels/test/project.dt";
+    public static String lvlsAtlas = "levels/test/orig/pack.atlas";
+    public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
+
 
     /**
      * Creates the AssetManager instance

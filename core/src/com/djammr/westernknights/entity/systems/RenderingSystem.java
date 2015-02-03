@@ -8,10 +8,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.djammr.westernknights.Assets;
-import com.djammr.westernknights.entity.components.Box2DComponent;
+import com.djammr.westernknights.entity.components.TransformComponent;
 
 
 /**
@@ -19,17 +17,17 @@ import com.djammr.westernknights.entity.components.Box2DComponent;
  */
 public class RenderingSystem extends IteratingSystem {
 
-    private ComponentMapper<Box2DComponent> b2DComp = ComponentMapper.getFor(Box2DComponent.class);
+    private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
 
     /**
-     * @param camWidth Camera frutsum width in meters
+     * @param camWidth Camera frustum width in meters
      * @param camHeight Camera frustum height in meters
      */
-    public RenderingSystem(int camWidth, int camHeight) {
-        super(Family.all(Box2DComponent.class).get());
+    public RenderingSystem(float camWidth, float camHeight) {
+        super(Family.all(TransformComponent.class).get());
         camera = new OrthographicCamera(camWidth, camHeight);
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
@@ -54,7 +52,6 @@ public class RenderingSystem extends IteratingSystem {
     }
 
     private void render(Entity entity) {
-        batch.draw(Assets.manager.get(Assets.testTexture, Texture.class), b2DComp.get(entity).body.getPosition().x, b2DComp.get(entity).body.getPosition().y, 1f, 1.8f);
     }
 
     @Override

@@ -15,6 +15,8 @@ import com.djammr.westernknights.util.Logger;
  */
 public class WKGame extends Game {
 
+	public static final float METERS_TO_PIXELS = 60f;
+	public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 	public static final Logger logger = new ConsoleLogger();
 
 	private ScreenManager screenManager;

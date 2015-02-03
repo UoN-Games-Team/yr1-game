@@ -21,7 +21,7 @@ public class GameScreen extends WKScreen {
 
     @Override
     public void load() {
-        world.load();
+        world.doLoad();
         super.load();
     }
 
