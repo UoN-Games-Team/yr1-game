@@ -6,11 +6,3 @@ com.djammr.westernknights.levels
 com.djammr.westernknights.screens
 com.djammr.westernknights.util
 com.djammr.westernknights.util.loaders
-com.uwsoft.editor.renderer
-com.uwsoft.editor.renderer.actor
-com.uwsoft.editor.renderer.data
-com.uwsoft.editor.renderer.physics
-com.uwsoft.editor.renderer.resources
-com.uwsoft.editor.renderer.script
-com.uwsoft.editor.renderer.utils
-tests
