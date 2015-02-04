@@ -1,6 +1,8 @@
 package com.djammr.westernknights.screens;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
@@ -10,11 +12,14 @@ import com.djammr.westernknights.WKGame;
  */
 public abstract class WKScreen implements Screen {
 
+    protected InputMultiplexer inputMultiplexer;
     protected WKGame game;
 
 
     public WKScreen(WKGame game) {
         this.game = game;
+        inputMultiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     /**
@@ -42,5 +47,13 @@ public abstract class WKScreen implements Screen {
     @Override
     public void hide() {
 
+    }
+
+    /**
+     * Gets the InputMultiplexer for this Screen. You should add any InputProcessors to this.
+     * @return this Screen's InputMultiplexer instance
+     */
+    public InputMultiplexer getInputMultiplexer() {
+        return inputMultiplexer;
     }
 }

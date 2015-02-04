@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.*;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.components.TransformComponent;
+import com.djammr.westernknights.entity.components.VisualComponent;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.util.MeshData;
 

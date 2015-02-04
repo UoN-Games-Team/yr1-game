@@ -6,10 +6,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.entity.components.TransformComponent;
+import com.djammr.westernknights.entity.components.VisualComponent;
+import sun.awt.X11.Visual;
 
 
 /**
@@ -18,6 +22,9 @@ import com.djammr.westernknights.entity.components.TransformComponent;
 public class RenderingSystem extends IteratingSystem {
 
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
+    private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
+
+    public float[] bgColour = {0, 0, 0, 0};
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
@@ -27,7 +34,7 @@ public class RenderingSystem extends IteratingSystem {
      * @param camHeight Camera frustum height in meters
      */
     public RenderingSystem(float camWidth, float camHeight) {
-        super(Family.all(TransformComponent.class).get());
+        super(Family.all(TransformComponent.class, VisualComponent.class).get());
         camera = new OrthographicCamera(camWidth, camHeight);
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
@@ -36,7 +43,7 @@ public class RenderingSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(bgColour[0], bgColour[1], bgColour[2], bgColour[3]);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
@@ -52,6 +59,8 @@ public class RenderingSystem extends IteratingSystem {
     }
 
     private void render(Entity entity) {
+        VisualComponent visc = vism.get(entity);
+        visc.sprite.draw(batch);
     }
 
     @Override

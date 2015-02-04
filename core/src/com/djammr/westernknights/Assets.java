@@ -1,6 +1,15 @@
 package com.djammr.westernknights;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Manages a libGDX AssetManager. Load and request assets through this class.<br/>
@@ -10,13 +19,22 @@ import com.badlogic.gdx.assets.AssetManager;
 public class Assets {
 
     public static AssetManager manager;
+    public static Map<String, BitmapFont> fonts = new HashMap<String, BitmapFont>();
 
     // Add all asset paths here and reference when loading assets
     public static String testTexture = "images/test.png";
+    public static String loadingTexture = "images/loading.png";
 
-    // Test Level
-    public static String lvlsProject = "levels/test/project.dt";
-    public static String lvlsAtlas = "levels/test/orig/pack.atlas";
+    // UI
+    public static Skin skinDefault;
+    public static String skinDefaultJson = "images/ui/skins/default/uiskin.json";
+
+    // Overlap2D Project
+    public static String overlap2DProject = "levels/test/project.dt";
+    public static String overlap2DAtlas = "levels/test/orig/pack.atlas";
+    public static String overlap2DFonts = "levels/test/freetypefonts";
+    // Scenes
+    public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
 
 
@@ -26,6 +44,9 @@ public class Assets {
     public static void init() {
         manager = new AssetManager();
         // Put assets you want to cache at the start of the game here
+        skinDefault = new Skin(Gdx.files.internal(skinDefaultJson));
+        load(Assets.testTexture, Texture.class);
+        load(Assets.overlap2DAtlas, TextureAtlas.class);
     }
 
     /**
@@ -37,6 +58,35 @@ public class Assets {
         if (!manager.isLoaded(path)) {
             manager.load(path, type);
         }
+    }
+
+    /**
+     * Gets a font from the cache if it exists otherwise creates it based on the following arguments
+     * @param fontID id of the font, must be in the format: {ttf-file-name}-{size}
+     * @param defaultPath path to the ttf file used to create the font if it doesn't exist
+     * @return the BitmapFont or null if it doesn't exist and no path is provided
+     */
+    public static BitmapFont getFont(String fontID, String defaultPath) {
+        if (fonts.containsKey(fontID)) {
+            return fonts.get(fontID);
+        }
+        else if (defaultPath != null) {
+            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(defaultPath));
+            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            parameter.size = Integer.parseInt(fontID.split("-")[1]);
+            BitmapFont font = generator.generateFont(parameter);
+            generator.dispose();
+            fonts.put(fontID, font);
+            return font;
+        }
+        return null;
+    }
+
+    /**
+     * see {@link #getFont}
+     */
+    public static BitmapFont getFont(String fontID) {
+        return getFont(fontID, null);
     }
 
     /**

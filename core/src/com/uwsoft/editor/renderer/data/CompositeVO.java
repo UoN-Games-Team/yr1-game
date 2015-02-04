@@ -259,14 +259,17 @@ public class CompositeVO {
         return finalList;
     }
 
-    public ArrayList<MainItemVO> getAllItems() {
+    public ArrayList<MainItemVO> getAllItems(boolean unpackComposites) {
         ArrayList<MainItemVO> itemsList = new ArrayList<>();
-        itemsList = getAllItemsRecursive(itemsList, this);
+        itemsList = getAllItemsRecursive(itemsList, this, unpackComposites);
 
         return itemsList;
     }
+    public ArrayList<MainItemVO> getAllItems() {
+        return getAllItems(true);
+    }
 
-    private ArrayList<MainItemVO> getAllItemsRecursive(ArrayList<MainItemVO> itemsList, CompositeVO compositeVo) {
+    private ArrayList<MainItemVO> getAllItemsRecursive(ArrayList<MainItemVO> itemsList, CompositeVO compositeVo, boolean unpackComposites) {
         for(MainItemVO vo: compositeVo.sButtons) {
             itemsList.add(vo);
         }
@@ -301,10 +304,16 @@ public class CompositeVO {
             itemsList.add(vo);
         }
         for(CompositeItemVO vo: compositeVo.sComposites) {
-            itemsList = getAllItemsRecursive(itemsList,vo.composite);
+            if (unpackComposites) {
+                itemsList = getAllItemsRecursive(itemsList, vo.composite);
+            }
             itemsList.add(vo);
         }
 
         return itemsList;
+    }
+
+    private ArrayList<MainItemVO> getAllItemsRecursive(ArrayList<MainItemVO> itemsList, CompositeVO compositeVo) {
+        return getAllItemsRecursive(itemsList, compositeVo, true);
     }
 }

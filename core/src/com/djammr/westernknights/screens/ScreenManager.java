@@ -1,6 +1,5 @@
 package com.djammr.westernknights.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.djammr.westernknights.WKGame;
 
 import java.util.HashMap;
@@ -14,15 +13,14 @@ public class ScreenManager {
 
     private final WKGame game;
     private Map<String, WKScreen> registeredScreens = new HashMap<String, WKScreen>();
-    private String prevScreen;
-    private String currentScreen;
+    private String prevScreen = "";
+    private String currentScreen = "";
 
 
     public ScreenManager(WKGame game) {
         this.game = game;
         // Default loading screen, users can overwrite this with their own
         addScreen("loading", new LoadingScreen(game));
-        setScreen("loading");
     }
 
     /**
@@ -30,12 +28,12 @@ public class ScreenManager {
      * @param screen Name of the registered screen
      */
     public void setScreen(String screen) {
-        if (!screen.equals("loading") && !currentScreen.equals("loading")) game.setScreen(registeredScreens.get("loading"));
+        if (!currentScreen.equals("loading")) game.setScreen(registeredScreens.get("loading"));
         if (registeredScreens.containsKey(screen)) {
             WKGame.logger.logDebug("Loading Screen: " + screen);
             prevScreen = currentScreen;
             currentScreen = screen;
-            // TODO: Continue to run the loading screen render method
+
             registeredScreens.get(screen).load();
             WKGame.logger.logDebug("Setting Screen: " + screen);
             game.setScreen(registeredScreens.get(screen));
