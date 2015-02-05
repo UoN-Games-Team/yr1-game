@@ -18,6 +18,7 @@ public class GameScreen extends WKScreen {
 
     private List<UIController> uiControllers = new ArrayList<UIController>();
     private WKWorld world;
+    private Thread mapThread;
 
 
     public GameScreen(WKGame game) {

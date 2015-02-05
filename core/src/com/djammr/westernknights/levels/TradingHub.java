@@ -1,10 +1,10 @@
 package com.djammr.westernknights.levels;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.Texture;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKWorld;
-import com.djammr.westernknights.util.loaders.Overlap2DLoader;
+import com.djammr.westernknights.util.AssetLoaders.Overlap2DMapLoader;
+import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DMapSettings;
 
 
 /**
@@ -16,10 +16,15 @@ public class TradingHub extends WKWorld {
         super(); // Make sure you call super() on all levels!
     }
 
+
     @Override
     public void load() {
-        Overlap2DLoader.loadMap(Gdx.files.internal(Assets.overlap2DProject),
-                Gdx.files.internal(Assets.lvlTestScene),
-                Assets.manager.get(Assets.overlap2DAtlas, TextureAtlas.class), getEntities());
+        // Box texture
+        Assets.load(Assets.testTexture, Texture.class);
+
+        // Level
+        Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();
+        params.set(Assets.overlap2DProject, Assets.lvlTestScene, Assets.overlap2DAtlas, getEntities());
+        Assets.manager.load(Assets.lvlTest, Overlap2DMapSettings.class, params);
     }
 }

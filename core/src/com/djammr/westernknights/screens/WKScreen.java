@@ -26,7 +26,7 @@ public abstract class WKScreen implements Screen {
      * Define assets to load (Assets.manager.load(path, type)) then call super.load()
      */
     public void load() {
-        Assets.manager.finishLoading();
+        //Assets.manager.finishLoading();
     }
 
     @Override

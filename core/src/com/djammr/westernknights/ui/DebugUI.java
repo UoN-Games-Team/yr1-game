@@ -1,13 +1,16 @@
 package com.djammr.westernknights.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetLoaderParameters;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.util.AssetLoaders.Overlap2DUILoader;
+import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DUISettings;
 import com.djammr.westernknights.util.Controllers.DebugController;
 import com.djammr.westernknights.util.Observer.Observable;
-import com.djammr.westernknights.util.loaders.Overlap2DLoader;
+import com.djammr.westernknights.util.Loaders.Overlap2DLoader;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
@@ -42,9 +45,21 @@ public class DebugUI extends UIView {
     @Override
     public void createUI() {
         TMB = ManagementFactory.getThreadMXBean();
-        Overlap2DLoader.loadUI(Gdx.files.internal(Assets.overlap2DProject),
+        /*Overlap2DLoader.loadUI(Gdx.files.internal(Assets.overlap2DProject),
                                Gdx.files.internal(Assets.uiDebugScene),
-                               Assets.overlap2DFonts, stage, actors);
+                               Assets.overlap2DFonts, stage, actors);*/
+        Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
+        params.set(Assets.overlap2DProject, Assets.uiDebugScene, Assets.overlap2DFonts, stage, actors);
+        params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
+            @Override
+            public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
+                loadUI();
+            }
+        };
+        Assets.manager.load(Assets.uiDebug, Overlap2DUISettings.class, params);
+    }
+
+    public void loadUI() {
         txtCodename = (Label)actors.get("txtCodename");
         txtFPS = (Label)actors.get("txtFPS");
         txtCPU = (Label)actors.get("txtCPU");

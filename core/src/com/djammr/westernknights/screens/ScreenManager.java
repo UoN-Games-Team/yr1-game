@@ -25,21 +25,36 @@ public class ScreenManager {
 
     /**
      * Changes the game screen to the requested screen
-     * @param screen Name of the registered screen
+     * @param screen Name of the registered screen to set
+     * @param preLoad Whether to show the loading screen while loading the target screen
      */
-    public void setScreen(String screen) {
-        if (!currentScreen.equals("loading")) game.setScreen(registeredScreens.get("loading"));
+    public void setScreen(String screen, boolean preLoad) {
+        if (preLoad && !currentScreen.equals("loading")) {
+            game.setScreen(registeredScreens.get("loading"));
+        }
         if (registeredScreens.containsKey(screen)) {
             WKGame.logger.logDebug("Loading Screen: " + screen);
             prevScreen = currentScreen;
             currentScreen = screen;
 
-            registeredScreens.get(screen).load();
-            WKGame.logger.logDebug("Setting Screen: " + screen);
-            game.setScreen(registeredScreens.get(screen));
+            if (preLoad) {
+                registeredScreens.get(screen).load();
+                ((LoadingScreen) game.getScreen()).setTarget(screen);
+            } else {
+                WKGame.logger.logDebug("Setting Screen: " + screen);
+                game.setScreen(registeredScreens.get(screen));
+            }
         } else {
             WKGame.logger.logError("Screen does not exist! Use addScreen()", new NullPointerException());
         }
+    }
+
+    /**
+     * Changes the game screen to the requested screen. Shows the loading screen while loading the target screen.<br/>
+     * @param screen Name of the registered screen to set
+     */
+    public void setScreen(String screen) {
+        setScreen(screen, true);
     }
 
     /**

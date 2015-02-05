@@ -38,9 +38,10 @@ public abstract class WKWorld {
 
     /**
      * Load assets and entities here. Will only run once during the world's life cycle. <br/>
-     * Asset.manager.finishloading() is called by the screen automatically
+     * Asset.manager.finishloading() is called automatically
      */
     public abstract void load();
+
 
     public void update(float delta) {
         entities.update(delta);

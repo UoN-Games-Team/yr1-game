@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.djammr.westernknights.util.AssetLoaders.Overlap2DMapLoader;
+import com.djammr.westernknights.util.AssetLoaders.Overlap2DUILoader;
+import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DMapSettings;
+import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DUISettings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,16 +41,20 @@ public class Assets {
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
 
+    // Loaded Overlap2D scene from Overlap2DLoaders. TODO: Add ability to load them again from get (or just cache)
+    public static String lvlTest = "lvlTest";
+    public static String uiDebug = "uiDebug";
+
 
     /**
      * Creates the AssetManager instance
      */
     public static void init() {
         manager = new AssetManager();
+        manager.setLoader(Overlap2DMapSettings.class, new Overlap2DMapLoader());
+        manager.setLoader(Overlap2DUISettings.class, new Overlap2DUILoader());
         // Put assets you want to cache at the start of the game here
         skinDefault = new Skin(Gdx.files.internal(skinDefaultJson));
-        load(Assets.testTexture, Texture.class);
-        load(Assets.overlap2DAtlas, TextureAtlas.class);
     }
 
     /**

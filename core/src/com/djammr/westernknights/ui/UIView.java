@@ -25,7 +25,7 @@ public abstract class UIView extends View {
     }
 
     /**
-     * Create your UI here
+     * Load your UI here
      */
     public abstract void createUI();
 

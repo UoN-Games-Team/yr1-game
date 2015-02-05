@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.loaders;
+package com.djammr.westernknights.util.Loaders;
 
 import box2dLight.ConeLight;
 import box2dLight.Light;
@@ -6,9 +6,9 @@ import box2dLight.PointLight;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -34,7 +34,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Loads maps and UIs from an Overlap2D project
@@ -94,11 +93,6 @@ public class Overlap2DLoader {
      * @param entityManager {@link com.djammr.westernknights.entity.EntityManager} instance to add entities to
      */
     public static void loadMap(FileHandle projectPath, FileHandle scenePath, TextureAtlas atlas, EntityManager entityManager) {
-        /*try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
         WKGame.logger.logDebug("Loading Overlap2D Scene: " + scenePath);
         setHandles(projectPath, scenePath);
         b2dSystem = entityManager.getEngine().getSystem(Box2DSystem.class);
@@ -244,14 +238,22 @@ public class Overlap2DLoader {
         }
     }
 
-    private static void addLabel(LabelVO label) {
-        Label nlabel = new Label(label.text, Assets.skinDefault);
+    private static void addLabel(final LabelVO label) {
+        final Label nlabel = new Label(label.text, Assets.skinDefault);
         nlabel.setPosition(label.x, label.y);
         nlabel.setRotation(label.rotation);
         nlabel.setAlignment(label.align);
-        nlabel.setStyle(new Label.LabelStyle(Assets.getFont(label.style + "-" + label.size, fontPath+"/"+label.style+".ttf"), new Color(label.tint[0], label.tint[1], label.tint[2], label.tint[3])));
+        //nlabel.setStyle(new Label.LabelStyle(Assets.getFont(label.style + "-" + label.size, fontPath+"/"+label.style+".ttf"), new Color(label.tint[0], label.tint[1], label.tint[2], label.tint[3])));
         stage.addActor(nlabel);
         actors.put(label.itemIdentifier, nlabel);
+
+        // Queue adding Label style as it requires an OpenGL Context
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                nlabel.setStyle(new Label.LabelStyle(Assets.getFont(label.style + "-" + label.size, fontPath+"/"+label.style+".ttf"), new Color(label.tint[0], label.tint[1], label.tint[2], label.tint[3])));
+            }
+        });
     }
 
     /**
