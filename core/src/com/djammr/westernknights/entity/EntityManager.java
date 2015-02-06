@@ -19,7 +19,7 @@ import java.util.Map;
 public class EntityManager {
 
     private Engine ashley;
-    /** ZbeEntity Maps arranged by user defined type **/
+    /** Entity Maps arranged by user defined type **/
     private Map<String, List<Entity>> entities = new HashMap<String, List<Entity>>();
 
 
@@ -33,7 +33,7 @@ public class EntityManager {
 
     /**
      * Adds an entity to the world grouped by type
-     * @param entity ZbeEntity instance to add
+     * @param entity Entity instance to add
      * @param type type to group this entity under. E.g. wall
      */
     public void addEntity(Entity entity, String type) {

@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.entity.components.TransformComponent;
 import com.djammr.westernknights.entity.components.VisualComponent;
-import sun.awt.X11.Visual;
 
 
 /**

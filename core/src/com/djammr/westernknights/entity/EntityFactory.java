@@ -17,6 +17,7 @@ import java.util.List;
 public class EntityFactory {
 
 
+    // TODO
     public static Entity createEntity(Box2DSystem box2DSystem, Component... components) {
         Entity entity = new Entity();
         entity.add(new Box2DComponent());

@@ -9,7 +9,9 @@ import com.djammr.westernknights.util.Controllers.DebugController;
 import com.djammr.westernknights.util.Controllers.UIController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Main Game screen
@@ -17,20 +19,19 @@ import java.util.List;
 public class GameScreen extends WKScreen {
 
     private List<UIController> uiControllers = new ArrayList<UIController>();
-    private WKWorld world;
-    private Thread mapThread;
+    private Map<String, WKWorld> worlds = new HashMap<String, WKWorld>();
+    private WKWorld currentWorld;
 
 
     public GameScreen(WKGame game) {
         super(game);
         Box2D.init();
-        setWorld(new TradingHub());
+        addWorld("trading_hub", new TradingHub());
     }
 
     @Override
     public void load() {
-        world.doLoad();
-
+        setWorld("trading_hub");
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
         uiControllers.add(dbgController);
@@ -45,7 +46,7 @@ public class GameScreen extends WKScreen {
 
     @Override
     public void render(float delta) {
-        if (world != null) world.update(delta);
+        if (currentWorld != null) currentWorld.update(delta);
 
         for (UIController controller : uiControllers) {
             controller.update(delta);
@@ -65,16 +66,36 @@ public class GameScreen extends WKScreen {
             controller.dispose();
         }
         uiControllers.clear();
-        if (world != null) world.dispose();
+
+        for (WKWorld world : worlds.values()) {
+            world.dispose();
+        }
     }
 
-    public void setWorld(WKWorld world) {
+    /**
+     * Changes the world to the registered world identified by name. The world will be loaded if it hasn't been already
+     * @param name name/ID the world was registered as
+     */
+    public void setWorld(String name) {
         game.getScreens().setScreen("loading");
-        if (this.world != null) this.world.dispose();
-        this.world = world;
+        currentWorld = worlds.get(name);
+        currentWorld.doLoad();
+    }
+
+    /**
+     * Adds a world to the list of worlds for retrieval later
+     * @param name name/ID to identify the world
+     * @param world {@link WKWorld} instance
+     */
+    public void addWorld(String name, WKWorld world) {
+        worlds.put(name, world);
     }
 
     public WKWorld getWorld() {
-        return world;
+        return currentWorld;
+    }
+
+    public Map<String, WKWorld> getWorlds() {
+        return worlds;
     }
 }
