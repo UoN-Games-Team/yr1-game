@@ -26,7 +26,7 @@ public class InputMapper extends WKInput {
     }
 
     /**
-     * XBox One: Joysticks, Triggers
+     * XBox 360 & One: Joysticks, Triggers
      */
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
@@ -35,7 +35,7 @@ public class InputMapper extends WKInput {
     }
 
     /**
-     * XBox One: D-Pad
+     * XBox 360 & One: D-Pad
      */
     @Override
     public boolean povMoved(Controller controller, int povCode, PovDirection value) {
