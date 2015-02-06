@@ -6,11 +6,10 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
-import com.djammr.westernknights.util.AssetLoaders.Overlap2DUILoader;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DUISettings;
-import com.djammr.westernknights.util.Controllers.DebugController;
-import com.djammr.westernknights.util.Observer.Observable;
-import com.djammr.westernknights.util.Loaders.Overlap2DLoader;
+import com.djammr.westernknights.util.assetloaders.Overlap2DUILoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
+import com.djammr.westernknights.util.controllers.DebugController;
+import com.djammr.westernknights.util.observers.Observable;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;

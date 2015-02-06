@@ -1,9 +1,8 @@
-package com.djammr.westernknights.util.Controllers;
+package com.djammr.westernknights.util.controllers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.djammr.westernknights.screens.WKScreen;
 import com.djammr.westernknights.ui.UIView;
-import com.djammr.westernknights.util.View;
 
 /**
  * Suggested base for User Interface Controllers, regardless of whether the view is a fancy GUI or a humble text based system

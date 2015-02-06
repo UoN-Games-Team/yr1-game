@@ -2,7 +2,7 @@ package com.djammr.westernknights.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.djammr.westernknights.util.Controllers.UIController;
+import com.djammr.westernknights.util.controllers.UIController;
 import com.djammr.westernknights.util.View;
 
 import java.util.HashMap;

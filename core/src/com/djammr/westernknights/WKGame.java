@@ -2,10 +2,14 @@ package com.djammr.westernknights;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.djammr.westernknights.screens.GameScreen;
 import com.djammr.westernknights.screens.ScreenManager;
 import com.djammr.westernknights.util.ConsoleLogger;
 import com.djammr.westernknights.util.Logger;
+
+import javax.naming.ldap.Control;
 
 /**
  * Game entry point

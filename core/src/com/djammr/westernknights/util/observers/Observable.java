@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.Observer;
+package com.djammr.westernknights.util.observers;
 
 public interface Observable {
     public abstract void registerObserver(Observer o);

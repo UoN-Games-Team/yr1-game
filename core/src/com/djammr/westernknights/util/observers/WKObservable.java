@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.Observer;
+package com.djammr.westernknights.util.observers;
 
 import java.util.ArrayList;
 import java.util.HashMap;

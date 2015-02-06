@@ -4,9 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.djammr.westernknights.WKGame;
-import com.djammr.westernknights.entity.systems.Box2DSystem;
-import com.djammr.westernknights.entity.systems.RenderingSystem;
-import com.djammr.westernknights.util.Observer.WKObservable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

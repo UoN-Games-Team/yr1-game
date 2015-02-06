@@ -105,7 +105,7 @@
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../com/djammr/westernknights/util/Observer/Observer.html" title="interface in com.djammr.westernknights.util.Observer">Observer</a></dd>
+<dd><a href="../../../../com/djammr/westernknights/util/Observer/Observer.html" title="interface in com.djammr.westernknights.util.observers">Observer</a></dd>
 </dl>
 <hr>
 <br>
@@ -176,7 +176,7 @@ extends <a href="../../../../com/djammr/westernknights/ui/UIView.html" title="cl
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="../../../../com/djammr/westernknights/ui/DebugUI.html#DebugUI(com.djammr.westernknights.util.Controllers.DebugController)">DebugUI</a></strong>(<a href="../../../../com/djammr/westernknights/util/Controllers/DebugController.html" title="class in com.djammr.westernknights.util.Controllers">DebugController</a>&nbsp;controller)</code>&nbsp;</td>
+<td class="colOne"><code><strong><a href="../../../../com/djammr/westernknights/ui/DebugUI.html#DebugUI(com.djammr.westernknights.util.Controllers.DebugController)">DebugUI</a></strong>(<a href="../../../../com/djammr/westernknights/util/Controllers/DebugController.html" title="class in com.djammr.westernknights.util.controllers">DebugController</a>&nbsp;controller)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -214,12 +214,12 @@ extends <a href="../../../../com/djammr/westernknights/ui/UIView.html" title="cl
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../com/djammr/westernknights/ui/DebugUI.html#render(float)">render</a></strong>(float&nbsp;delta)</code>
-<div class="block">Should be called each frame from the <a href="../../../../com/djammr/westernknights/util/Controllers/UIController.html" title="class in com.djammr.westernknights.util.Controllers"><code>UIController</code></a>.</div>
+<div class="block">Should be called each frame from the <a href="../../../../com/djammr/westernknights/util/Controllers/UIController.html" title="class in com.djammr.westernknights.util.controllers"><code>UIController</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../../com/djammr/westernknights/ui/DebugUI.html#update(com.djammr.westernknights.util.Observer.Observable,%20java.util.Map)">update</a></strong>(<a href="../../../../com/djammr/westernknights/util/Observer/Observable.html" title="interface in com.djammr.westernknights.util.Observer">Observable</a>&nbsp;obs,
+<td class="colLast"><code><strong><a href="../../../../com/djammr/westernknights/ui/DebugUI.html#update(com.djammr.westernknights.util.Observer.Observable,%20java.util.Map)">update</a></strong>(<a href="../../../../com/djammr/westernknights/util/Observer/Observable.html" title="interface in com.djammr.westernknights.util.observers">Observable</a>&nbsp;obs,
       java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;data)</code>&nbsp;</td>
 </tr>
 </table>
@@ -319,7 +319,7 @@ extends <a href="../../../../com/djammr/westernknights/ui/UIView.html" title="cl
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DebugUI</h4>
-<pre>public&nbsp;DebugUI(<a href="../../../../com/djammr/westernknights/util/Controllers/DebugController.html" title="class in com.djammr.westernknights.util.Controllers">DebugController</a>&nbsp;controller)</pre>
+<pre>public&nbsp;DebugUI(<a href="../../../../com/djammr/westernknights/util/Controllers/DebugController.html" title="class in com.djammr.westernknights.util.controllers">DebugController</a>&nbsp;controller)</pre>
 </li>
 </ul>
 </li>
@@ -362,7 +362,7 @@ extends <a href="../../../../com/djammr/westernknights/ui/UIView.html" title="cl
 <h4>render</h4>
 <pre>public&nbsp;void&nbsp;render(float&nbsp;delta)</pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../com/djammr/westernknights/ui/UIView.html#render(float)">UIView</a></code></strong></div>
-<div class="block">Should be called each frame from the <a href="../../../../com/djammr/westernknights/util/Controllers/UIController.html" title="class in com.djammr.westernknights.util.Controllers"><code>UIController</code></a>. Make sure you call super.render()!</div>
+<div class="block">Should be called each frame from the <a href="../../../../com/djammr/westernknights/util/Controllers/UIController.html" title="class in com.djammr.westernknights.util.controllers"><code>UIController</code></a>. Make sure you call super.render()!</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../com/djammr/westernknights/ui/UIView.html#render(float)">render</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/djammr/westernknights/ui/UIView.html" title="class in com.djammr.westernknights.ui">UIView</a></code></dd>
@@ -388,7 +388,7 @@ extends <a href="../../../../com/djammr/westernknights/ui/UIView.html" title="cl
 <ul class="blockList">
 <li class="blockList">
 <h4>update</h4>
-<pre>public&nbsp;void&nbsp;update(<a href="../../../../com/djammr/westernknights/util/Observer/Observable.html" title="interface in com.djammr.westernknights.util.Observer">Observable</a>&nbsp;obs,
+<pre>public&nbsp;void&nbsp;update(<a href="../../../../com/djammr/westernknights/util/Observer/Observable.html" title="interface in com.djammr.westernknights.util.observers">Observable</a>&nbsp;obs,
           java.util.Map&lt;java.lang.String,java.lang.Object&gt;&nbsp;data)</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>obs</code> - The Observable instance that has changed</dd><dd><code>data</code> - The changed data from the Observable</dd></dl>
 </li>

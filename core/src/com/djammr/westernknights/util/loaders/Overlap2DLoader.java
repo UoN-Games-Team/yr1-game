@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.Loaders;
+package com.djammr.westernknights.util.loaders;
 
 import box2dLight.ConeLight;
 import box2dLight.Light;

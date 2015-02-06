@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.AssetLoaders;
+package com.djammr.westernknights.util.assetloaders;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -10,8 +10,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.djammr.westernknights.entity.EntityManager;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DMapSettings;
-import com.djammr.westernknights.util.Loaders.Overlap2DLoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings;
+import com.djammr.westernknights.util.loaders.Overlap2DLoader;
 
 /**
  * Loads and Overlap2D Scene to a {@link com.djammr.westernknights.WKWorld} and returns a setting file.<br/>

@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.AssetLoaders;
+package com.djammr.westernknights.util.assetloaders;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
@@ -7,15 +7,12 @@ import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import com.djammr.westernknights.WKGame;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DUISettings;
-import com.djammr.westernknights.util.Loaders.Overlap2DLoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
+import com.djammr.westernknights.util.loaders.Overlap2DLoader;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 
 /**

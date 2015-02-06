@@ -2,15 +2,13 @@ package com.djammr.westernknights;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.djammr.westernknights.util.AssetLoaders.Overlap2DMapLoader;
-import com.djammr.westernknights.util.AssetLoaders.Overlap2DUILoader;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DMapSettings;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DUISettings;
+import com.djammr.westernknights.util.assetloaders.Overlap2DMapLoader;
+import com.djammr.westernknights.util.assetloaders.Overlap2DUILoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
 
 import java.util.HashMap;
 import java.util.Map;

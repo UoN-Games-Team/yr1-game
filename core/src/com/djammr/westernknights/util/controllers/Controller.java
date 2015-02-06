@@ -1,6 +1,4 @@
-package com.djammr.westernknights.util.Controllers;
-
-import com.djammr.westernknights.util.View;
+package com.djammr.westernknights.util.controllers;
 
 /**
  * Engine MVC Setup:<br/>

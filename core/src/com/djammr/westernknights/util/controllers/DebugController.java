@@ -1,4 +1,4 @@
-package com.djammr.westernknights.util.Controllers;
+package com.djammr.westernknights.util.controllers;
 
 import com.djammr.westernknights.screens.GameScreen;
 

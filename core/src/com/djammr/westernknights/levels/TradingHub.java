@@ -3,8 +3,8 @@ package com.djammr.westernknights.levels;
 import com.badlogic.gdx.graphics.Texture;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKWorld;
-import com.djammr.westernknights.util.AssetLoaders.Overlap2DMapLoader;
-import com.djammr.westernknights.util.AssetLoaders.Settings.Overlap2DMapSettings;
+import com.djammr.westernknights.util.assetloaders.Overlap2DMapLoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings;
 
 
 /**
