@@ -3,6 +3,7 @@ package com.djammr.westernknights.screens;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.levels.TradingHub;
 import com.djammr.westernknights.ui.DebugUI;
 import com.djammr.westernknights.util.controllers.DebugController;
@@ -19,6 +20,7 @@ import java.util.Map;
  */
 public class GameScreen extends WKScreen {
 
+    private InputMapper inputMapper = new InputMapper();
     private List<UIController> uiControllers = new ArrayList<UIController>();
     private Map<String, WKWorld> worlds = new HashMap<String, WKWorld>();
     private WKWorld currentWorld;
@@ -28,7 +30,7 @@ public class GameScreen extends WKScreen {
         super(game);
         Box2D.init();
         addWorld("trading_hub", new TradingHub());
-        getInputMultiplexer().addProcessor(new InputMapper());
+        getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
@@ -80,8 +82,12 @@ public class GameScreen extends WKScreen {
      */
     public void setWorld(String name) {
         game.getScreens().setScreen("loading");
+        if (currentWorld != null) {
+            inputMapper.removeObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
+        }
         currentWorld = worlds.get(name);
         currentWorld.doLoad();
+        inputMapper.registerObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
     }
 
     /**

@@ -16,7 +16,7 @@ import com.djammr.westernknights.entity.components.VisualComponent;
 
 
 /**
- * Renders a World
+ * Renders entity sprites
  */
 public class RenderingSystem extends IteratingSystem {
 

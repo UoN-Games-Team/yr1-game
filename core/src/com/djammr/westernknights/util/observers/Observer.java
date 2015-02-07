@@ -3,7 +3,7 @@ package com.djammr.westernknights.util.observers;
 import java.util.Map;
 
 /**
- * Base observer interface
+ * Generic observer interface
  */
 public interface Observer {
 

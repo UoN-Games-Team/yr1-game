@@ -8,6 +8,8 @@ import com.djammr.westernknights.screens.GameScreen;
 import com.djammr.westernknights.screens.ScreenManager;
 import com.djammr.westernknights.util.ConsoleLogger;
 import com.djammr.westernknights.util.Logger;
+import com.djammr.westernknights.util.SaveManager;
+import com.djammr.westernknights.util.input.keybindings.KeyMapManager;
 
 import javax.naming.ldap.Control;
 
@@ -21,6 +23,8 @@ public class WKGame extends Game {
 	public static final float PIXELS_TO_METERS = 1/METERS_TO_PIXELS;
 	public static final int DEBUG_KEY = Input.Keys.APOSTROPHE;
 	public static final Logger logger = new ConsoleLogger();
+	public static final SaveManager saveManager = new SaveManager();
+	public static final KeyMapManager keyMaps = new KeyMapManager();
 
 	private ScreenManager screenManager;
 
@@ -31,6 +35,9 @@ public class WKGame extends Game {
 		logger.logDebug("Starting game");
 
 		Assets.init();
+		keyMaps.loadDefaultKeyMap();
+		keyMaps.loadDefaultControllerMap();
+
 		screenManager = new ScreenManager(this);
 		screenManager.addScreen("game", new GameScreen(this));
 		screenManager.setScreen("game");

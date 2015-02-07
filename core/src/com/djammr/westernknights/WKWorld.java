@@ -2,6 +2,7 @@ package com.djammr.westernknights;
 
 import com.djammr.westernknights.entity.EntityManager;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
+import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.entity.systems.RenderingSystem;
 import com.djammr.westernknights.entity.systems.VisualSystem;
 
@@ -25,6 +26,7 @@ public abstract class WKWorld {
         if (!loaded) {
             WKGame.logger.logDebug("Loading World");
             entities = new EntityManager();
+            entities.getEngine().addSystem(new InputSystem());
             entities.getEngine().addSystem(new RenderingSystem(20, 11.25f)); // 20m x 11.25m (16x9)
             entities.getEngine().addSystem(new Box2DSystem());
             entities.getEngine().addSystem(new VisualSystem());

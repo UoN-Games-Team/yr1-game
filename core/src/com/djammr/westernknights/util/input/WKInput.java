@@ -5,12 +5,33 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
-import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.util.observers.InputObservable;
+import com.djammr.westernknights.util.observers.InputObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Just to de-clutter {@link InputMapper}
+ * Implements InputProcessor and ControllerListener for de-cluttering subclasses and implements {@link InputObservable} for dispatching translated events
  */
-public class WKInput implements InputProcessor, ControllerListener {
+public class WKInput implements InputProcessor, ControllerListener, InputObservable {
+
+    private List<InputObserver> observers = new ArrayList<>();
+
+
+    public void registerObserver(InputObserver o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(InputObserver o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers(int event) {
+        for (InputObserver observer : observers) {
+            observer.inputEvent(event);
+        }
+    }
 
     // Controller Stuff
     @Override

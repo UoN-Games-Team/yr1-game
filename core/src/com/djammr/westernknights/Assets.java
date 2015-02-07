@@ -39,9 +39,13 @@ public class Assets {
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
 
-    // Loaded Overlap2D scene from Overlap2DLoaders. TODO: Add ability to load them again from get (or just cache)
+    // Loaded Overlap2D scene from Overlap2DLoaders
     public static String lvlTest = "lvlTest";
     public static String uiDebug = "uiDebug";
+
+    // Key Maps
+    public static String keyMapDefault = "data/keymaps/default_key_map.json";
+    public static String controllerMapDefault = "data/keymaps/default_controller_map.json";
 
 
     /**
