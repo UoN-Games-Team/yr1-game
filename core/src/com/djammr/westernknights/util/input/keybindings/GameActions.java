@@ -5,6 +5,7 @@ package com.djammr.westernknights.util.input.keybindings;
  */
 public class GameActions {
 
+    public static final int PLAYER_MOVE_NONE = -1;
     public static final int PLAYER_LEFT = 0;
     public static final int PLAYER_RIGHT = 1;
     public static final int PLAYER_JUMP = 2;
@@ -34,6 +35,8 @@ public class GameActions {
      */
     public static String toString(int actionCode) {
         switch (actionCode) {
+            case PLAYER_MOVE_NONE:
+                return "Player Stop Moving";
             case PLAYER_LEFT:
                 return "Player Left";
             case PLAYER_RIGHT:

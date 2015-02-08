@@ -53,7 +53,7 @@
 },
 "deadzone": {
 	"class": "java.lang.Float",
-	"value": 0.25
+	"value": 0.45
 },
 "btn-6": {
 	"class": "java.lang.Float",

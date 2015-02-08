@@ -31,6 +31,7 @@ public class SaveTest implements ApplicationListener {
     public void create() {
         keyMap.put(""+Input.Keys.A, (float)GameActions.PLAYER_LEFT);
         keyMap.put(""+Input.Keys.D, (float)GameActions.PLAYER_RIGHT);
+        keyMap.put(""+Input.Keys.SPACE, (float)GameActions.PLAYER_JUMP);
 
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"-", (float)GameActions.PLAYER_LEFT);
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"+", (float)GameActions.PLAYER_RIGHT);
@@ -51,7 +52,7 @@ public class SaveTest implements ApplicationListener {
         controllerMap.put("pov-"+XboxOne.BUTTON_DPAD_DOWN.ordinal(), (float)GameActions.FAVS_DOWN);
         controllerMap.put("axis-"+XboxOne.AXIS_RIGHT_X+"-", (float)GameActions.PAN_LEFT);
         controllerMap.put("axis-"+XboxOne.AXIS_RIGHT_X+"+", (float)GameActions.PAN_RIGHT);
-        controllerMap.put("deadzone", 0.25f);
+        controllerMap.put("deadzone", 0.45f);
 
         System.out.println("To save: ");
         printMap(keyMap);
