@@ -13,16 +13,14 @@ public class InputMapper extends WKInput {
 
     public InputMapper() {
         // Register with controllers
-        for (Controller controller : Controllers.getControllers()) {
-            controller.addListener(this);
-        }
+        Controllers.addListener(this);
     }
 
     @Override
     public boolean keyDown(int keycode) {
         WKGame.logger.logDebug(Input.Keys.toString(keycode) + " pressed");
-        if (WKGame.keyMaps.getKeyMap().get(keycode) != null) {
-            notifyObservers(WKGame.keyMaps.getKeyMap().get(keycode));
+        if (WKGame.keyMaps.getKeyMap().get(""+keycode) != null) {
+            notifyObservers(WKGame.keyMaps.getKeyMap().get(""+keycode).intValue());
         }
         return true;
     }
@@ -32,7 +30,13 @@ public class InputMapper extends WKInput {
      */
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
-        WKGame.logger.logDebug(controller.getName() + ", moved axis: " + axisCode + " to " + value);
+        value = controller.getAxis(axisCode);
+        //WKGame.logger.logDebug(controller.getName() + " axis " + axisCode + " at " + value);
+
+        if ((value > WKGame.keyMaps.getControllerMap().get("deadzone") || value < -WKGame.keyMaps.getControllerMap().get("deadzone")) &&
+                WKGame.keyMaps.getControllerMap().get("axis-"+axisCode+((value > 0)? "+" : "-")) != null) {
+            notifyObservers(WKGame.keyMaps.getControllerMap().get("axis-"+axisCode+((value > 0)? "+" : "-")).intValue());
+        }
         return true;
     }
 
@@ -41,16 +45,26 @@ public class InputMapper extends WKInput {
      */
     @Override
     public boolean povMoved(Controller controller, int povCode, PovDirection value) {
-        WKGame.logger.logDebug(controller.getName() + ", moved pov: " + povCode + " to " + value);
+        //WKGame.logger.logDebug(controller.getName() + ", moved pov: " + povCode + " to " + value);
+
+        if (WKGame.keyMaps.getControllerMap().get("pov-"+value.ordinal()) != null) {
+            notifyObservers(WKGame.keyMaps.getControllerMap().get("pov-" + value.ordinal()).intValue());
+        }
         return true;
     }
 
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
-        WKGame.logger.logDebug(controller.getName() + ", pressed: " + buttonCode);
-        if (WKGame.keyMaps.getControllerMap().get(buttonCode) != null) {
-            notifyObservers(WKGame.keyMaps.getControllerMap().get(buttonCode));
+        //WKGame.logger.logDebug(controller.getName() + ", pressed: " + buttonCode);
+
+        if (WKGame.keyMaps.getControllerMap().get("btn-"+buttonCode) != null) {
+            notifyObservers(WKGame.keyMaps.getControllerMap().get("btn-"+buttonCode).intValue());
         }
         return true;
+    }
+
+    @Override
+    public void connected(Controller controller) {
+        controller.addListener(this);
     }
 }

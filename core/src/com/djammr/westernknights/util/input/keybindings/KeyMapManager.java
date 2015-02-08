@@ -4,15 +4,20 @@ import com.badlogic.gdx.utils.IntMap;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Manages saving, loading and binding of keys
  */
 public class KeyMapManager {
 
     /** Map for Keyboard & Mouse */
-    private IntMap<Integer> keyMap = new IntMap<Integer>();
+    //private IntMap<Integer> keyMap = new IntMap<Integer>();
+    private Map<String, Float> keyMap;
     /** Map for a Controller */
-    private IntMap<Integer> controllerMap = new IntMap<Integer>();
+    //private IntMap<Integer> controllerMap = new IntMap<Integer>();
+    private Map<String, Float> controllerMap;
 
 
 
@@ -22,7 +27,7 @@ public class KeyMapManager {
      */
     @SuppressWarnings("unchecked")
     public void loadKeyMap(String localPath) {
-        keyMap = WKGame.saveManager.load(IntMap.class, localPath);
+        keyMap = WKGame.saveManager.load(HashMap.class, localPath);
     }
 
     /**
@@ -31,7 +36,7 @@ public class KeyMapManager {
      */
     @SuppressWarnings("unchecked")
     public void loadControllerMap(String localPath) {
-        controllerMap = WKGame.saveManager.load(IntMap.class, localPath);
+        controllerMap = WKGame.saveManager.load(HashMap.class, localPath);
     }
 
     /**
@@ -51,14 +56,14 @@ public class KeyMapManager {
     /**
      * @return the current keyboard & mouse map
      */
-    public IntMap<Integer> getKeyMap() {
+    public Map<String, Float> getKeyMap() {
         return keyMap;
     }
 
     /**
      * @return the current controller map
      */
-    public IntMap<Integer> getControllerMap() {
+    public Map<String, Float> getControllerMap() {
         return controllerMap;
     }
 

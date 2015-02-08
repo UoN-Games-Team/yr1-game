@@ -1,52 +1,10 @@
 {
-"size": 2,
-"keyTable": [ 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-"valueTable": [
-	{
-		"class": "java.lang.Integer",
-		"value": 1
-	},
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	{
-		"class": "java.lang.Integer",
-		"value": 0
-	},
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null
-]
+"32": {
+	"class": "java.lang.Float",
+	"value": 1
+},
+"29": {
+	"class": "java.lang.Float",
+	"value": 0
+}
 }

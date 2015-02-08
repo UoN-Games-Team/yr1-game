@@ -13,23 +13,45 @@ import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.util.input.controllers.mappings.XboxOne;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Test saving and loading a key map
  */
 public class SaveTest implements ApplicationListener {
 
-    //Map<Integer, Integer> keyMap = new HashMap<Integer, Integer>();
-    //Map<Integer, Integer> controllerMap = new HashMap<Integer, Integer>();
-    IntMap<Integer> keyMap = new IntMap<Integer>();
-    IntMap<Integer> controllerMap = new IntMap<Integer>();
+    Map<String, Float> keyMap = new HashMap<String, Float>();
+    Map<String, Float> controllerMap = new HashMap<String, Float>();
+    //IntMap<Integer> keyMap = new IntMap<Integer>();
+    //IntMap<Integer> controllerMap = new IntMap<Integer>();
 
 
     @Override
     public void create() {
-        keyMap.put(Input.Keys.A, GameActions.PLAYER_LEFT);
-        keyMap.put(Input.Keys.D, GameActions.PLAYER_RIGHT);
-        controllerMap.put(XboxOne.AXIS_LEFT_X, GameActions.PLAYER_LEFT);
-        controllerMap.put(XboxOne.BUTTON_A, GameActions.PLAYER_JUMP);
+        keyMap.put(""+Input.Keys.A, (float)GameActions.PLAYER_LEFT);
+        keyMap.put(""+Input.Keys.D, (float)GameActions.PLAYER_RIGHT);
+
+        controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"-", (float)GameActions.PLAYER_LEFT);
+        controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"+", (float)GameActions.PLAYER_RIGHT);
+        controllerMap.put("btn-"+XboxOne.BUTTON_A, (float)GameActions.PLAYER_JUMP);
+        controllerMap.put("btn-"+XboxOne.BUTTON_B, (float)GameActions.PLAYER_DODGE);
+        controllerMap.put("btn-"+XboxOne.BUTTON_X, (float)GameActions.PLAYER_ATTACK_LIGHT);
+        controllerMap.put("btn-"+XboxOne.BUTTON_Y, (float)GameActions.PLAYER_ATTACK_HEAVY);
+        controllerMap.put("btn-"+XboxOne.BUTTON_LB, (float)GameActions.PLAYER_BLOCK);
+        controllerMap.put("btn-"+XboxOne.BUTTON_RB, (float)GameActions.PLAYER_ATTACK_RANGED);
+        controllerMap.put("axis-"+XboxOne.AXIS_LEFT_TRIGGER+"+", (float)GameActions.PLAYER_ABILITY_1);
+        controllerMap.put("axis-"+XboxOne.AXIS_RIGHT_TRIGGER+"+", (float)GameActions.PLAYER_ABILITY_2);
+        controllerMap.put("btn-"+XboxOne.BUTTON_LB + ",btn-"+ XboxOne.BUTTON_RB, (float)GameActions.PLAYER_ABILITY_SPECIAL); //TODO
+        controllerMap.put("btn-"+XboxOne.BUTTON_BACK, (float)GameActions.GAME_MENU);
+        controllerMap.put("btn-"+XboxOne.BUTTON_START, (float)GameActions.ESC_MENU);
+        controllerMap.put("pov-"+XboxOne.BUTTON_DPAD_LEFT.ordinal(), (float)GameActions.FAVS_LEFT);
+        controllerMap.put("pov-"+XboxOne.BUTTON_DPAD_UP.ordinal(), (float)GameActions.FAVS_UP);
+        controllerMap.put("pov-"+XboxOne.BUTTON_DPAD_RIGHT.ordinal(), (float)GameActions.FAVS_RIGHT);
+        controllerMap.put("pov-"+XboxOne.BUTTON_DPAD_DOWN.ordinal(), (float)GameActions.FAVS_DOWN);
+        controllerMap.put("axis-"+XboxOne.AXIS_RIGHT_X+"-", (float)GameActions.PAN_LEFT);
+        controllerMap.put("axis-"+XboxOne.AXIS_RIGHT_X+"+", (float)GameActions.PAN_RIGHT);
+        controllerMap.put("deadzone", 0.25f);
 
         System.out.println("To save: ");
         printMap(keyMap);
@@ -50,9 +72,11 @@ public class SaveTest implements ApplicationListener {
         controllerMap.clear();
 
         // Load the maps
-        keyMap = json.fromJson(IntMap.class, file.readString());
+        //keyMap = json.fromJson(IntMap.class, file.readString());
         //controllerMap = json.fromJson(IntMap.class, Base64Coder.decodeString(cfile.readString()));
-        controllerMap = json.fromJson(IntMap.class, cfile.readString());
+        //controllerMap = json.fromJson(IntMap.class, cfile.readString());
+        keyMap = json.fromJson(HashMap.class, file.readString());
+        controllerMap = json.fromJson(HashMap.class, cfile.readString());
 
         System.out.println("Loaded: ");
         printMap(keyMap);
@@ -63,6 +87,11 @@ public class SaveTest implements ApplicationListener {
         IntMap<Integer> map = new IntMap<Integer>(keyMap);
         for (IntMap.Entry entry : map.entries()) {
             System.out.println(entry.key + ": " + GameActions.toString((int)entry.value));
+        }
+    }
+    public void printMap(Map<String, Float> keyMap) {
+        for (String key : keyMap.keySet()) {
+            System.out.println(key + ": " + GameActions.toString(keyMap.get(key).intValue()));
         }
     }
 

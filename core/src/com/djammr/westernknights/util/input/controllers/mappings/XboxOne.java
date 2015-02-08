@@ -23,10 +23,10 @@ public class XboxOne {
     public static final PovDirection BUTTON_DPAD_RIGHT = PovDirection.east;
     public static final PovDirection BUTTON_DPAD_DOWN = PovDirection.south;
     public static final PovDirection BUTTON_DPAD_LEFT = PovDirection.west;
-    public static final int AXIS_LEFT_Y = 0;        // -1 up, +1 down
-    public static final int AXIS_LEFT_X = 1;        // -1 left, + 1 right
+    public static final int AXIS_LEFT_X = 0;        // -1 left, + 1 right
+    public static final int AXIS_LEFT_Y = 1;        // -1 up, +1 down
     public static final int AXIS_LEFT_TRIGGER = 2;  // -1 to 1
-    public static final int AXIS_RIGHT_Y = 3;       // -1 up, +1 down
-    public static final int AXIS_RIGHT_X = 4;       // -1 left, + 1 right
+    public static final int AXIS_RIGHT_X = 3;       // -1 left, + 1 right
+    public static final int AXIS_RIGHT_Y = 4;       // -1 up, +1 down
     public static final int AXIS_RIGHT_TRIGGER = 5; // -1 to 1
 }

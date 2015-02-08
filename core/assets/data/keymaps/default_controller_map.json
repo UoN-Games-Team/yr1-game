@@ -1,54 +1,82 @@
 {
-"size": 2,
-"keyTable": [ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-"valueTable": [
-	null,
-	{
-		"class": "java.lang.Integer",
-		"value": 0
-	},
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null
-],
-"zeroValue": {
-	"class": "java.lang.Integer",
+"axis-0+": {
+	"class": "java.lang.Float",
+	"value": 1
+},
+"axis-3+": {
+	"class": "java.lang.Float",
+	"value": 20
+},
+"axis-2+": {
+	"class": "java.lang.Float",
+	"value": 7
+},
+"axis-3-": {
+	"class": "java.lang.Float",
+	"value": 19
+},
+"axis-5+": {
+	"class": "java.lang.Float",
+	"value": 8
+},
+"btn-0": {
+	"class": "java.lang.Float",
 	"value": 2
 },
-"hasZeroValue": true
+"btn-4": {
+	"class": "java.lang.Float",
+	"value": 10
+},
+"btn-3": {
+	"class": "java.lang.Float",
+	"value": 5
+},
+"btn-2": {
+	"class": "java.lang.Float",
+	"value": 4
+},
+"btn-1": {
+	"class": "java.lang.Float",
+	"value": 3
+},
+"btn-7": {
+	"class": "java.lang.Float",
+	"value": 14
+},
+"axis-0-": {
+	"class": "java.lang.Float",
+	"value": 0
+},
+"btn-4,btn-5": {
+	"class": "java.lang.Float",
+	"value": 9
+},
+"deadzone": {
+	"class": "java.lang.Float",
+	"value": 0.25
+},
+"btn-6": {
+	"class": "java.lang.Float",
+	"value": 13
+},
+"btn-5": {
+	"class": "java.lang.Float",
+	"value": 6
+},
+"pov-4": {
+	"class": "java.lang.Float",
+	"value": 15
+},
+"pov-2": {
+	"class": "java.lang.Float",
+	"value": 18
+},
+"pov-3": {
+	"class": "java.lang.Float",
+	"value": 17
+},
+"pov-1": {
+	"class": "java.lang.Float",
+	"value": 16
+}
 }
