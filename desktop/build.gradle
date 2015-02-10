@@ -3,7 +3,7 @@ apply plugin: "java"
 sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-project.ext.mainClassName = "com.djammer.westernknights.desktop.DesktopLauncher"
+project.ext.mainClassName = "com.djammr.westernknights.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets");
 
 task run(dependsOn: classes, type: JavaExec) {
@@ -18,8 +18,10 @@ task dist(type: Jar) {
     from files(sourceSets.main.output.classesDir)
     from files(sourceSets.main.output.resourcesDir)
     from {configurations.compile.collect {zipTree(it)}}
-    from files(project.assetsDir);
- 
+    from files(project.assetsDir)
+    exclude '**/tests/**'
+    exclude 'test';
+
     manifest {
         attributes 'Main-Class': project.mainClassName
     }
