@@ -19,9 +19,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Json;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.EntityFactory;
 import com.djammr.westernknights.entity.EntityManager;
 import com.djammr.westernknights.entity.components.Box2DComponent;
+import com.djammr.westernknights.entity.components.PlayerComponent;
 import com.djammr.westernknights.entity.components.TransformComponent;
 import com.djammr.westernknights.entity.components.VisualComponent;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
@@ -100,8 +103,8 @@ public class Overlap2DLoader {
         Overlap2DLoader.entityManager = entityManager;
 
         // Global Stuff
-        entityManager.getEngine().getSystem(RenderingSystem.class).bgColour = sceneVO.ambientColor;
-        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, 0.4f);
+        //entityManager.getEngine().getSystem(RenderingSystem.class).bgColour = sceneVO.ambientColor;
+        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, (scenePath.toString().contains("night"))? 0.05f : 0.4f);
 
         // Add Scene composite
         addComposite(new CompositeItemVO(sceneVO.composite));
@@ -178,14 +181,19 @@ public class Overlap2DLoader {
             components.add(new VisualComponent());
         }
 
+        Entity entity;
         // Box2D Mesh
-        MeshData meshData = null;
-        if (item.physicsBodyData != null) {
-            meshData = loadMesh(projectVO, item);
+        if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
+            entity = EntityFactory.createPlayer(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
+        } else {
+            MeshData meshData = null;
+            if (item.physicsBodyData != null) {
+                meshData = loadMesh(projectVO, item);
+            }
+            // Create the entity
+            entity = EntityFactory.createEntity(b2dSystem, meshData, components);
         }
 
-        // Create the entity
-        Entity entity = EntityFactory.createEntity(b2dSystem, meshData, components);
         // Set Position
         TransformComponent transc = transm.get(entity);
         transc.x = item.x * WKGame.PIXELS_TO_METERS;
@@ -194,14 +202,19 @@ public class Overlap2DLoader {
         transc.rotation = item.rotation;
         if (entity.getComponent(Box2DComponent.class) != null) {
             entity.getComponent(Box2DComponent.class).body.setTransform(transc.x, transc.y, transc.rotation * MathUtils.degRad);
+            ((Box2DUserData)entity.getComponent(Box2DComponent.class).body.getUserData()).id = item.itemIdentifier;
         }
         // Set Texture
         VisualComponent visc = vism.get(entity);
         if (visc != null) {
             visc.sprite.setRegion(region);
-            visc.sprite.setSize(region.getRegionWidth() * WKGame.PIXELS_TO_METERS, region.getRegionHeight() * WKGame.PIXELS_TO_METERS);
-            visc.sprite.setScale(item.scaleX, item.scaleY);
-            visc.sprite.setRotation(transc.rotation);
+            if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
+                visc.sprite.setSize(WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT);
+            } else {
+                visc.sprite.setSize(region.getRegionWidth() * WKGame.PIXELS_TO_METERS, region.getRegionHeight() * WKGame.PIXELS_TO_METERS);
+                visc.sprite.setScale(item.scaleX, item.scaleY);
+                visc.sprite.setRotation(transc.rotation);
+            }
             visc.sprite.setPosition(transc.x, transc.y);
         }
         // Add the entity to the world

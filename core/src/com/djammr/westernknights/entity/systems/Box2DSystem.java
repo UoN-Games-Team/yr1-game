@@ -6,16 +6,17 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.components.TransformComponent;
 
 /**
  * Manages the Box2D World
  */
-public class Box2DSystem extends IteratingSystem {
+public class Box2DSystem extends IteratingSystem implements ContactListener {
 
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private ComponentMapper<Box2DComponent> b2dm = ComponentMapper.getFor(Box2DComponent.class);
@@ -35,7 +36,8 @@ public class Box2DSystem extends IteratingSystem {
 
     public Box2DSystem() {
         super(Family.all(Box2DComponent.class, TransformComponent.class).get());
-        b2World = new World(new Vector2(0, -10), true);
+        b2World = new World(new Vector2(0, -14), true);
+        b2World.setContactListener(this);
         rayHandler = new RayHandler(b2World, 320, 180);
         debugRenderer = new Box2DDebugRenderer();
     }
@@ -43,6 +45,13 @@ public class Box2DSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+
+        if (Gdx.input.isKeyJustPressed(WKGame.DEBUG_KEY)) {
+            debugEnabled = !debugEnabled;
+        }
+        if (debugEnabled) debugRenderer.render(b2World, camera.combined);
+        rayHandler.setCombinedMatrix(camera.combined);
+        rayHandler.render();
 
         accumulator += deltaTime;
         loops = 0;
@@ -54,14 +63,6 @@ public class Box2DSystem extends IteratingSystem {
             stepped = true;
         }
         if (stepped) rayHandler.update();
-
-        if (debugEnabled) debugRenderer.render(b2World, camera.combined);
-        rayHandler.setCombinedMatrix(camera.combined);
-        rayHandler.render();
-
-        if (Gdx.input.isKeyJustPressed(WKGame.DEBUG_KEY)) {
-            debugEnabled = !debugEnabled;
-        }
     }
 
     @Override
@@ -92,5 +93,50 @@ public class Box2DSystem extends IteratingSystem {
      */
     public void setCamera(OrthographicCamera camera) {
         this.camera = camera;
+    }
+
+
+    // Contact Listener Methods TODO: Better way of detecting collisions?
+    Body bodyA;
+    Body bodyB;
+    Box2DUserData userDataA;
+    Box2DUserData userDataB;
+    @Override
+    public void beginContact(Contact contact) {
+        bodyA = contact.getFixtureA().getBody();
+        bodyB = contact.getFixtureB().getBody();
+        userDataA = (Box2DUserData)bodyA.getUserData();
+        userDataB = (Box2DUserData)bodyB.getUserData();
+
+
+        if (userDataA != null && userDataA.id.equals(WKWorld.GROUND_IDENTIFIER)) {
+            if (userDataB != null) userDataB.onGround = true;
+        } else if (userDataB != null && userDataB.id.equals(WKWorld.GROUND_IDENTIFIER)) {
+            if (userDataA != null) userDataA.onGround = true;
+        }
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+        bodyA = contact.getFixtureA().getBody();
+        bodyB = contact.getFixtureB().getBody();
+        userDataA = (Box2DUserData)bodyA.getUserData();
+        userDataB = (Box2DUserData)bodyB.getUserData();
+
+        if (userDataA != null && userDataA.id.equals(WKWorld.GROUND_IDENTIFIER)) {
+            if (userDataB != null) userDataB.onGround = false;
+        } else if (userDataB != null && userDataB.id.equals(WKWorld.GROUND_IDENTIFIER)) {
+            if (userDataA != null) userDataA.onGround = false;
+        }
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+
     }
 }

@@ -38,6 +38,7 @@ public class Assets {
     // Scenes
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
+    public static String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
 
     // Loaded Overlap2D scene from Overlap2DLoaders
     public static String lvlTest = "lvlTest";

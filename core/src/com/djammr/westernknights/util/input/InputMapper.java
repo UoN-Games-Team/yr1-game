@@ -5,11 +5,18 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.util.input.keybindings.GameActions;
 
 /**
  * Input Processor for Kbd & Mouse and Controllers that translates input to mapped events
  */
 public class InputMapper extends WKInput {
+
+    private float axisValue;
+    private String axisName;
+    private int action;
+    private float deadzone;
+
 
     public InputMapper() {
         // Register with controllers
@@ -25,6 +32,15 @@ public class InputMapper extends WKInput {
         return true;
     }
 
+    @Override
+    public boolean keyUp(int keycode) {
+        if (WKGame.keyMaps.getKeyMap().get(""+keycode) != null &&
+                (WKGame.keyMaps.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_LEFT || WKGame.keyMaps.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_RIGHT)) {
+            notifyObservers(GameActions.PLAYER_MOVE_NONE);
+        }
+        return true;
+    }
+
     /**
      * XBox 360 & One: Joysticks, Triggers
      */
@@ -33,9 +49,17 @@ public class InputMapper extends WKInput {
         value = controller.getAxis(axisCode);
         //WKGame.logger.logDebug(controller.getName() + " axis " + axisCode + " at " + value);
 
-        if ((value > WKGame.keyMaps.getControllerMap().get("deadzone") || value < -WKGame.keyMaps.getControllerMap().get("deadzone")) &&
-                WKGame.keyMaps.getControllerMap().get("axis-"+axisCode+((value > 0)? "+" : "-")) != null) {
-            notifyObservers(WKGame.keyMaps.getControllerMap().get("axis-"+axisCode+((value > 0)? "+" : "-")).intValue());
+        axisName = "axis-" + axisCode + ((value > 0)? "+" : "-");
+        action = -2;
+        if (WKGame.keyMaps.getControllerMap().get(axisName) != null) {
+            action = WKGame.keyMaps.getControllerMap().get(axisName).intValue();
+        }
+        deadzone = WKGame.keyMaps.getControllerMap().get("deadzone");
+
+        if ((value > deadzone || value < -deadzone) && action != -2) {
+            notifyObservers(action);
+        } else if (action == GameActions.PLAYER_LEFT || action == GameActions.PLAYER_RIGHT) {
+            notifyObservers(GameActions.PLAYER_MOVE_NONE);
         }
         return true;
     }
