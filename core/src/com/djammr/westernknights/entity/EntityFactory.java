@@ -4,11 +4,11 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
-import com.djammr.westernknights.util.MeshData;
+import com.djammr.westernknights.util.loaders.MeshData;
 
 import java.util.List;
 
@@ -33,6 +33,12 @@ public class EntityFactory {
 
         Entity entity = new Entity();
         entity.add(new Box2DComponent());
+        entity.add(new StateComponent());
+        entity.add(new TransformComponent());
+        entity.add(new MovementComponent());
+        for (Component component : components) {
+            entity.add(component);
+        }
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -73,16 +79,19 @@ public class EntityFactory {
         motor.localAnchorB.set(circle.getPosition());
         box2DSystem.getB2World().createJoint(motor);
 
+        // Foot Sensor
+        poly.setAsBox(width/4, 0.1f, new Vector2(width/2, 0), 0);
+        FixtureDef fixtureDefS = new FixtureDef();
+        fixtureDefS.shape = poly;
+        fixtureDefS.isSensor = true;
+        Fixture sensor = wheel.createFixture(fixtureDefS);
+        sensor.setUserData(new Box2DUserData());
+        ((Box2DUserData)sensor.getUserData()).id = WKWorld.FOOT_SENSOR_IDENTIFIER;
+        ((Box2DUserData)sensor.getUserData()).stateComponent = entity.getComponent(StateComponent.class);
+
         entity.getComponent(Box2DComponent.class).body = wheel;
         poly.dispose();
         circle.dispose();
-
-
-        entity.add(new TransformComponent());
-        entity.add(new MovementComponent());
-        for (Component component : components) {
-            entity.add(component);
-        }
 
         return entity;
     }
@@ -118,6 +127,7 @@ public class EntityFactory {
             entity.getComponent(Box2DComponent.class).body = body;
         }
 
+        entity.add(new StateComponent());
         entity.add(new TransformComponent());
         for (Component component : components) {
             entity.add(component);

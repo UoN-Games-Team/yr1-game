@@ -5,18 +5,23 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
-import com.djammr.westernknights.entity.components.Box2DComponent;
-import com.djammr.westernknights.entity.components.TransformComponent;
-import com.djammr.westernknights.entity.components.VisualComponent;
+import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.components.*;
 
 /**
- * CUpdates animations and sprite positions
+ * Updates animations and sprite positions
  */
 public class VisualSystem extends IteratingSystem {
 
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private ComponentMapper<Box2DComponent> b2dm = ComponentMapper.getFor(Box2DComponent.class);
     private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
+    private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
+    private TransformComponent transc;
+    private Box2DComponent b2dc;
+    private VisualComponent visc;
+    private MovementComponent mvc;
+
 
 
     public VisualSystem() {
@@ -25,13 +30,19 @@ public class VisualSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        TransformComponent transc = transm.get(entity);
-        Box2DComponent b2dc = b2dm.get(entity);
-        VisualComponent visc = vism.get(entity);
+        transc = transm.get(entity);
+        b2dc = b2dm.get(entity);
+        visc = vism.get(entity);
+        mvc = mvm.get(entity);
 
         if (b2dc != null) {
             visc.sprite.setPosition(b2dc.body.getPosition().x, b2dc.body.getPosition().y);
             visc.sprite.setRotation(b2dc.body.getAngle() * MathUtils.radDeg);
+            if (mvc != null) {
+                visc.sprite.setFlip(visc.flipX, false);
+                if (mvc.left) visc.flipX = true;
+                else if (mvc.right) visc.flipX = false;
+            }
         }
         else if (transc != null) {
             visc.sprite.setPosition(transc.x, transc.y);

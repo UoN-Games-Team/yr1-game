@@ -28,7 +28,7 @@ public class TradingHub extends WKWorld {
 
         // Level
         Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();
-        params.set(Assets.overlap2DProject, Assets.lvlTestLevelNight, Assets.overlap2DAtlas, getEntities());
+        params.set(Assets.overlap2DProject, Assets.lvlTestLevelNight, Assets.overlap2DAtlas, Assets.overlap2DSpriteAnimations, getEntities());
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {

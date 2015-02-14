@@ -8,9 +8,11 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.PerformanceCounter;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.components.MovementComponent;
 import com.djammr.westernknights.entity.components.PlayerComponent;
+import com.djammr.westernknights.entity.components.StateComponent;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
 import com.djammr.westernknights.util.observers.InputObserver;
 

@@ -9,7 +9,7 @@ public class TransformComponent extends Component {
 
     public float x = 0;
     public float y = 0;
-    public float z = 0;
+    public int z = 0;
     /** Rotation in degrees */
     public float rotation = 0;
 }

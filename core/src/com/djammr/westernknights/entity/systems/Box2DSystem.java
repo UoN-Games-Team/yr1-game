@@ -1,9 +1,11 @@
 package com.djammr.westernknights.entity.systems;
 
+import box2dLight.Light;
 import box2dLight.RayHandler;
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -11,7 +13,10 @@ import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.components.Box2DComponent;
+import com.djammr.westernknights.entity.components.StateComponent;
 import com.djammr.westernknights.entity.components.TransformComponent;
+
+import java.util.ArrayList;
 
 /**
  * Manages the Box2D World
@@ -33,12 +38,15 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
     private RayHandler rayHandler;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera camera;
+    private ArrayList<Light> lights;
+    private boolean night = true;
 
     public Box2DSystem() {
-        super(Family.all(Box2DComponent.class, TransformComponent.class).get());
+        super(Family.all(Box2DComponent.class, TransformComponent.class, StateComponent.class).get());
         b2World = new World(new Vector2(0, -14), true);
         b2World.setContactListener(this);
         rayHandler = new RayHandler(b2World, 320, 180);
+        lights = new ArrayList<Light>();
         debugRenderer = new Box2DDebugRenderer();
     }
 
@@ -48,6 +56,13 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
 
         if (Gdx.input.isKeyJustPressed(WKGame.DEBUG_KEY)) {
             debugEnabled = !debugEnabled;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            night = !night;
+            rayHandler.setAmbientLight(255, 255, 255, (night)? 0.05f : 0.4f);
+            for (Light light : lights) {
+                light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
+            }
         }
         if (debugEnabled) debugRenderer.render(b2World, camera.combined);
         rayHandler.setCombinedMatrix(camera.combined);
@@ -80,6 +95,10 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         b2World.dispose();
     }
 
+    public void registerLight(Light light) {
+        lights.add(light);
+    }
+
     public World getB2World() {
         return b2World;
     }
@@ -97,36 +116,41 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
 
 
     // Contact Listener Methods TODO: Better way of detecting collisions?
-    Body bodyA;
-    Body bodyB;
+    Fixture bodyA;
+    Fixture bodyB;
     Box2DUserData userDataA;
     Box2DUserData userDataB;
     @Override
     public void beginContact(Contact contact) {
-        bodyA = contact.getFixtureA().getBody();
-        bodyB = contact.getFixtureB().getBody();
+        bodyA = contact.getFixtureA();
+        bodyB = contact.getFixtureB();
         userDataA = (Box2DUserData)bodyA.getUserData();
         userDataB = (Box2DUserData)bodyB.getUserData();
 
-
-        if (userDataA != null && userDataA.id.equals(WKWorld.GROUND_IDENTIFIER)) {
-            if (userDataB != null) userDataB.onGround = true;
-        } else if (userDataB != null && userDataB.id.equals(WKWorld.GROUND_IDENTIFIER)) {
-            if (userDataA != null) userDataA.onGround = true;
+        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+            userDataA.footContacts++;
+            if (userDataA.footContacts > 0) userDataA.stateComponent.onGround = true;
+        }
+        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+            userDataB.footContacts++;
+            if (userDataB.footContacts > 0) userDataB.stateComponent.onGround = true;
         }
     }
 
     @Override
     public void endContact(Contact contact) {
-        bodyA = contact.getFixtureA().getBody();
-        bodyB = contact.getFixtureB().getBody();
+        bodyA = contact.getFixtureA();
+        bodyB = contact.getFixtureB();
         userDataA = (Box2DUserData)bodyA.getUserData();
         userDataB = (Box2DUserData)bodyB.getUserData();
 
-        if (userDataA != null && userDataA.id.equals(WKWorld.GROUND_IDENTIFIER)) {
-            if (userDataB != null) userDataB.onGround = false;
-        } else if (userDataB != null && userDataB.id.equals(WKWorld.GROUND_IDENTIFIER)) {
-            if (userDataA != null) userDataA.onGround = false;
+        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+            userDataA.footContacts--;
+            if (userDataA.footContacts < 1) userDataA.stateComponent.onGround = false;
+        }
+        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+            userDataB.footContacts--;
+            if (userDataB.footContacts < 1) userDataB.stateComponent.onGround = false;
         }
     }
 

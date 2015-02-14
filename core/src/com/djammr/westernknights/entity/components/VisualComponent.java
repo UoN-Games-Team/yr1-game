@@ -9,4 +9,5 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class VisualComponent extends Component {
 
     public Sprite sprite = new Sprite();
+    public boolean flipX = false;
 }

@@ -2,14 +2,18 @@ package com.djammr.westernknights;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.djammr.westernknights.util.assetloaders.Overlap2DMapLoader;
 import com.djammr.westernknights.util.assetloaders.Overlap2DUILoader;
 import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings;
 import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +38,7 @@ public class Assets {
     // Overlap2D Project
     public static String overlap2DProject = "levels/test/project.dt";
     public static String overlap2DAtlas = "levels/test/orig/pack.atlas";
+    public static String overlap2DSpriteAnimations = "levels/test/orig/sprite_animations";
     public static String overlap2DFonts = "levels/test/freetypefonts";
     // Scenes
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
@@ -101,6 +106,37 @@ public class Assets {
     }
 
     /**
+     * Creates an animation. Loops by default
+     * @param frameDuration frame duration in seconds
+     * @param atlas TextureAtlas to use for the Animation
+     * @param frames frame numbers to use in the Animation
+     * @return the created Animation
+     */
+    public static Animation createAnimation(float frameDuration, TextureAtlas atlas, Integer[] frames) {
+        Array<TextureAtlas.AtlasRegion> regions = new Array<TextureAtlas.AtlasRegion>();
+        for (int frame : frames) {
+            regions.add(atlas.getRegions().get(frame));
+        }
+        return new Animation(frameDuration, regions, Animation.PlayMode.LOOP);
+    }
+
+    /**
+     * Creates an animation. Loops by default
+     * @param frameDuration frame duration in seconds
+     * @param atlas TextureAtlas to use for the Animation
+     * @param startFrame start frame number
+     * @param endFrame start frame number
+     * @return the created Animation
+     */
+    public static Animation createAnimation(float frameDuration, TextureAtlas atlas, int startFrame, int endFrame) {
+        Array<Integer> frames = new Array<Integer>();
+        for (int i = startFrame; i <= endFrame; i++) {
+            frames.add(i);
+        }
+        return createAnimation(frameDuration, atlas, (Integer[])frames.toArray(Integer.class));
+    }
+
+    /**
      * Updates the AssetManager instance
      */
     public static void update() {
@@ -108,6 +144,8 @@ public class Assets {
     }
 
     public static void dispose() {
+        for (BitmapFont font : fonts.values()) font.dispose();
+        skinDefault.dispose();
         manager.dispose();
     }
 }

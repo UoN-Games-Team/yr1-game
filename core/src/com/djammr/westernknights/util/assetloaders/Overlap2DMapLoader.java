@@ -24,12 +24,14 @@ public class Overlap2DMapLoader extends AsynchronousAssetLoader<Overlap2DMapSett
         String projectPath;
         String scenePath;
         String atlas;
+        String spriteAnimationsPath;
         EntityManager entityManager;
 
-        public void set(String projectPath, String scenePath, String atlas, EntityManager entityManager) {
+        public void set(String projectPath, String scenePath, String atlas, String spriteAnimationsPath, EntityManager entityManager) {
             this.projectPath = projectPath;
             this.scenePath = scenePath;
             this.atlas = atlas;
+            this.spriteAnimationsPath = spriteAnimationsPath;
             this.entityManager = entityManager;
         }
     }
@@ -46,7 +48,7 @@ public class Overlap2DMapLoader extends AsynchronousAssetLoader<Overlap2DMapSett
     @Override
     public void loadAsync(AssetManager manager, String fileName, FileHandle file, Parameters parameter) {
         settings = new Overlap2DMapSettings();
-        Overlap2DLoader.loadMap(resolve(parameter.projectPath), resolve(parameter.scenePath), manager.get(parameter.atlas, TextureAtlas.class), parameter.entityManager);
+        Overlap2DLoader.loadMap(resolve(parameter.projectPath), resolve(parameter.scenePath), manager.get(parameter.atlas, TextureAtlas.class), parameter.spriteAnimationsPath, parameter.entityManager);
     }
 
     @Override
