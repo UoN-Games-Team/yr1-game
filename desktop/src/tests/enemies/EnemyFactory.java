@@ -33,7 +33,7 @@ public class EnemyFactory {
 	
 	public static int createLevel() {
 		//get player level
-		int playerLevel = 6;
+		int playerLevel = 1;
 		
 		//Create Random Modifier Value
 		int modifyvalue = rand.nextInt(20);
@@ -59,8 +59,9 @@ public class EnemyFactory {
 		return level;
     }
 	
-	public static int createDmgStat() {
-       return 0;
+	public static int createDmgStat(int level) {
+		int dmg = level * 4 + 7;
+		return dmg;
     }
 	
 	
@@ -72,7 +73,7 @@ public class EnemyFactory {
 		enemy.setFaction(createFaction());
 		enemy.setType(createType());
 		enemy.setLevel(createLevel());
-		enemy.setDmgStat(createDmgStat());
+		enemy.setDmgStat(EnemyFactory.createDmgStat(enemy.getLevel()));
 		
 		return enemy;
 	}
