@@ -54,7 +54,7 @@ public class Weapon {
         return passive;
     }
 
-    //Output Format
+    //Output
     public String toString() {
         return name + ", " + type + ", " + quality + ", " + enchantment + ", " + passive;
     }
