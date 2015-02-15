@@ -61,7 +61,30 @@ public class EnemyFactory {
 	
 	public static int createDmgStat(int level) {
 		int dmg = level * 4 + 7;
+		
+		int modifyvalue = rand.nextInt(20);
+		int modify;
+		if (modifyvalue <= 3){modify = 0;}
+		else if (modifyvalue <= 8){modify = 1;}
+		else if (modifyvalue <= 13){modify = 2;}
+		else if (modifyvalue <= 16){modify = 3;}
+		else if (modifyvalue <= 18){modify = 4;}
+		else {modify = 5;}
+		
+		boolean operator;
+		int operatorvalue = rand.nextInt(3);
+		if (operatorvalue == 0) {operator = false;}
+		else {operator = true;}
+		
+		if (!operator){ modify = modify - modify*2;}
+		
+		dmg = dmg + modify;
 		return dmg;
+    }
+	
+	public static int createHealthStat(int level) {
+		int health = level * 50 + 100;
+		return health;
     }
 	
 	
@@ -74,6 +97,7 @@ public class EnemyFactory {
 		enemy.setType(createType());
 		enemy.setLevel(createLevel());
 		enemy.setDmgStat(EnemyFactory.createDmgStat(enemy.getLevel()));
+		enemy.setHealthStat(EnemyFactory.createHealthStat(enemy.getLevel()));
 		
 		return enemy;
 	}

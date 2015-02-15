@@ -6,6 +6,7 @@ public class Enemy {
 	private String type;
 	private int level;
 	private int dmg;
+	private int health;
 	
 	//Setters
 	 public void setFaction(String faction) {
@@ -24,6 +25,9 @@ public class Enemy {
 	        this.dmg = dmg;
 	    }
 	
+	 public void setHealthStat(int health) {
+	        this.health = health;
+	    }
 	
 	
 	//Getters
@@ -43,9 +47,12 @@ public class Enemy {
         return dmg;
     }
 	
+	public int getHealth() {
+        return health;
+    }
 		
 	//Output
 	public String toString() {
-        return "Faction: " + faction + ", Type: " + type + ", Level: " + level + ", Damage: " + dmg;
+        return "Faction: " + faction + ", Type: " + type + ", Level: " + level + ", Health: " + health + ", Damage: " + dmg;
     }
 }
