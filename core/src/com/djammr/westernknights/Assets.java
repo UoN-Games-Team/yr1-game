@@ -42,11 +42,12 @@ public class Assets {
     public static String overlap2DFonts = "levels/test/freetypefonts";
     // Scenes
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
-    public static String lvlTestScene = "levels/test/scenes/MainScene.dt";
+    public static String lvlTestLevel = "levels/test/scenes/MainScene.dt";
     public static String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
 
-    // Loaded Overlap2D scene from Overlap2DLoaders
+    // Loaded Scene IDs
     public static String lvlTest = "lvlTest";
+    public static String lvlTradingHub = "lvlTradingHub";
     public static String uiDebug = "uiDebug";
 
     // Key Maps

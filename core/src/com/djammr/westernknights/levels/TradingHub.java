@@ -24,7 +24,7 @@ public class TradingHub extends WKWorld {
     @Override
     public void load() {
         // Box texture
-        Assets.load(Assets.testTexture, Texture.class);
+        //Assets.load(Assets.testTexture, Texture.class);
 
         // Level
         Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();

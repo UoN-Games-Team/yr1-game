@@ -1,6 +1,7 @@
 package com.djammr.westernknights.screens;
 
 import com.badlogic.gdx.physics.box2d.Box2D;
+import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.systems.InputSystem;
@@ -29,13 +30,13 @@ public class GameScreen extends WKScreen {
     public GameScreen(WKGame game) {
         super(game);
         Box2D.init();
-        addWorld("trading_hub", new TradingHub());
+        addWorld(Assets.lvlTradingHub, new TradingHub());
         getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
     public void load() {
-        setWorld("trading_hub");
+        setWorld(Assets.lvlTradingHub);
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
         uiControllers.add(dbgController);

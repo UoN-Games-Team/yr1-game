@@ -44,20 +44,20 @@ public class MovementSystem extends IteratingSystem {
 
         if (mvc.right) {
             if (b2dc.body.getLinearVelocity().x < mvc.speed) {
-                b2dc.body.applyLinearImpulse(mvc.speed / 2, 0,
+                b2dc.body.applyLinearImpulse(mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
             stc.state = EntityStates.ACTIVE_STATE.MOVING;
         }
         else if (mvc.left) {
             if (b2dc.body.getLinearVelocity().x > -mvc.speed) {
-                b2dc.body.applyLinearImpulse(-mvc.speed / 2, 0,
+                b2dc.body.applyLinearImpulse(-mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
             stc.state = EntityStates.ACTIVE_STATE.MOVING;
         }
         else {
-            resetSpeed(); //TODO: Test if resetting the speed is required when no movement should happen
+            resetSpeed();
         }
 
         if (mvc.jump) {
