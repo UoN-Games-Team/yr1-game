@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r2">
+    <folder id="0">
+        <file id="0" name="arm_top.png" width="71" height="36" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="torso.png" width="102" height="151" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="hand.png" width="24" height="27" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="head.png" width="60" height="72" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="entity_000">
+        <animation id="0" name="NewAnimation" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="0" z_index="1"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="torso">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-43" y="96"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="head">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="95.145631" y="142.718447"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
