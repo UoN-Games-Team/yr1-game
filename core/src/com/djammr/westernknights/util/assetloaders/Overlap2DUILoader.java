@@ -26,15 +26,13 @@ public class Overlap2DUILoader extends AsynchronousAssetLoader<Overlap2DUISettin
         String projectPath;
         String scenePath;
         String fontFolderPath;
-        String spriteAnimationsPath;
         Stage stage;
         Map<String, Actor> actors;
 
-        public void set(String projectPath, String scenePath, String fontFolderPath, String spriteAnimationsPath, Stage stage, Map<String, Actor> actors) {
+        public void set(String projectPath, String scenePath, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
             this.projectPath = projectPath;
             this.scenePath = scenePath;
             this.fontFolderPath = fontFolderPath;
-            this.spriteAnimationsPath = spriteAnimationsPath;
             this.stage = stage;
             this.actors = actors;
         }
@@ -52,7 +50,7 @@ public class Overlap2DUILoader extends AsynchronousAssetLoader<Overlap2DUISettin
     @Override
     public void loadAsync(AssetManager manager, String fileName, FileHandle file, Parameters parameter) {
         settings = new Overlap2DUISettings();
-        Overlap2DLoader.loadUI(resolve(parameter.projectPath), resolve(parameter.scenePath), parameter.fontFolderPath, parameter.spriteAnimationsPath, parameter.stage, parameter.actors);
+        Overlap2DLoader.loadUI(resolve(parameter.projectPath), resolve(parameter.scenePath), parameter.fontFolderPath, parameter.stage, parameter.actors);
     }
 
     @Override

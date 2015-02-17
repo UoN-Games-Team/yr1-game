@@ -38,7 +38,6 @@ public class Assets {
     // Overlap2D Project
     public static String overlap2DProject = "levels/test/project.dt";
     public static String overlap2DAtlas = "levels/test/orig/pack.atlas";
-    public static String overlap2DSpriteAnimations = "levels/test/orig/sprite_animations";
     public static String overlap2DFonts = "levels/test/freetypefonts";
     // Scenes
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";

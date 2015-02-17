@@ -10,10 +10,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.djammr.westernknights.entity.components.AnimationComponent;
-import com.djammr.westernknights.entity.components.PlayerComponent;
-import com.djammr.westernknights.entity.components.TransformComponent;
-import com.djammr.westernknights.entity.components.VisualComponent;
+import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.util.comparators.ZIndexComparator;
 
 
@@ -23,6 +21,9 @@ import com.djammr.westernknights.util.comparators.ZIndexComparator;
 public class RenderingSystem extends SortedIteratingSystem {
 
     private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
+    private ComponentMapper<SpriterComponent> sprtm = ComponentMapper.getFor(SpriterComponent.class);
+    VisualComponent visc;
+    SpriterComponent sprtc;
 
     public float[] bgColour = {0, 0, 0, 0};
     private OrthographicCamera camera;
@@ -34,7 +35,7 @@ public class RenderingSystem extends SortedIteratingSystem {
      * //@param camHeight Camera frustum height in meters
      */
     public RenderingSystem() {
-        super(Family.all(TransformComponent.class, VisualComponent.class).get(), new ZIndexComparator());
+        super(Family.all(VisualComponent.class).get(), new ZIndexComparator());
         batch = new SpriteBatch();
     }
 
@@ -55,10 +56,13 @@ public class RenderingSystem extends SortedIteratingSystem {
     }
 
     private void render(Entity entity) {
-        VisualComponent visc = vism.get(entity);
-        visc.sprite.draw(batch);
-        if (entity.getComponent(PlayerComponent.class) != null) {
-            //batch.draw(entity.getComponent(AnimationComponent.class).currentAnim.getKeyFrames()[0], 0, 2f, 5f, 5f);
+        visc = vism.get(entity);
+        sprtc = sprtm.get(entity);
+        if (sprtc != null) {
+            sprtc.player.update();
+            sprtc.drawer.draw(sprtc.player, batch);
+        } else {
+            visc.sprite.draw(batch);
         }
     }
 

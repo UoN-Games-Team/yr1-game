@@ -16,10 +16,12 @@ public class VisualSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private ComponentMapper<Box2DComponent> b2dm = ComponentMapper.getFor(Box2DComponent.class);
     private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
+    private ComponentMapper<SpriterComponent> sprtm = ComponentMapper.getFor(SpriterComponent.class);
     private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
     private TransformComponent transc;
     private Box2DComponent b2dc;
     private VisualComponent visc;
+    private SpriterComponent sprtc;
     private MovementComponent mvc;
 
 
@@ -33,6 +35,7 @@ public class VisualSystem extends IteratingSystem {
         transc = transm.get(entity);
         b2dc = b2dm.get(entity);
         visc = vism.get(entity);
+        sprtc = sprtm.get(entity);
         mvc = mvm.get(entity);
 
         if (b2dc != null) {
@@ -43,10 +46,21 @@ public class VisualSystem extends IteratingSystem {
                 if (mvc.left) visc.flipX = true;
                 else if (mvc.right) visc.flipX = false;
             }
+            // Spriter
+            if (sprtc != null) {
+                sprtc.player.setPosition(b2dc.body.getPosition().x, b2dc.body.getPosition().y);
+                sprtc.player.rotate(b2dc.body.getAngle() * MathUtils.radDeg);
+                if ((visc.flipX && sprtc.player.flippedX() == 1) || (!visc.flipX && sprtc.player.flippedX() != 1)) sprtc.player.flipX();
+            }
         }
         else if (transc != null) {
             visc.sprite.setPosition(transc.x, transc.y);
             visc.sprite.setRotation(transc.rotation);
+            // Spriter
+            if (sprtc != null) {
+                sprtc.player.setPosition(transc.x, transc.y);
+                sprtc.player.rotate(transc.rotation);
+            }
         }
     }
 }

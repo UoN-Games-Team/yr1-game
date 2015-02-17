@@ -14,7 +14,8 @@ import com.brashmonkey.spriter.Drawer;
 import com.brashmonkey.spriter.Player;
 import com.brashmonkey.spriter.SCMLReader;
 import com.djammr.westernknights.WKGame;
-import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.util.spriter.LibGdxDrawer;
+import com.djammr.westernknights.util.spriter.LibGdxLoader;
 
 
 /** From https://github.com/Trixt0r/spriter/blob/master/SpriterTests/src/com/brashmonkey/spriter/tests/backend/LibGdxTest.java */

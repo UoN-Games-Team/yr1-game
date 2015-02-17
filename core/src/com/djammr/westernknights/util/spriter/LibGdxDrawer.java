@@ -1,13 +1,15 @@
-package tests.animation;
+package com.djammr.westernknights.util.spriter;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.brashmonkey.spriter.Drawer;
 import com.brashmonkey.spriter.Loader;
+import com.brashmonkey.spriter.Player;
 import com.brashmonkey.spriter.Timeline.Key.Object;
 
-public class LibGdxDrawer extends Drawer<Sprite>{
+/** From https://github.com/Trixt0r/spriter */
+public class LibGdxDrawer extends Drawer<Sprite> {
 	
 	SpriteBatch batch;
 	ShapeRenderer renderer;
@@ -56,4 +58,9 @@ public class LibGdxDrawer extends Drawer<Sprite>{
 		sprite.setScale(object.scale.x, object.scale.y);
 		sprite.draw(batch);
 	}
+
+    public void draw(Player player, SpriteBatch batch) {
+        this.batch = batch;
+        draw(player);
+    }
 }

@@ -1,4 +1,4 @@
-package tests.animation;
+package com.djammr.westernknights.util.spriter;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -19,6 +19,8 @@ import com.brashmonkey.spriter.Data;
 import com.brashmonkey.spriter.FileReference;
 import com.brashmonkey.spriter.Loader;
 
+
+/** From https://github.com/Trixt0r/spriter */
 public class LibGdxLoader extends Loader<Sprite> implements Disposable{
 	
 	public static int standardAtlasWidth = 2048, standardAtlasHeight = 2048;

@@ -19,18 +19,21 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.SCMLReader;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.EntityFactory;
 import com.djammr.westernknights.entity.EntityManager;
-import com.djammr.westernknights.entity.components.AnimationComponent;
-import com.djammr.westernknights.entity.components.Box2DComponent;
-import com.djammr.westernknights.entity.components.TransformComponent;
-import com.djammr.westernknights.entity.components.VisualComponent;
+import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.entity.systems.RenderingSystem;
+import com.djammr.westernknights.util.spriter.LibGdxDrawer;
+import com.djammr.westernknights.util.spriter.LibGdxLoader;
+import com.uwsoft.editor.renderer.Overlap2D;
 import com.uwsoft.editor.renderer.actor.SpriteAnimation.Animation;
 import com.uwsoft.editor.renderer.data.*;
 import com.uwsoft.editor.renderer.utils.CustomVariables;
@@ -59,12 +62,14 @@ public class Overlap2DLoader {
     private static ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
 
     // Nasty time saving way of giving methods access the loadMap arguments.
+    private static String projectPath;
     private static SceneVO sceneVO;
     private static ProjectInfoVO projectVO;
     private static CustomVariables customVars;
     private static Box2DSystem b2dSystem;
     private static TextureAtlas atlas;
     private static String spriteAnimationsPath;
+    private static String spriterAnimationsPath;
     private static EntityManager entityManager;
     private static String fontPath;
     private static Stage stage;
@@ -72,10 +77,12 @@ public class Overlap2DLoader {
     private static List<String> layers;
 
 
-    private static void setHandles(FileHandle projectPath, FileHandle scenePath, String spriteAnimationsPath) {
+    private static void setHandles(FileHandle projectPath, FileHandle scenePath) {
+        Overlap2DLoader.projectPath = projectPath.parent().path();
         sceneVO = json.fromJson(SceneVO.class, scenePath.readString());
         projectVO = json.fromJson(ProjectInfoVO.class, projectPath.readString());
-        Overlap2DLoader.spriteAnimationsPath = spriteAnimationsPath;
+        spriteAnimationsPath = Overlap2DLoader.projectPath + "/orig/sprite_animations";
+        spriterAnimationsPath = Overlap2DLoader.projectPath + "/orig/spriter_animations";
         customVars = new CustomVariables();
     }
 
@@ -84,12 +91,11 @@ public class Overlap2DLoader {
      * @param projectPath FileHandle for Overlap2D project file
      * @param scenePath FileHandle for Overlap2D scene file to load
      * @param atlas path to Overlap2D project texture atlas
-     * @param spriteAnimationsPath path to folder containing Overlap2D sprite animations, e.g project/orig/sprite_animations
      * @param entityManager {@link com.djammr.westernknights.entity.EntityManager} instance to add entities to
      */
-    public static void loadMap(FileHandle projectPath, FileHandle scenePath, TextureAtlas atlas, String spriteAnimationsPath, EntityManager entityManager) {
+    public static void loadMap(FileHandle projectPath, FileHandle scenePath, TextureAtlas atlas, EntityManager entityManager) {
         WKGame.logger.logDebug("Loading Overlap2D Scene: " + scenePath);
-        setHandles(projectPath, scenePath, spriteAnimationsPath);
+        setHandles(projectPath, scenePath);
         b2dSystem = entityManager.getEngine().getSystem(Box2DSystem.class);
         Overlap2DLoader.atlas = atlas;
         Overlap2DLoader.entityManager = entityManager;
@@ -107,13 +113,12 @@ public class Overlap2DLoader {
      * @param projectPath FileHandle for Overlap2D project file
      * @param scenePath FileHandle for Overlap2D scene file to load
      * @param fontFolderPath Path to font folder containing Overlap2D ttfs
-     * @param spriteAnimationsPath path to folder containing Overlap2D sprite animations, e.g project/orig/sprite_animations
      * @param stage Stage instance to add components to
      * @param actors Map<String, Actor> to populate for receiving actors later. Keys are the identifiers set in Overlap2D.
      */
-    public static void loadUI(FileHandle projectPath, FileHandle scenePath, String fontFolderPath, String spriteAnimationsPath, Stage stage, Map<String, Actor> actors) {
+    public static void loadUI(FileHandle projectPath, FileHandle scenePath, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
         WKGame.logger.logDebug("Loading Overlap2D UI: " + scenePath);
-        setHandles(projectPath, scenePath, spriteAnimationsPath);
+        setHandles(projectPath, scenePath);
         Overlap2DLoader.fontPath = fontFolderPath;
         Overlap2DLoader.stage = stage;
         Overlap2DLoader.actors = actors;
@@ -152,6 +157,9 @@ public class Overlap2DLoader {
             }
             else if (item instanceof SpriteAnimationVO) {
                 addEntity((SpriteAnimationVO)item);
+            }
+            else if (item instanceof SpriterVO) {
+                addEntity((SpriterVO)item);
             }
             else if (item instanceof LightVO) {
                 addLight((LightVO) item);
@@ -248,6 +256,31 @@ public class Overlap2DLoader {
         TextureRegion region = atlas.findRegion(item.imageName);
 
         addEntity(item, region, ((region != null) ? new VisualComponent() : null));
+    }
+
+    /**
+     * Adds an Entity from a SpriterVO
+     * @param item SpriterVO to add
+     */
+    private static void addEntity(final SpriterVO item) {
+        final FileHandle spriterFile = Gdx.files.internal(spriterAnimationsPath + "/" + item.animationName + "/" + item.animationName + ".scml");
+        final Data data = new SCMLReader(spriterFile.read()).getData();
+
+        final Entity entity = addEntity(item, null, new VisualComponent(), new SpriterComponent());
+        final SpriterComponent spriterComponent = entity.getComponent(SpriterComponent.class);
+
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                spriterComponent.loader = new LibGdxLoader(data);
+                spriterComponent.loader.load(spriterFile.file());
+                spriterComponent.player = new Player(data.getEntity(item.entity));
+                spriterComponent.player.setScale(item.scale * WKGame.PIXELS_TO_METERS);
+                spriterComponent.player.setPosition(item.x, item.y);
+                spriterComponent.drawer = new LibGdxDrawer(spriterComponent.loader, null, null);
+                spriterComponent.player.speed = 4;
+            }
+        });
     }
 
     /**
