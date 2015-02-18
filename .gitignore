@@ -64,3 +64,6 @@ build/
 .DS_Store
 
 s101plugin.state
+
+thumbs.db
+Thumbs.db
