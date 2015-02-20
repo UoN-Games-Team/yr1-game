@@ -330,20 +330,29 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
         world.dispose();
     }
 
+
     @Override
     public boolean keyDown(int keycode) {
         //WKGame.logger.logDebug(Input.Keys.toString(keycode) + " pressed");
-        if (keyMapManager.getKeyMap().get(""+keycode) != null) {
-            notifyObservers(keyMapManager.getKeyMap().get(""+keycode).intValue());
+        if (keyMapManager.getKeyMap().get("btn-"+keycode) != null) {
+            notifyObservers(keyMapManager.getKeyMap().get("btn-"+keycode).intValue());
         }
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if (keyMapManager.getKeyMap().get(""+keycode) != null &&
-                (keyMapManager.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_LEFT || keyMapManager.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_RIGHT)) {
+        if (keyMapManager.getKeyMap().get("btn-"+keycode) != null &&
+                (keyMapManager.getKeyMap().get("btn-"+keycode).intValue() == GameActions.PLAYER_LEFT || keyMapManager.getKeyMap().get("btn-"+keycode).intValue() == GameActions.PLAYER_RIGHT)) {
             notifyObservers(GameActions.PLAYER_MOVE_NONE);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (keyMapManager.getKeyMap().get("btn-"+button) != null) {
+            notifyObservers(keyMapManager.getKeyMap().get("btn-"+button).intValue());
         }
         return true;
     }
@@ -387,7 +396,6 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
         //System.out.println(controller.getName() + ", pressed: " + buttonCode);
-
         if (keyMapManager.getControllerMap().get("btn-"+buttonCode) != null) {
             notifyObservers(keyMapManager.getControllerMap().get("btn-"+buttonCode).intValue());
         }

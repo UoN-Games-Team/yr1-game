@@ -29,9 +29,10 @@ public class SaveTest implements ApplicationListener {
 
     @Override
     public void create() {
-        keyMap.put(""+Input.Keys.A, (float)GameActions.PLAYER_LEFT);
-        keyMap.put(""+Input.Keys.D, (float)GameActions.PLAYER_RIGHT);
-        keyMap.put(""+Input.Keys.SPACE, (float)GameActions.PLAYER_JUMP);
+        keyMap.put("btn-"+Input.Keys.A, (float)GameActions.PLAYER_LEFT);
+        keyMap.put("btn-"+Input.Keys.D, (float)GameActions.PLAYER_RIGHT);
+        keyMap.put("btn-"+Input.Keys.SPACE, (float)GameActions.PLAYER_JUMP);
+        keyMap.put("btn-"+Input.Buttons.LEFT, (float)GameActions.PLAYER_ATTACK_LIGHT);
 
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"-", (float)GameActions.PLAYER_LEFT);
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"+", (float)GameActions.PLAYER_RIGHT);

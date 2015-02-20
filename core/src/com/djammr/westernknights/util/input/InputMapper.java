@@ -26,17 +26,26 @@ public class InputMapper extends WKInput {
     @Override
     public boolean keyDown(int keycode) {
         WKGame.logger.logDebug(Input.Keys.toString(keycode) + " pressed");
-        if (WKGame.keyMaps.getKeyMap().get(""+keycode) != null) {
-            notifyObservers(WKGame.keyMaps.getKeyMap().get(""+keycode).intValue());
+        if (WKGame.keyMaps.getKeyMap().get("btn-"+keycode) != null) {
+            notifyObservers(WKGame.keyMaps.getKeyMap().get("btn-"+keycode).intValue());
         }
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if (WKGame.keyMaps.getKeyMap().get(""+keycode) != null &&
-                (WKGame.keyMaps.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_LEFT || WKGame.keyMaps.getKeyMap().get(""+keycode).intValue() == GameActions.PLAYER_RIGHT)) {
+        if (WKGame.keyMaps.getKeyMap().get("btn-"+keycode) != null &&
+                (WKGame.keyMaps.getKeyMap().get("btn-"+keycode).intValue() == GameActions.PLAYER_LEFT || WKGame.keyMaps.getKeyMap().get("btn-"+keycode).intValue() == GameActions.PLAYER_RIGHT)) {
             notifyObservers(GameActions.PLAYER_MOVE_NONE);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        WKGame.logger.logDebug(button + " pressed");
+        if (WKGame.keyMaps.getKeyMap().get("btn-"+button) != null) {
+            notifyObservers(WKGame.keyMaps.getKeyMap().get("btn-"+button).intValue());
         }
         return true;
     }

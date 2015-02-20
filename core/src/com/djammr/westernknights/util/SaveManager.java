@@ -20,7 +20,7 @@ public class SaveManager {
      * @return the loaded Object of type T
      */
     public <T> T load(Class<T> type, String localPath, boolean encoded) {
-        FileHandle file = Gdx.files.local(localPath);
+        FileHandle file = Gdx.files.internal(localPath);
         if (encoded) {
             return json.fromJson(type, Base64Coder.decodeString(file.readString()));
         }
