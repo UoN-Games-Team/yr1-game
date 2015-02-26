@@ -1,0 +1,12 @@
+# see https://github.com/libgdx/gdx-ai/blob/master/tests/data/dog.tree
+
+import wander:"tests.ai.btree.tasks.WalkTask"
+import work:"tests.ai.btree.tasks.WorkTask"
+
+# root is optional
+root
+  selector
+    sequence
+      wander
+      work
+

@@ -47,7 +47,7 @@ public class EntityFactory {
 
         // Box
         PolygonShape poly = new PolygonShape();
-        poly.setAsBox(width/2, boxHeight/2, new Vector2(width/2, width/2 + boxOffset), 0);
+        poly.setAsBox(width/2, boxHeight/2, new Vector2(0/*width/2*/, width/2 + boxOffset), 0);
         FixtureDef fixtureDefB = new FixtureDef();
         fixtureDefB.shape = poly;
         fixtureDefB.density = density;
@@ -60,7 +60,7 @@ public class EntityFactory {
         // Wheel
         CircleShape circle = new CircleShape();
         circle.setRadius(width/2);
-        circle.setPosition(new Vector2(width/2, width/2));
+        circle.setPosition(new Vector2(0/*width/2*/, width/2));
         FixtureDef fixtureDefC = new FixtureDef();
         fixtureDefC.shape = circle;
         fixtureDefC.density = density;
@@ -76,12 +76,12 @@ public class EntityFactory {
         motor.bodyA = box;
         motor.bodyB = wheel;
         motor.collideConnected = false;
-        motor.localAnchorA.set(width/2, -boxOffset/2);
+        motor.localAnchorA.set(0/*width/2*/, -boxOffset/2);
         motor.localAnchorB.set(circle.getPosition());
         box2DSystem.getB2World().createJoint(motor);
 
         // Foot Sensor
-        poly.setAsBox(width/4, 0.1f, new Vector2(width/2, 0), 0);
+        poly.setAsBox(width/4, 0.1f, new Vector2(0/*width/2*/, 0), 0);
         FixtureDef fixtureDefS = new FixtureDef();
         fixtureDefS.shape = poly;
         fixtureDefS.isSensor = true;

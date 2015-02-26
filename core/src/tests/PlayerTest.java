@@ -36,7 +36,6 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
     private OrthographicCamera camera;
     private KeyMapManager keyMapManager;
 
-    private Player spriterPlayer;
     private Player swordPlayer;
     private PlayerTweener spriterTweener;
     private LibGdxLoader spriterLoader;
@@ -203,8 +202,8 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
         spriterTweener = new PlayerTweener(data.getEntity("player"));
         //spriterTweener.setPlayers(spriterPlayer, spriterPlayer);
         spriterTweener.setScale(WKGame.PIXELS_TO_METERS / 2.5f);
-        spriterTweener.getFirstPlayer().speed = 4;
-        spriterTweener.getSecondPlayer().speed = 4;
+        //spriterTweener.getFirstPlayer().speed = 4;
+        //spriterTweener.getSecondPlayer().speed = 4;
         spriterTweener.addListener(this);
 
         swordPlayer = new Player(data.getEntity("sword"));
@@ -286,7 +285,7 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
             //playerJoint.setMotorSpeed(-playerSpeed*2);
             if (playerOnGround)  {
                 spriterTweener.getSecondPlayer().setAnimation("run");
-                spriterTweener.getSecondPlayer().speed = 4;
+                //spriterTweener.getSecondPlayer().speed = 4;
             }
         }
         else if (playerLeft) {
@@ -297,7 +296,7 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
             //playerJoint.setMotorSpeed(playerSpeed*2);
             if (playerOnGround)  {
                 spriterTweener.getSecondPlayer().setAnimation("run");
-                spriterTweener.getSecondPlayer().speed = 4;
+                //spriterTweener.getSecondPlayer().speed = 4;
             }
         }
         else {
@@ -411,7 +410,7 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
                     spriterTweener.baseBoneName = "bone_002";
                 }
                 spriterTweener.setWeight(0f);
-                spriterTweener.getFirstPlayer().speed = 1;
+                //spriterTweener.getFirstPlayer().speed = 1;
                 break;
             case GameActions.PLAYER_MOVE_NONE:
                 resetPlayerSpeed();
@@ -420,7 +419,7 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
                 if (playerOnGround) {
                     spriterTweener.getSecondPlayer().setAnimation("idle");
                     spriterTweener.setWeight(1f);
-                    spriterTweener.getSecondPlayer().speed = 1;
+                    //spriterTweener.getSecondPlayer().speed = 1;
                 }
                 break;
             case GameActions.PLAYER_LEFT:

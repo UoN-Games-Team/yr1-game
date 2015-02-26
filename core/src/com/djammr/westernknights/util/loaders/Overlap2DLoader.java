@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.brashmonkey.spriter.Data;
 import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.PlayerTweener;
 import com.brashmonkey.spriter.SCMLReader;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
@@ -274,11 +275,12 @@ public class Overlap2DLoader {
             public void run() {
                 spriterComponent.loader = new LibGdxLoader(data);
                 spriterComponent.loader.load(spriterFile.file());
-                spriterComponent.player = new Player(data.getEntity(item.entity));
+                spriterComponent.player = new PlayerTweener(data.getEntity(item.entity));
                 spriterComponent.player.setScale(item.scale * WKGame.PIXELS_TO_METERS);
                 spriterComponent.player.setPosition(item.x, item.y);
+                //spriterComponent.player.setBaseAnimation(item.animation);
+                //spriterComponent.player.getFirstPlayer().setAnimation(item.animation);
                 spriterComponent.drawer = new LibGdxDrawer(spriterComponent.loader, null, null);
-                spriterComponent.player.speed = 4;
             }
         });
     }

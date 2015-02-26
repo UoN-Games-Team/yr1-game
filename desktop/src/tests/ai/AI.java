@@ -1,6 +1,7 @@
 package tests.ai;
 
 import tests.WKTest;
+import tests.ai.btree.BehaviourTreeTest;
 
 public class AI extends WKTest {
 

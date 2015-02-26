@@ -100,11 +100,12 @@ public class B2DSteeringEntity implements Steerable<Vector2> {
             boolean applySteering = true;
 
             if (random.nextFloat() > 0.5f) {
-                steeringBehavior.calculateSteering(steeringOutput); // 50% chance to change
+                steeringBehavior.calculateSteering(steeringOutput); // 50% chance to stop moving
             } else {
                 steeringOutput.setZero();
             }
 
+            // boundaries
             if (minX != null && body.getPosition().x + steeringOutput.linear.x < minX) applySteering = false;
             if (maxX != null && body.getPosition().x + steeringOutput.linear.x > maxX) applySteering = false;
             if (applySteering) {
@@ -156,6 +157,13 @@ public class B2DSteeringEntity implements Steerable<Vector2> {
     public void setBoundaries(Float minX, Float maxX) {
         setMinX(minX);
         setMaxX(maxX);
+    }
+
+    public float getMinX() {
+        return minX;
+    }
+    public float getMaxX() {
+        return maxX;
     }
 
     @Override

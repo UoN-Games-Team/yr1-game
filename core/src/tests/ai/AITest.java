@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
-import com.djammr.westernknights.WKGame;
 import tests.ai.behaviours.B2DSteeringEntity;
 
 /**
@@ -29,10 +28,9 @@ public class AITest implements ApplicationListener {
     private float cameraSpeed = 0.1f;
     private boolean debugRender = true;
 
-    private B2DSteeringEntity npc1;
+    private NPC npc1;
     private Body ground;
 
-    private Sprite npc1Sprite;
     private float actorWidth = 0.72f;
     private float actorHeight = 1.8f;
 
@@ -49,9 +47,6 @@ public class AITest implements ApplicationListener {
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -10), true);
 
-        npc1Sprite = new Sprite(new Texture(Gdx.files.internal("test/npc.png")));
-        npc1Sprite.setSize(actorWidth, actorHeight);
-
         createBodies();
     }
 
@@ -60,17 +55,22 @@ public class AITest implements ApplicationListener {
         float width = actorWidth, height = actorHeight;
 
         // --- NPC1
-        npc1 = new B2DSteeringEntity(createActor(width, height), width);
+        /*npc1 = new B2DSteeringEntity(createActor(width, height), width);
+        npc1.getBody().setTransform(15, 5, 0);*/
+        npc1 = new NPC(createActor(width, height), width);
         npc1.getBody().setTransform(15, 5, 0);
+        Sprite sprite = new Sprite(new Texture(Gdx.files.internal("test/npc.png")));
+        sprite.setSize(actorWidth, actorHeight);
+        npc1.setSprite(sprite);
 
         B2DSteeringEntity target = createNode(20, 2.25f);
         //npc1.setSteeringBehavior(new Seek<Vector2>(npc1, target));
-        npc1.setSteeringBehavior(new Wander<Vector2>(npc1)
+        npc1.getBehaviour().setSteeringBehavior(new Wander<Vector2>(npc1.getBehaviour())
                 .setWanderOffset(0f)
                 .setWanderRadius(1f)
                 .setWanderRate(0.1f)
                 .setFaceEnabled(false));
-        npc1.setBoundaries(0f, target.getPosition().x);
+        npc1.getBehaviour().setBoundaries(0f, target.getPosition().x);
 
         // --- Ground
         BodyDef bodyDef = new BodyDef();
@@ -181,7 +181,7 @@ public class AITest implements ApplicationListener {
 
         batch.begin();
         {
-            npc1Sprite.draw(batch);
+            npc1.render(batch);
         }
         batch.end();
 
@@ -190,12 +190,7 @@ public class AITest implements ApplicationListener {
 
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             {
-                shapeRenderer.circle(((Wander<Vector2>) npc1.getSteeringBehavior()).getWanderCenter().x,
-                        ((Wander<Vector2>) npc1.getSteeringBehavior()).getWanderCenter().y,
-                        0.8f);
-                shapeRenderer.circle(((Wander<Vector2>) npc1.getSteeringBehavior()).getInternalTargetPosition().x,
-                        ((Wander<Vector2>) npc1.getSteeringBehavior()).getInternalTargetPosition().y,
-                        0.5f);
+                npc1.debugRender(shapeRenderer);
             }
             shapeRenderer.end();
         }
@@ -231,11 +226,6 @@ public class AITest implements ApplicationListener {
 
         // --- AI
         npc1.update(deltaTime);
-
-        // --- Sprites
-        npc1Sprite.setPosition(npc1.getPosition().x - npc1Sprite.getWidth()/2, npc1.getPosition().y - actorWidth/2);
-        if (npc1.getLinearVelocity().x < -npc1.getMaxLinearSpeed()/4) npc1Sprite.setFlip(false, false);
-        else if (npc1.getLinearVelocity().x > npc1.getMaxLinearSpeed()/4) npc1Sprite.setFlip(true, false);
 
         // --- Debug
         if (Gdx.input.isKeyJustPressed(Input.Keys.APOSTROPHE)) {
