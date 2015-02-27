@@ -1,0 +1,27 @@
+
+pack.png
+size: 4096,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+achemist
+  rotate: false
+  xy: 1051, 908
+  size: 1236, 848
+  orig: 1236, 848
+  offset: 0, 0
+  index: -1
+blacksmith
+  rotate: false
+  xy: 2, 2
+  size: 671, 500
+  orig: 671, 500
+  offset: 0, 0
+  index: -1
+bountyoffice
+  rotate: false
+  xy: 2, 504
+  size: 1047, 1252
+  orig: 1047, 1252
+  offset: 0, 0
+  index: -1
