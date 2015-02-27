@@ -48,7 +48,7 @@ public class DebugUI extends UIView {
                                Gdx.files.internal(Assets.uiDebugScene),
                                Assets.overlap2DFonts, stage, actors);*/
         Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
-        params.set(Assets.overlap2DProject, Assets.uiDebugScene, Assets.overlap2DFonts, stage, actors);
+        params.set(Assets.overlap2DProject, Assets.uiDebugScene, Assets.overlap2DAtlas, Assets.overlap2DFonts, stage, actors);
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {

@@ -32,7 +32,7 @@ public class PlayerHUD extends UIView {
     @Override
     public void createUI() {
         Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
-        params.set(Assets.overlap2DUIProject, Assets.uiHud, Assets.overlap2DUIFonts, stage, actors);
+        params.set(Assets.overlap2DUIProject, Assets.uiHud,  Assets.overlap2DUIAtlas, Assets.overlap2DUIFonts, stage, actors);
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {

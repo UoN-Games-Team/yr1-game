@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.loaders.AsynchronousAssetLoader;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -26,12 +27,14 @@ public class Overlap2DUILoader extends AsynchronousAssetLoader<Overlap2DUISettin
         String projectPath;
         String scenePath;
         String fontFolderPath;
+        String atlas;
         Stage stage;
         Map<String, Actor> actors;
 
-        public void set(String projectPath, String scenePath, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
+        public void set(String projectPath, String scenePath, String atlas, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
             this.projectPath = projectPath;
             this.scenePath = scenePath;
+            this.atlas = atlas;
             this.fontFolderPath = fontFolderPath;
             this.stage = stage;
             this.actors = actors;
@@ -50,7 +53,7 @@ public class Overlap2DUILoader extends AsynchronousAssetLoader<Overlap2DUISettin
     @Override
     public void loadAsync(AssetManager manager, String fileName, FileHandle file, Parameters parameter) {
         settings = new Overlap2DUISettings();
-        Overlap2DLoader.loadUI(resolve(parameter.projectPath), resolve(parameter.scenePath), parameter.fontFolderPath, parameter.stage, parameter.actors);
+        Overlap2DLoader.loadUI(resolve(parameter.projectPath), resolve(parameter.scenePath),  manager.get(parameter.atlas, TextureAtlas.class), parameter.fontFolderPath, parameter.stage, parameter.actors);
     }
 
     @Override
@@ -62,6 +65,8 @@ public class Overlap2DUILoader extends AsynchronousAssetLoader<Overlap2DUISettin
 
     @Override
     public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, Parameters parameter) {
-        return null;
+        Array<AssetDescriptor> dependencies = new Array<AssetDescriptor>();
+        dependencies.add(new AssetDescriptor(parameter.atlas, TextureAtlas.class));
+        return dependencies;
     }
 }

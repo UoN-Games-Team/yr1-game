@@ -16,7 +16,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.brashmonkey.spriter.Data;
@@ -57,6 +59,10 @@ import java.util.*;
  * The way this class is structured is pretty gross, but at least it's easy to add new features and extend functionality, so that's good, right?...
  */
 public class Overlap2DLoader {
+
+    public static enum SceneType {
+        UI, MAP
+    }
 
     private static Json json = new Json();
     private static ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
@@ -103,10 +109,10 @@ public class Overlap2DLoader {
 
         // Global Stuff
         //entityManager.getEngine().getSystem(RenderingSystem.class).bgColour = sceneVO.ambientColor;
-        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, (scenePath.toString().contains("night"))? 0.05f : 0.5f);
+        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, (scenePath.toString().contains("night"))? 0.05f : 0.5f); // TODO: no longer using the _night suffix
 
         // Add Scene
-        addScene(sceneVO);
+        addScene(sceneVO, SceneType.MAP);
     }
 
     /**
@@ -117,35 +123,36 @@ public class Overlap2DLoader {
      * @param stage Stage instance to add components to
      * @param actors Map<String, Actor> to populate for receiving actors later. Keys are the identifiers set in Overlap2D.
      */
-    public static void loadUI(FileHandle projectPath, FileHandle scenePath, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
+    public static void loadUI(FileHandle projectPath, FileHandle scenePath, TextureAtlas atlas, String fontFolderPath, Stage stage, Map<String, Actor> actors) {
         WKGame.logger.logDebug("Loading Overlap2D UI: " + scenePath);
         setHandles(projectPath, scenePath);
         Overlap2DLoader.fontPath = fontFolderPath;
+        Overlap2DLoader.atlas = atlas;
         Overlap2DLoader.stage = stage;
         Overlap2DLoader.actors = actors;
 
         // Add Scene
-        addScene(sceneVO);
+        addScene(sceneVO, SceneType.UI);
     }
 
     /**
      * Parses a scene object and adds objects
      * @param sceneVO SceneVO to parse
      */
-    private static void addScene(SceneVO sceneVO) {
+    private static void addScene(SceneVO sceneVO, SceneType sceneType) {
         // The index of the layer an item is on is prepended to the item's z-index to resolve layer clashes easily
         layers = new ArrayList<String>();
         for (LayerItemVO layerVO : sceneVO.composite.layers) {
             layers.add(layerVO.layerName);
         }
-        addComposite(new CompositeItemVO(sceneVO.composite));
+        addComposite(new CompositeItemVO(sceneVO.composite), sceneType);
     }
 
     /**
      * Recursively add objects from a CompositeItemVO including child composites
      * @param composite CompositeVO to add
      */
-    private static void addComposite(CompositeItemVO composite) {
+    private static void addComposite(CompositeItemVO composite, SceneType sceneType) {
         for (MainItemVO item : composite.composite.getAllItems(false)) {
             item.x += composite.x;
             item.y += composite.y;
@@ -154,7 +161,8 @@ public class Overlap2DLoader {
             item.rotation += composite.rotation;
 
             if (item instanceof SimpleImageVO) {
-                addEntity((SimpleImageVO)item);
+                if (sceneType.equals(SceneType.MAP)) addEntity((SimpleImageVO)item);
+                else if (sceneType.equals(SceneType.UI)) addUiImage((SimpleImageVO) item);
             }
             else if (item instanceof SpriteAnimationVO) {
                 addEntity((SpriteAnimationVO)item);
@@ -166,10 +174,10 @@ public class Overlap2DLoader {
                 addLight((LightVO) item);
             }
             else if (item instanceof LabelVO) {
-                addLabel((LabelVO) item);
+                addUiLabel((LabelVO) item);
             }
             else if (item instanceof CompositeItemVO) {
-                addComposite((CompositeItemVO) item);
+                addComposite((CompositeItemVO) item, sceneType);
             }
         }
     }
@@ -200,7 +208,7 @@ public class Overlap2DLoader {
      * @param additionalComponents any additional  Entity Components to add
      */
     private static Entity addEntity(MainItemVO item, TextureRegion region, Component... additionalComponents) {
-        // Components
+        // --- Components
         List<Component> components = new ArrayList<Component>();
         customVars.loadFromString(item.customVars);
         if (customVars.getStringVariable("components") != null) {
@@ -215,7 +223,7 @@ public class Overlap2DLoader {
         components.addAll(Arrays.asList(additionalComponents));
 
         Entity entity;
-        // Box2D Mesh
+        // --- Box2D Mesh
         if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
             entity = EntityFactory.createPlayer(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
         } else {
@@ -227,7 +235,7 @@ public class Overlap2DLoader {
             entity = EntityFactory.createEntity(b2dSystem, meshData, components);
         }
 
-        // Set Position
+        // --- Set Position
         TransformComponent transc = transm.get(entity);
         transc.x = item.x * WKGame.PIXELS_TO_METERS;
         transc.y = item.y * WKGame.PIXELS_TO_METERS;
@@ -238,12 +246,12 @@ public class Overlap2DLoader {
             ((Box2DUserData)entity.getComponent(Box2DComponent.class).body.getUserData()).id = item.itemIdentifier;
         }
 
-        // Set Texture
+        // --- Set Texture
         if (region != null) {
             initVisualComponent(item, entity, region);
         }
 
-        // Add the entity to the world
+        // --- Add the entity to the world
         entityManager.addEntity(entity, item.itemIdentifier);
         return entity;
     }
@@ -255,7 +263,6 @@ public class Overlap2DLoader {
     private static void addEntity(SimpleImageVO item) {
         // Texture
         TextureRegion region = atlas.findRegion(item.imageName);
-
         addEntity(item, region, ((region != null) ? new VisualComponent() : null));
     }
 
@@ -346,22 +353,47 @@ public class Overlap2DLoader {
         }
     }
 
-    private static void addLabel(final LabelVO label) {
-        final Label nlabel = new Label(label.text, Assets.skinDefault);
-        nlabel.setPosition(label.x, label.y);
-        nlabel.setRotation(label.rotation);
-        nlabel.setAlignment(label.align);
-        //nlabel.setStyle(new Label.LabelStyle(Assets.getFont(label.style + "-" + label.size, fontPath+"/"+label.style+".ttf"), new Color(label.tint[0], label.tint[1], label.tint[2], label.tint[3])));
-        stage.addActor(nlabel);
-        actors.put(label.itemIdentifier, nlabel);
+    /**
+     * Adds a Label to the stage from a LabelVO
+     * @param item LabelVO to add
+     */
+    private static void addUiLabel(final LabelVO item) {
+        final Label label = new Label(item.text, Assets.skinDefault);
+        addUiItem(label, item);
+        label.setAlignment(item.align);
 
         // Queue adding Label style as it requires an OpenGL Context
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
-                nlabel.setStyle(new Label.LabelStyle(Assets.getFont(label.style + "-" + label.size, fontPath+"/"+label.style+".ttf"), new Color(label.tint[0], label.tint[1], label.tint[2], label.tint[3])));
+                label.setStyle(new Label.LabelStyle(Assets.getFont(item.style + "-" + item.size, fontPath + "/" + item.style + ".ttf"), new Color(item.tint[0], item.tint[1], item.tint[2], item.tint[3])));
             }
         });
+    }
+
+    /**
+     * Adds an Image to the stage from a SimpleImageVO
+     * @param item SimpleImageVO to add
+     */
+    private static void addUiImage(SimpleImageVO item) {
+        Image image = new Image(atlas.findRegion(item.imageName));
+        addUiItem(image, item);
+    }
+
+    /**
+     * Configures and adds an Actor to the stage. The actor is also added to the actors map
+     * @param actor Actor to add
+     * @param item MainItemVO to configure from
+     */
+    private static void addUiItem(Actor actor, MainItemVO item) {
+        actor.setPosition(item.x, item.y);
+        actor.setRotation(item.rotation);
+        actor.setScaleX(item.scaleX);
+        actor.setScaleY(item.scaleY);
+        actor.setZIndex(Integer.parseInt(layers.indexOf(item.layerName) + "" + item.zIndex));
+
+        stage.addActor(actor);
+        actors.put(item.itemIdentifier, actor);
     }
 
     /**
