@@ -59,7 +59,7 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             night = !night;
-            rayHandler.setAmbientLight(255, 255, 255, (night)? 0.05f : 0.4f);
+            rayHandler.setAmbientLight(0.2f, 0.2f, 0.2f, (night)? 0.1f : 0.8f);
             for (Light light : lights) {
                 light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
             }
