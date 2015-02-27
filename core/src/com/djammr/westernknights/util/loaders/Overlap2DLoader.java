@@ -103,7 +103,7 @@ public class Overlap2DLoader {
 
         // Global Stuff
         //entityManager.getEngine().getSystem(RenderingSystem.class).bgColour = sceneVO.ambientColor;
-        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, (scenePath.toString().contains("night"))? 0.05f : 0.4f);
+        b2dSystem.getRayHandler().setAmbientLight(255, 255, 255, (scenePath.toString().contains("night"))? 0.05f : 0.5f);
 
         // Add Scene
         addScene(sceneVO);

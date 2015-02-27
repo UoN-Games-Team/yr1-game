@@ -14,9 +14,9 @@ import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings
 /**
  * Trading Hub Level
  */
-public class TradingHub extends WKWorld {
+public class Test extends WKWorld {
 
-    public TradingHub() {
+    public Test() {
         super(); // Make sure you call super() on all levels!
     }
 
@@ -28,12 +28,12 @@ public class TradingHub extends WKWorld {
 
         // Level
         Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();
-        params.set(Assets.overlap2DLevelProject, Assets.lvlTradingArea, Assets.overlap2DLevelAtlas, getEntities());
+        params.set(Assets.overlap2DProject, Assets.lvlTestLevelNight, Assets.overlap2DAtlas, getEntities());
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
-                //getEntities().getEngine().getSystem(InputSystem.class).setControllable(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER));
-                //getEntities().getEngine().getSystem(CameraSystem.class).follow(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER), null, null, 0f, null);
+                getEntities().getEngine().getSystem(InputSystem.class).setControllable(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER));
+                getEntities().getEngine().getSystem(CameraSystem.class).follow(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER), null, null, 0f, null);
             }
         };
 

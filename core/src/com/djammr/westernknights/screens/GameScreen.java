@@ -7,7 +7,9 @@ import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.levels.TradingHub;
 import com.djammr.westernknights.ui.DebugUI;
+import com.djammr.westernknights.ui.PlayerHUD;
 import com.djammr.westernknights.util.controllers.DebugController;
+import com.djammr.westernknights.util.controllers.PlayerHUDController;
 import com.djammr.westernknights.util.controllers.UIController;
 import com.djammr.westernknights.util.input.InputMapper;
 
@@ -30,16 +32,21 @@ public class GameScreen extends WKScreen {
     public GameScreen(WKGame game) {
         super(game);
         Box2D.init();
-        addWorld(Assets.lvlTradingHub, new TradingHub());
+        addWorld(Assets.lvlTradingAreaID, new TradingHub());
         getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
     public void load() {
-        setWorld(Assets.lvlTradingHub);
+        setWorld(Assets.lvlTradingAreaID);
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
         uiControllers.add(dbgController);
+        
+        PlayerHUDController hudController = new PlayerHUDController(this);
+        hudController.setView(new PlayerHUD(hudController));
+        uiControllers.add(hudController);
+        
 
         super.load();
     }
