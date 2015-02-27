@@ -1,5 +1,6 @@
 package com.djammr.westernknights;
 
+import com.badlogic.gdx.graphics.Color;
 import com.djammr.westernknights.entity.EntityManager;
 import com.djammr.westernknights.entity.systems.*;
 
@@ -8,6 +9,9 @@ import com.djammr.westernknights.entity.systems.*;
  */
 public abstract class WKWorld {
 
+    public static float AMBIENT_ALPHA_DAY = 0.5f;
+    public static float AMBIENT_ALPHA_NIGHT = 0.1f;
+    public static final Color AMBIENT_COLOUR = new Color();  // Update from Overlap2DLoader and RayHandler ambient light should be set from this.
     public static final float PLAYER_WIDTH = 0.8f;
     public static final float PLAYER_HEIGHT = 1.8f;
     public static final String PLAYER_IDENTIFIER = "player";

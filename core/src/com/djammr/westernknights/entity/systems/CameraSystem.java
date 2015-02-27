@@ -1,6 +1,8 @@
 package com.djammr.westernknights.entity.systems;
 
 import com.badlogic.ashley.core.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 
@@ -37,6 +39,11 @@ public class CameraSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) camera.position.x -= 0.2;
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) camera.position.x += 0.2;
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y += 0.2;
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= 0.2;
+
         if (followEntity != null) {
             followX = b2dc.body.getPosition().x;
             followY = b2dc.body.getPosition().y;

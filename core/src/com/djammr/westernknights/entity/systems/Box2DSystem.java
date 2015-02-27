@@ -59,9 +59,9 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             night = !night;
-            rayHandler.setAmbientLight(0.2f, 0.2f, 0.2f, (night)? 0.1f : 0.8f);
+            rayHandler.setAmbientLight(WKWorld.AMBIENT_COLOUR.r, WKWorld.AMBIENT_COLOUR.g, WKWorld.AMBIENT_COLOUR.b, (night)? WKWorld.AMBIENT_ALPHA_NIGHT : WKWorld.AMBIENT_ALPHA_DAY);
             for (Light light : lights) {
-                light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
+                //light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
             }
         }
         if (debugEnabled) debugRenderer.render(b2World, camera.combined);
