@@ -1,33 +1,54 @@
 
 pack.png
-size: 4096,2048
+size: 4096,4096
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 achemist
   rotate: false
-  xy: 1051, 1117
+  xy: 1051, 1910
   size: 1236, 848
   orig: 1236, 848
   offset: 0, 0
   index: -1
+background
+  rotate: false
+  xy: 2, 2760
+  size: 3785, 824
+  orig: 3785, 824
+  offset: 0, 0
+  index: -1
 blacksmith
   rotate: false
-  xy: 2289, 1465
+  xy: 2, 2
   size: 671, 500
   orig: 671, 500
   offset: 0, 0
   index: -1
 bountyoffice
   rotate: false
-  xy: 2, 713
+  xy: 2, 1506
   size: 1047, 1252
   orig: 1047, 1252
   offset: 0, 0
   index: -1
+sand
+  rotate: false
+  xy: 1051, 1708
+  size: 500, 200
+  orig: 500, 200
+  offset: 0, 0
+  index: -1
+sky
+  rotate: false
+  xy: 2, 504
+  size: 1000, 1000
+  orig: 1000, 1000
+  offset: 0, 0
+  index: -1
 stable
   rotate: false
-  xy: 2, 2
+  xy: 2289, 2049
   size: 824, 709
   orig: 824, 709
   offset: 0, 0
