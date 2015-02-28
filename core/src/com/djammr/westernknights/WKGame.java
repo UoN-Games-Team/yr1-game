@@ -25,6 +25,7 @@ public class WKGame extends Game {
 	public static final Logger logger = new ConsoleLogger();
 	public static final SaveManager saveManager = new SaveManager();
 	public static final KeyMapManager keyMaps = new KeyMapManager();
+    public static boolean debugEnabled = true;
 
 	private ScreenManager screenManager;
 

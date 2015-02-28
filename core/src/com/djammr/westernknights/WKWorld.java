@@ -3,6 +3,7 @@ package com.djammr.westernknights;
 import com.badlogic.gdx.graphics.Color;
 import com.djammr.westernknights.entity.EntityManager;
 import com.djammr.westernknights.entity.systems.*;
+import com.djammr.westernknights.entity.systems.ai.BehaviourSystem;
 
 /**
  * Holds a Box2D world read from an Overlap2D file. Each level should be a World and set in the GameScreen
@@ -19,6 +20,7 @@ public abstract class WKWorld {
     public static final String PLAYER_IDENTIFIER = "player";
     public static final String GROUND_IDENTIFIER = "ground";
     public static final String NPC_TYPE = "npc";
+    public static final String NODE_TYPE = "node";
     public static final String FOOT_SENSOR_IDENTIFIER = "foot_sensor";
 
 
@@ -39,6 +41,7 @@ public abstract class WKWorld {
             entities = new EntityManager();
             entities.getEngine().addSystem(new InputSystem());
             entities.getEngine().addSystem(new CameraSystem(20, 11.25f)); // 20m x 11.25m (16x9)
+            entities.getEngine().addSystem(new BehaviourSystem());
             entities.getEngine().addSystem(new MovementSystem());
             entities.getEngine().addSystem(new AnimationSystem());
             entities.getEngine().addSystem(new VisualSystem());

@@ -29,6 +29,10 @@ public class InputMapper extends WKInput {
         if (WKGame.keyMaps.getKeyMap().get("btn-"+keycode) != null) {
             notifyObservers(WKGame.keyMaps.getKeyMap().get("btn-"+keycode).intValue());
         }
+
+        if (keycode == WKGame.DEBUG_KEY) {
+            WKGame.debugEnabled = !WKGame.debugEnabled;
+        }
         return true;
     }
 

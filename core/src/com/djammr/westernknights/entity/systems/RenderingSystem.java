@@ -10,8 +10,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.entity.components.*;
+import com.djammr.westernknights.entity.components.ai.BehaviourComponent;
+import com.djammr.westernknights.entity.components.ai.NodeComponent;
 import com.djammr.westernknights.util.comparators.ZIndexComparator;
 
 
@@ -22,12 +25,17 @@ public class RenderingSystem extends SortedIteratingSystem {
 
     private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
     private ComponentMapper<SpriterComponent> sprtm = ComponentMapper.getFor(SpriterComponent.class);
+    private ComponentMapper<BehaviourComponent> bvm = ComponentMapper.getFor(BehaviourComponent.class);
+    private ComponentMapper<NodeComponent> nodem = ComponentMapper.getFor(NodeComponent.class);
     VisualComponent visc;
     SpriterComponent sprtc;
+    BehaviourComponent bvc;
+    NodeComponent nodec;
 
     public float[] bgColour = {0, 0, 0, 0};
     private OrthographicCamera camera;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
 
 
     /**
@@ -37,6 +45,7 @@ public class RenderingSystem extends SortedIteratingSystem {
     public RenderingSystem() {
         super(Family.all(VisualComponent.class).get(), new ZIndexComparator());
         batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -48,6 +57,13 @@ public class RenderingSystem extends SortedIteratingSystem {
         batch.begin();
         super.update(deltaTime);
         batch.end();
+
+        if (WKGame.debugEnabled) {
+            shapeRenderer.setProjectionMatrix(camera.combined);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+                for (Entity entity : getEntities()) debugRender(entity);
+            shapeRenderer.end();
+        }
     }
 
     @Override
@@ -58,12 +74,18 @@ public class RenderingSystem extends SortedIteratingSystem {
     private void render(Entity entity) {
         visc = vism.get(entity);
         sprtc = sprtm.get(entity);
+        nodec = nodem.get(entity);
         if (sprtc != null) {
             sprtc.player.update();
             sprtc.drawer.draw(sprtc.player, batch);
         } else {
-            visc.sprite.draw(batch);
+            if (nodec == null || WKGame.debugEnabled) visc.sprite.draw(batch);
         }
+    }
+
+    private void debugRender(Entity entity) {
+        bvc = bvm.get(entity);
+        if (bvc != null) bvc.controller.debugRender(shapeRenderer);
     }
 
     @Override
@@ -75,6 +97,7 @@ public class RenderingSystem extends SortedIteratingSystem {
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
         batch.dispose();
+        shapeRenderer.dispose();
     }
 
     /**

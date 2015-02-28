@@ -7,7 +7,9 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.ai.controllers.NPCController;
 import com.djammr.westernknights.entity.components.*;
+import com.djammr.westernknights.entity.components.ai.BehaviourComponent;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.util.loaders.MeshData;
 
@@ -53,6 +55,7 @@ public class EntityFactory {
         fixtureDefB.density = density;
         fixtureDefB.friction = 0;
         fixtureDefB.filter.maskBits = PhysicsFilters.MASK_ACTOR;
+        fixtureDefB.filter.groupIndex = PhysicsFilters.GROUP_ACTORS;
 
         Body box = box2DSystem.getB2World().createBody(bodyDef);
         box.createFixture(fixtureDefB);
@@ -67,6 +70,7 @@ public class EntityFactory {
         fixtureDefC.density = density;
         fixtureDefC.friction = 0.6f;
         fixtureDefC.filter.maskBits = PhysicsFilters.MASK_ACTOR;
+        fixtureDefC.filter.groupIndex = PhysicsFilters.GROUP_ACTORS;
 
         Body wheel = box2DSystem.getB2World().createBody(bodyDef);
         wheel.setUserData(new Box2DUserData());
@@ -106,6 +110,17 @@ public class EntityFactory {
     public static Entity createPlayer(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
         Entity entity = createActor(box2DSystem, width, height, components);
         entity.add(new PlayerComponent());
+        return entity;
+    }
+
+    /**
+     * Creates an actor with NPC specific components and attributes. See {@link #createActor(com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
+     * @return the created Entity
+     */
+    public static Entity createNPC(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
+        Entity entity = createActor(box2DSystem, width, height, components);
+        entity.add(new BehaviourComponent());
+        entity.getComponent(BehaviourComponent.class).controller = new NPCController(entity);
         return entity;
     }
 

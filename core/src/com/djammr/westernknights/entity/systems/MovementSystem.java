@@ -21,7 +21,6 @@ public class MovementSystem extends IteratingSystem {
     private ComponentMapper<StateComponent> stm = ComponentMapper.getFor(StateComponent.class);
     private MovementComponent mvc;
     private Box2DComponent b2dc;
-    private Box2DUserData b2dUserData;
     private StateComponent stc;
 
 
@@ -33,7 +32,6 @@ public class MovementSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         mvc = mvm.get(entity);
         b2dc = b2dm.get(entity);
-        b2dUserData = (Box2DUserData)b2dc.body.getUserData();
         stc = stm.get(entity);
 
         if (mvc.stop) {

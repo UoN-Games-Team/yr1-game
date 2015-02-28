@@ -33,7 +33,6 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
     private float accumulator = 0;
     private int loops;
     private boolean stepped = false;
-    private boolean debugEnabled = true;
     private World b2World;
     private RayHandler rayHandler;
     private Box2DDebugRenderer debugRenderer;
@@ -54,9 +53,6 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        if (Gdx.input.isKeyJustPressed(WKGame.DEBUG_KEY)) {
-            debugEnabled = !debugEnabled;
-        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             night = !night;
             rayHandler.setAmbientLight(WKWorld.AMBIENT_COLOUR.r, WKWorld.AMBIENT_COLOUR.g, WKWorld.AMBIENT_COLOUR.b, (night)? WKWorld.AMBIENT_ALPHA_NIGHT : WKWorld.AMBIENT_ALPHA_DAY);
@@ -64,7 +60,7 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
                 //light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
             }
         }
-        if (debugEnabled) debugRenderer.render(b2World, camera.combined);
+        if (WKGame.debugEnabled) debugRenderer.render(b2World, camera.combined);
         rayHandler.setCombinedMatrix(camera.combined);
         rayHandler.render();
 
@@ -115,7 +111,7 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
     }
 
 
-    // Contact Listener Methods TODO: Better way of detecting collisions?
+    // Contact Listener Methods
     Fixture bodyA;
     Fixture bodyB;
     Box2DUserData userDataA;
@@ -136,7 +132,6 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
             if (userDataB.footContacts > 0) userDataB.stateComponent.onGround = true;
         }
     }
-
     @Override
     public void endContact(Contact contact) {
         bodyA = contact.getFixtureA();
