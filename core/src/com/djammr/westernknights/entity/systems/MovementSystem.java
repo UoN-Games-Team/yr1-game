@@ -39,7 +39,7 @@ public class MovementSystem extends IteratingSystem {
         if (mvc.stop) {
             resetSpeed();
             mvc.stop = false;
-            stc.state = EntityStates.ACTIVE_STATE.IDLE;
+            stc.state = EntityStates.IDLE;
         }
 
         if (mvc.right) {
@@ -47,14 +47,14 @@ public class MovementSystem extends IteratingSystem {
                 b2dc.body.applyLinearImpulse(mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
-            stc.state = EntityStates.ACTIVE_STATE.MOVING;
+            stc.state = EntityStates.MOVING;
         }
         else if (mvc.left) {
             if (b2dc.body.getLinearVelocity().x > -mvc.speed) {
                 b2dc.body.applyLinearImpulse(-mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
-            stc.state = EntityStates.ACTIVE_STATE.MOVING;
+            stc.state = EntityStates.MOVING;
         }
         else {
             resetSpeed();

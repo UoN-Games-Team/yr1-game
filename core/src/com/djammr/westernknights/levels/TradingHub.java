@@ -2,9 +2,7 @@ package com.djammr.westernknights.levels;
 
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.djammr.westernknights.Assets;
-import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.systems.CameraSystem;

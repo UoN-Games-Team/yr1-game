@@ -1,16 +1,12 @@
 package com.djammr.westernknights.entity;
 
-/**
- * Holds state enums
- */
+
 public class EntityStates {
 
-    // TODO: Change to bits 0x0001 etc. which will allow for the use of bitwise operators
-    public static enum ACTIVE_STATE {
-        IDLE, MOVING, JUMPING, ATTACKING_MELEE, ATTACKING_RANGED, DODGING
-    }
-
-    public static enum AI_STATE {
-
-    }
+    public static final short IDLE = 0x0001;
+    public static final short MOVING = 0x0002;
+    public static final short JUMPING = 0x0003;
+    public static final short ATTACKING_MELEE = 0x0004;
+    public static final short ATTACKING_RANGED = 0x0005;
+    public static final short DODGING = 0x0006;
 }

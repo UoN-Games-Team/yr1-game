@@ -228,6 +228,7 @@ public class Overlap2DLoader {
         }
         components.addAll(Arrays.asList(additionalComponents));
 
+        String entityType = customVars.getStringVariable("entity_type");
         Entity entity;
         // --- Box2D Mesh
         if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
@@ -238,7 +239,12 @@ public class Overlap2DLoader {
                 filter.maskBits = PhysicsFilters.MASK_PLAYER;
                 fixture.setFilterData(filter);
             }
-        } else {
+        }
+        else if (entityType != null && entityType.equals(WKWorld.NPC_TYPE)) {
+            entity = EntityFactory.createActor(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
+            customVars.setVariable("filter_category", "actor");
+        }
+        else {
             MeshData meshData = null;
             if (item.physicsBodyData != null) {
                 meshData = loadMesh(projectVO, item);
@@ -253,6 +259,13 @@ public class Overlap2DLoader {
                 Filter filter = fixture.getFilterData();
                 filter.categoryBits = PhysicsFilters.fromString(customVars.getStringVariable("filter_category"));
                 fixture.setFilterData(filter);
+            }
+        }
+
+        if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER) || (entityType != null && entityType.equals(WKWorld.NPC_TYPE))) {
+            for (Fixture fixture : entity.getComponent(Box2DComponent.class).body.getFixtureList()) {
+                System.out.println(fixture.getFilterData().categoryBits);
+                System.out.println(fixture.getFilterData().maskBits);
             }
         }
 

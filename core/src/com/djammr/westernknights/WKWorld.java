@@ -14,10 +14,11 @@ public abstract class WKWorld {
     public static float AMBIENT_ALPHA_NIGHT = 0.1f;
     public static final Color AMBIENT_COLOUR = new Color();  // Update from Overlap2DLoader and RayHandler ambient light should be set from this.
     // Entities
-    public static final float PLAYER_WIDTH = 0.8f;
+    public static final float PLAYER_WIDTH = 0.5f;
     public static final float PLAYER_HEIGHT = 1.8f;
     public static final String PLAYER_IDENTIFIER = "player";
     public static final String GROUND_IDENTIFIER = "ground";
+    public static final String NPC_TYPE = "npc";
     public static final String FOOT_SENSOR_IDENTIFIER = "foot_sensor";
 
 

@@ -29,8 +29,8 @@ public class EntityFactory {
      */
     public static Entity createActor(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
         float boxHeight = height - width/2;
-        float boxOffset = (width/2)/2;
-        float density = 0.5f;
+        float boxOffset = width/2;
+        float density = 0.6f;
 
         Entity entity = new Entity();
         entity.add(new Box2DComponent());
@@ -47,7 +47,7 @@ public class EntityFactory {
 
         // Box
         PolygonShape poly = new PolygonShape();
-        poly.setAsBox(width/2, boxHeight/2, new Vector2(0/*width/2*/, width/2 + boxOffset), 0);
+        poly.setAsBox(width/2, boxHeight/2, new Vector2(0/*width/2*/, height/2 - width/2), 0);
         FixtureDef fixtureDefB = new FixtureDef();
         fixtureDefB.shape = poly;
         fixtureDefB.density = density;

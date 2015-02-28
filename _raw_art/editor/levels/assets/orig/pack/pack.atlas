@@ -25,11 +25,32 @@ blacksmith
   orig: 671, 500
   offset: 0, 0
   index: -1
+blank
+  rotate: false
+  xy: 2289, 2037
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
 bountyoffice
   rotate: false
   xy: 2, 1506
   size: 1047, 1252
   orig: 1047, 1252
+  offset: 0, 0
+  index: -1
+node
+  rotate: false
+  xy: 1004, 1454
+  size: 25, 50
+  orig: 25, 50
+  offset: 0, 0
+  index: -1
+npc
+  rotate: false
+  xy: 3789, 3375
+  size: 87, 209
+  orig: 87, 209
   offset: 0, 0
   index: -1
 sand

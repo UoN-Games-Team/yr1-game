@@ -8,6 +8,6 @@ import com.djammr.westernknights.entity.EntityStates;
  */
 public class StateComponent extends Component {
 
-    public EntityStates.ACTIVE_STATE state = EntityStates.ACTIVE_STATE.IDLE;
+    public short state = EntityStates.IDLE;
     public boolean onGround = false;
 }

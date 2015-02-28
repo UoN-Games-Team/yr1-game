@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.djammr.westernknights.entity.Box2DUserData;
+import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.*;
 
 /**
@@ -34,15 +35,16 @@ public class AnimationSystem extends IteratingSystem {
         stc = stm.get(entity);
 
         // TODO: Implement as an enum component and just query that for names e.g. setAnim(Animations.JUMP)
+        // TODO: Add bitwise operators for checking combined states
         String animName = null;
         switch (stc.state) {
-            case JUMPING:
+            case EntityStates.JUMPING:
                 animName = "jump";
                 break;
-            case IDLE:
+            case EntityStates.IDLE:
                 animName = "idle";
                 break;
-            case MOVING:
+            case EntityStates.MOVING:
                 animName = "run";
                 break;
         }

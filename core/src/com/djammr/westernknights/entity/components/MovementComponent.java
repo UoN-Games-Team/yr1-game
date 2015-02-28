@@ -7,8 +7,8 @@ import com.badlogic.ashley.core.Component;
  */
 public class MovementComponent extends Component {
 
-    public float speed = 6;
-    public float jumpForce = 8;
+    public float speed = 4;
+    public float jumpForce = 6;
 
     public boolean stop = false;
     public boolean left = false;
