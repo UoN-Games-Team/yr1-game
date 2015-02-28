@@ -52,6 +52,7 @@ public class EntityFactory {
         fixtureDefB.shape = poly;
         fixtureDefB.density = density;
         fixtureDefB.friction = 0;
+        fixtureDefB.filter.maskBits = PhysicsFilters.MASK_ACTOR;
 
         Body box = box2DSystem.getB2World().createBody(bodyDef);
         box.createFixture(fixtureDefB);
@@ -65,6 +66,7 @@ public class EntityFactory {
         fixtureDefC.shape = circle;
         fixtureDefC.density = density;
         fixtureDefC.friction = 0.6f;
+        fixtureDefC.filter.maskBits = PhysicsFilters.MASK_ACTOR;
 
         Body wheel = box2DSystem.getB2World().createBody(bodyDef);
         wheel.setUserData(new Box2DUserData());

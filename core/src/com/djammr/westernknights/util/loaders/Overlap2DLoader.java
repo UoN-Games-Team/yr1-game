@@ -31,6 +31,7 @@ import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.EntityFactory;
 import com.djammr.westernknights.entity.EntityManager;
+import com.djammr.westernknights.entity.PhysicsFilters;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.entity.systems.RenderingSystem;
@@ -231,6 +232,12 @@ public class Overlap2DLoader {
         // --- Box2D Mesh
         if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
             entity = EntityFactory.createPlayer(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
+            customVars.setVariable("filter_category", "player");
+            for (Fixture fixture : entity.getComponent(Box2DComponent.class).body.getFixtureList()) {
+                Filter filter = fixture.getFilterData();
+                filter.maskBits = PhysicsFilters.MASK_PLAYER;
+                fixture.setFilterData(filter);
+            }
         } else {
             MeshData meshData = null;
             if (item.physicsBodyData != null) {
@@ -238,6 +245,15 @@ public class Overlap2DLoader {
             }
             // Create the entity
             entity = EntityFactory.createEntity(b2dSystem, meshData, components);
+        }
+
+        // --- Physics Category
+        if (customVars.getStringVariable("filter_category") != null) {
+            for (Fixture fixture : entity.getComponent(Box2DComponent.class).body.getFixtureList()) {
+                Filter filter = fixture.getFilterData();
+                filter.categoryBits = PhysicsFilters.fromString(customVars.getStringVariable("filter_category"));
+                fixture.setFilterData(filter);
+            }
         }
 
         // --- Set Position

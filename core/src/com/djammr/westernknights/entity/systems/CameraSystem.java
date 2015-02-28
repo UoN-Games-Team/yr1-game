@@ -39,10 +39,10 @@ public class CameraSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) camera.position.x -= 0.2;
+        /*if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) camera.position.x -= 0.2;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) camera.position.x += 0.2;
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y += 0.2;
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= 0.2;
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= 0.2;*/
 
         if (followEntity != null) {
             followX = b2dc.body.getPosition().x;

@@ -4,7 +4,9 @@ import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.djammr.westernknights.Assets;
+import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.systems.CameraSystem;
 import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.util.assetloaders.Overlap2DMapLoader;
@@ -32,8 +34,11 @@ public class TradingHub extends WKWorld {
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
-                //getEntities().getEngine().getSystem(InputSystem.class).setControllable(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER));
-                //getEntities().getEngine().getSystem(CameraSystem.class).follow(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER), null, null, 0f, null);
+                getEntities().getEngine().getSystem(InputSystem.class).setControllable(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER));
+                getEntities().getEngine().getSystem(CameraSystem.class).follow(getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER),
+                        getEntities().getEntity("ground").getComponent(Box2DComponent.class).body.getPosition().x,
+                        getEntities().getEntity("border_right").getComponent(Box2DComponent.class).body.getPosition().x,
+                        0f, null);
             }
         };
 
