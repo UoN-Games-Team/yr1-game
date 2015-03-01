@@ -18,10 +18,10 @@ public class SteeringEntity implements Steerable<Vector2> {
 
     private Box2DComponent b2dc;
     private MovementComponent mvc;
-    Float minX = null;
-    Float maxX = null;
-    float boundingRadius;
-    boolean tagged = false;
+    private Float minX = null;
+    private Float maxX = null;
+    private float boundingRadius;
+    private boolean tagged = false;
 
     protected SteeringBehavior<Vector2> steeringBehavior;
     private final SteeringAcceleration<Vector2> steeringOutput = new SteeringAcceleration<Vector2>(new Vector2());

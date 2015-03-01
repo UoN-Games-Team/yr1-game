@@ -18,11 +18,12 @@ public class WKInput implements InputProcessor, ControllerListener, InputObserva
 
     private List<InputObserver> observers = new ArrayList<>();
 
-
+    @Override
     public void registerObserver(InputObserver o) {
         observers.add(o);
     }
 
+    @Override
     public void removeObserver(InputObserver o) {
         observers.remove(o);
     }
