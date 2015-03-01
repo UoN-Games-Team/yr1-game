@@ -27,7 +27,7 @@ blacksmith
   index: -1
 blank
   rotate: false
-  xy: 1051, 2100
+  xy: 675, 694
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
@@ -65,6 +65,13 @@ npc
   xy: 3789, 3577
   size: 87, 209
   orig: 87, 209
+  offset: 0, 0
+  index: -1
+playerhouse
+  rotate: false
+  xy: 1051, 1895
+  size: 375, 215
+  orig: 375, 215
   offset: 0, 0
   index: -1
 sand
