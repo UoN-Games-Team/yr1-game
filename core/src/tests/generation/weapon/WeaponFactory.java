@@ -34,7 +34,7 @@ public class WeaponFactory {
             case 2:
                 return "Storm";
             case 3:
-                return "Poision";
+                return "Poison";
             default:
                 return "None";
         }
