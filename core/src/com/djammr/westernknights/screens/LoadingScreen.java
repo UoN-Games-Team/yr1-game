@@ -43,7 +43,9 @@ public class LoadingScreen extends WKScreen {
 
         if (Assets.manager.update()) {
             if (targetScreen == null) WKGame.logger.logDebug("Target screen is null!");
-            else game.getScreens().setScreen(targetScreen, false);
+            else {
+                game.getScreens().setScreen(targetScreen, false);
+            }
         }
         loadingSprite.rotate(rotation--);
     }
@@ -57,7 +59,12 @@ public class LoadingScreen extends WKScreen {
         loadingSprite = new Sprite(Assets.manager.get(Assets.loadingTexture, Texture.class));
         loadingSprite.setPosition(Gdx.graphics.getWidth()/2 - loadingSprite.getWidth()/2, Gdx.graphics.getHeight()/2 - loadingSprite.getHeight()/2);
         //loadingTexture = Assets.manager.get(Assets.loadingTexture, Texture.class);
-        super.load();
+        //super.load();
+    }
+
+    @Override
+    public void loadComplete() {
+
     }
 
     /** Set the target screen to load */

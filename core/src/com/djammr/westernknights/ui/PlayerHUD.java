@@ -1,20 +1,16 @@
 package com.djammr.westernknights.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.util.assetloaders.Overlap2DUILoader;
 import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
-import com.djammr.westernknights.util.controllers.DebugController;
 import com.djammr.westernknights.util.controllers.PlayerHUDController;
 import com.djammr.westernknights.util.observers.Observable;
+import com.djammr.westernknights.util.observers.ObserverKeys;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadMXBean;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -23,6 +19,9 @@ import java.util.Map;
 public class PlayerHUD extends UIView {
 
     private PlayerHUDController controller;
+    private float healthBarFullWidth;
+    private Image imgHealthBar;
+    private Image imgXpBar;
 
     public PlayerHUD(PlayerHUDController controller) {
         super(controller);
@@ -43,15 +42,9 @@ public class PlayerHUD extends UIView {
     }
 
     public void loadUI() {
-        /*txtCodename = (Label)actors.get("txtCodename");
-        txtFPS = (Label)actors.get("txtFPS");
-        txtCPU = (Label)actors.get("txtCPU");
-        txtHeap = (Label)actors.get("txtHeap");
-        txtNHeap = (Label)actors.get("txtNHeap");
-        txtEntites = (Label)actors.get("txtEntities");*/
-
-        //txtCodename.setText(txtCodename.getText() + WKGame.VERSION);
-        //WKGame.logger.logDebug("Debug overlay enabled, toggle with ' (apostrophe)");
+        imgHealthBar = (Image)actors.get("health_bar");
+        imgXpBar = (Image)actors.get("xp_bar");
+        healthBarFullWidth = imgXpBar.getWidth();
     }
 
     @Override
@@ -66,6 +59,8 @@ public class PlayerHUD extends UIView {
 
     @Override
     public void update(Observable obs, Map<String, Object> data) {
-
+        if (data.containsKey(ObserverKeys.PLAYER_HEALTH_PERCENT)) {
+            imgHealthBar.setWidth(healthBarFullWidth * (float)data.get(ObserverKeys.PLAYER_HEALTH_PERCENT));
+        }
     }
 }

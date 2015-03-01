@@ -39,6 +39,7 @@ public abstract class WKWorld {
         if (!loaded) {
             WKGame.logger.logDebug("Loading World");
             entities = new EntityManager();
+            entities.getEngine().addSystem(new MessagingSystem());
             entities.getEngine().addSystem(new InputSystem());
             entities.getEngine().addSystem(new CameraSystem(20, 11.25f)); // 20m x 11.25m (16x9)
             entities.getEngine().addSystem(new BehaviourSystem());

@@ -28,6 +28,9 @@ public class GameActions {
     public static final int PAN_LEFT = 19;
     public static final int PAN_RIGHT = 20;
 
+    public static final int DAMAGE = 21;
+    public static final int HEAL = 22;
+
 
 
     /**

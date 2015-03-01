@@ -29,6 +29,11 @@ public abstract class WKScreen implements Screen {
         //Assets.manager.finishLoading();
     }
 
+    /**
+     * Call when loading has finished
+     */
+    public abstract void loadComplete();
+
     @Override
     public void resize(int width, int height) {
 

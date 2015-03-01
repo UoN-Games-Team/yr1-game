@@ -1,20 +1,14 @@
 package com.djammr.westernknights.entity.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.PerformanceCounter;
 import com.djammr.westernknights.WKGame;
-import com.djammr.westernknights.entity.EntityStates;
-import com.djammr.westernknights.entity.components.Box2DComponent;
-import com.djammr.westernknights.entity.components.MovementComponent;
-import com.djammr.westernknights.entity.components.PlayerComponent;
-import com.djammr.westernknights.entity.components.StateComponent;
+import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
 import com.djammr.westernknights.util.observers.InputObserver;
+import com.djammr.westernknights.util.observers.ObserverKeys;
 
 /**
  * Executes commands best on input events from an {@link com.djammr.westernknights.util.observers.InputObservable} <br/>
@@ -23,7 +17,11 @@ import com.djammr.westernknights.util.observers.InputObserver;
 public class InputSystem extends IteratingSystem implements InputObserver {
 
     private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
+    private ComponentMapper<StatComponent> statm = ComponentMapper.getFor(StatComponent.class);
+    private ComponentMapper<MessagingComponent> msgm = ComponentMapper.getFor(MessagingComponent.class);
     private MovementComponent mvc;
+    private StatComponent statc;
+    private MessagingComponent msgc;
 
 
     public InputSystem() {
@@ -55,6 +53,15 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                 case GameActions.PLAYER_JUMP:
                     mvc.jump = true;
                     break;
+
+                case GameActions.DAMAGE:
+                    statc.damage(50);
+                    msgc.addObserverData(ObserverKeys.PLAYER_HEALTH_PERCENT, statc.health / statc.maxHealth);
+                    break;
+                case GameActions.HEAL:
+                    statc.heal(50);
+                    msgc.addObserverData(ObserverKeys.PLAYER_HEALTH_PERCENT, statc.health / statc.maxHealth);
+                    break;
             }
         }
     }
@@ -64,5 +71,7 @@ public class InputSystem extends IteratingSystem implements InputObserver {
      */
     public void setControllable(Entity entity) {
         mvc = mvm.get(entity);
+        statc = statm.get(entity);
+        msgc = msgm.get(entity);
     }
 }

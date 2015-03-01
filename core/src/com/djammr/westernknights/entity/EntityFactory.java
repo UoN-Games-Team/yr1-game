@@ -39,6 +39,8 @@ public class EntityFactory {
         entity.add(new StateComponent());
         entity.add(new TransformComponent());
         entity.add(new MovementComponent());
+        entity.add(new StatComponent());
+        entity.add(new MessagingComponent());
         for (Component component : components) {
             entity.add(component);
         }
@@ -145,6 +147,7 @@ public class EntityFactory {
             entity.getComponent(Box2DComponent.class).body = body;
         }
 
+        entity.add(new MessagingComponent());
         entity.add(new StateComponent());
         entity.add(new TransformComponent());
         for (Component component : components) {

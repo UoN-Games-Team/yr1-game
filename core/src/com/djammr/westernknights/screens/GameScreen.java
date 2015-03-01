@@ -24,7 +24,7 @@ import java.util.Map;
 public class GameScreen extends WKScreen {
 
     private InputMapper inputMapper = new InputMapper();
-    private List<UIController> uiControllers = new ArrayList<UIController>();
+    private Map<String, UIController> uiControllers = new HashMap<String, UIController>();
     private Map<String, WKWorld> worlds = new HashMap<String, WKWorld>();
     private WKWorld currentWorld;
 
@@ -33,7 +33,6 @@ public class GameScreen extends WKScreen {
         super(game);
         Box2D.init();
         addWorld(Assets.lvlTradingAreaID, new TradingHub());
-        getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
@@ -41,14 +40,18 @@ public class GameScreen extends WKScreen {
         setWorld(Assets.lvlTradingAreaID);
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
-        uiControllers.add(dbgController);
+        uiControllers.put("debug", dbgController);
         
         PlayerHUDController hudController = new PlayerHUDController(this);
-        hudController.setView(new PlayerHUD(hudController));
-        uiControllers.add(hudController);
-        
+        uiControllers.put("player_hud", hudController);
 
-        super.load();
+        //super.load();
+    }
+
+    @Override
+    public void loadComplete() {
+        uiControllers.get("player_hud").setView(new PlayerHUD((PlayerHUDController)uiControllers.get("player_hud")));
+        getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
@@ -60,21 +63,21 @@ public class GameScreen extends WKScreen {
     public void render(float delta) {
         if (currentWorld != null) currentWorld.update(delta);
 
-        for (UIController controller : uiControllers) {
+        for (UIController controller : uiControllers.values()) {
             controller.update(delta);
         }
     }
 
     @Override
     public void resize(int width, int height) {
-        for (UIController controller : uiControllers) {
+        for (UIController controller : uiControllers.values()) {
             controller.resize(width, height);
         }
     }
 
     @Override
     public void dispose() {
-        for (UIController controller : uiControllers) {
+        for (UIController controller : uiControllers.values()) {
             controller.dispose();
         }
         uiControllers.clear();

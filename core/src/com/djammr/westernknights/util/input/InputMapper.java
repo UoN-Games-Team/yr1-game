@@ -30,8 +30,14 @@ public class InputMapper extends WKInput {
             notifyObservers(WKGame.keyMaps.getKeyMap().get("btn-"+keycode).intValue());
         }
 
+        // Debugging Keys
         if (keycode == WKGame.DEBUG_KEY) {
             WKGame.debugEnabled = !WKGame.debugEnabled;
+        }
+        else if (keycode == Input.Keys.LEFT_BRACKET) {
+            notifyObservers(GameActions.DAMAGE);
+        } else if (keycode == Input.Keys.RIGHT_BRACKET) {
+            notifyObservers(GameActions.HEAL);
         }
         return true;
     }
