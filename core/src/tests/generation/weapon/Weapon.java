@@ -1,4 +1,4 @@
-package tests.weapon;
+package tests.generation.weapon;
 
 
 

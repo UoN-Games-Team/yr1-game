@@ -1,4 +1,4 @@
-package tests.enemies;
+package tests.generation.enemies;
 
 public class Enemy {
 

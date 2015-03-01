@@ -1,4 +1,4 @@
-package tests.item;
+package tests.generation.item;
 
 
 public class Item {
