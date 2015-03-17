@@ -10,10 +10,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.graphics.ParticleEmitterBox2D;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -81,6 +84,7 @@ public class Overlap2DLoader {
     private static TextureAtlas atlas;
     private static String spriteAnimationsPath;
     private static String spriterAnimationsPath;
+    private static String particlesPath;
     private static EntityManager entityManager;
     private static String fontPath;
     private static Stage stage;
@@ -94,6 +98,7 @@ public class Overlap2DLoader {
         projectVO = json.fromJson(ProjectInfoVO.class, projectPath.readString());
         spriteAnimationsPath = Overlap2DLoader.projectPath + "/orig/sprite_animations";
         spriterAnimationsPath = Overlap2DLoader.projectPath + "/orig/spriter_animations";
+        particlesPath = Overlap2DLoader.projectPath + "/particles";
         customVars = new CustomVariables();
     }
 
@@ -181,6 +186,9 @@ public class Overlap2DLoader {
             }
             else if (item instanceof LightVO) {
                 addLight((LightVO) item);
+            }
+            else if (item instanceof ParticleEffectVO) {
+                addParticle((ParticleEffectVO) item);
             }
             else if (item instanceof LabelVO) {
                 addUiLabel((LabelVO) item);
@@ -395,6 +403,30 @@ public class Overlap2DLoader {
             nlight.setDirection(light.rotation);
             b2dSystem.registerLight(nlight);
         }
+    }
+
+    /**
+     * Adds a ParticleEffect from a ParticleEffectVO. Uses ParticleEmitterBox2D
+     * @param item ParticleEffectVO to add
+     */
+    private static void addParticle(ParticleEffectVO item) {
+        ParticleEffect particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal(particlesPath + "/" + item.particleName), atlas);
+        particleEffect.scaleEffect(WKGame.PIXELS_TO_METERS * item.scaleX);
+
+        for (int i=0; i < particleEffect.getEmitters().size; i++) {
+            particleEffect.getEmitters().set(i, new ParticleEmitterBox2D(b2dSystem.getB2World(), particleEffect.getEmitters().get(i)));
+            ParticleEmitter emitter = particleEffect.getEmitters().get(i);
+
+            // Spawn scaling doesn't seem to alter the actual dimensions of the effect like in the editor
+            /*emitter.getSpawnWidth().setHigh(emitter.getSpawnWidth().getHighMin() * item.scaleX, emitter.getSpawnWidth().getHighMax() * item.scaleX);
+            emitter.getSpawnWidth().setLow(emitter.getSpawnWidth().getLowMin() * item.scaleX, emitter.getSpawnWidth().getLowMax() * item.scaleX);
+            emitter.getSpawnHeight().setHigh(emitter.getSpawnHeight().getHighMin() * item.scaleY, emitter.getSpawnHeight().getHighMax() * item.scaleY);
+            emitter.getSpawnHeight().setLow(emitter.getSpawnHeight().getLowMin() * item.scaleY, emitter.getSpawnHeight().getLowMax() * item.scaleY);*/
+
+            emitter.setPosition(item.x * WKGame.PIXELS_TO_METERS, item.y * WKGame.PIXELS_TO_METERS);
+        }
+        entityManager.getEngine().getSystem(RenderingSystem.class).addParticle(particleEffect);
     }
 
     /**

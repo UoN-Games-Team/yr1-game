@@ -8,6 +8,7 @@ import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -16,6 +17,8 @@ import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.entity.components.ai.BehaviourComponent;
 import com.djammr.westernknights.entity.components.ai.NodeComponent;
 import com.djammr.westernknights.util.comparators.ZIndexComparator;
+
+import java.util.ArrayList;
 
 
 /**
@@ -33,6 +36,7 @@ public class RenderingSystem extends SortedIteratingSystem {
     NodeComponent nodec;
 
     public float[] bgColour = {0, 0, 0, 0};
+    private ArrayList<ParticleEffect> particles = new ArrayList<ParticleEffect>();
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
@@ -56,6 +60,7 @@ public class RenderingSystem extends SortedIteratingSystem {
 
         batch.begin();
         super.update(deltaTime);
+        for (ParticleEffect particle : particles) particle.draw(batch, deltaTime);
         batch.end();
 
         if (WKGame.debugEnabled) {
@@ -96,8 +101,17 @@ public class RenderingSystem extends SortedIteratingSystem {
     @Override
     public void removedFromEngine(Engine engine) {
         super.removedFromEngine(engine);
+        for (ParticleEffect particle : particles) particle.dispose();
         batch.dispose();
         shapeRenderer.dispose();
+    }
+
+    /**
+     * Add a PartcleEffect to be rendered
+     * @param particleEffect ParticleEffect to add
+     */
+    public void addParticle(ParticleEffect particleEffect) {
+        particles.add(particleEffect);
     }
 
     /**
