@@ -71,7 +71,7 @@ public class LightTest extends InputAdapter implements ApplicationListener {
         font.setColor(Color.RED);
         textureRegion = new TextureRegion(new Texture(
                 Gdx.files.internal("test/marble.png")));
-        bg = new Texture(Gdx.files.internal("test/bg.png"));
+        bg = new Texture(Gdx.files.internal("test/sky.png"));
         createPhysicsWorld();
         Gdx.input.setInputProcessor(this);
         normalProjection.setToOrtho2D(
