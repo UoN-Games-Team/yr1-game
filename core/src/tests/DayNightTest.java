@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -23,7 +24,9 @@ public class DayNightTest implements ApplicationListener {
     Body box;
     RayHandler rayHandler;
     Light sun;
-    Texture sky;
+    Sprite skyDay;
+    Sprite skyNight;
+    float skyDayAlpha = 1;
     Texture bg;
     float gameTime = 0.25f;
     float sunDirection = -90f;
@@ -33,13 +36,24 @@ public class DayNightTest implements ApplicationListener {
     @Override
     public void create() {
         camera = new OrthographicCamera(viewportWidth, viewportHeight);
-        camera.position.set(viewportWidth/2, viewportHeight/2, 0);
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         batch = new SpriteBatch();
         debugRenderer = new Box2DDebugRenderer();
         createPhysicsWorld();
 
-        sky = new Texture(Gdx.files.internal("images/sky.png"));
+        skyDay = new Sprite();
+        skyDay.setRegion(new Texture(Gdx.files.internal("images/sky_day.png")));
+        skyDay.setSize(30, 30);
+        skyDay.setOriginCenter();
+        skyDay.setPosition(camera.viewportWidth/2 - skyDay.getWidth()/2, camera.viewportHeight/2 - skyDay.getHeight()/2);
+        skyNight = new Sprite();
+        skyNight.setRegion(new Texture(Gdx.files.internal("images/sky_night.png")));
+        skyNight.setSize(30, 30);
+        skyNight.setOriginCenter();
+        skyNight.setPosition(camera.viewportWidth/2 - skyNight.getWidth()/2, camera.viewportHeight/2 - skyNight.getHeight()/2);
+        skyNight.setAlpha(1);
+
         bg = new Texture(Gdx.files.internal("images/background.png"));
 
         rayHandler = new RayHandler(world);
@@ -50,15 +64,35 @@ public class DayNightTest implements ApplicationListener {
     @Override
     public void render() {
         camera.update();
+        batch.setProjectionMatrix(camera.combined);
+        //Gdx.gl.glClearColor(58/ 255f, 144/ 255f, 224 / 255f, 0);
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameTime += Gdx.graphics.getDeltaTime() / 8;
         if (gameTime > 1f) gameTime = 0;
+
+        // Rotation
         sun.setDirection(-(360 * gameTime));
+        skyDay.setRotation(-(360 * gameTime));
+        skyNight.setRotation(-(360 * gameTime));
+
+        // Skybox Fading
+        if (skyDayAlpha < 0) skyDayAlpha = 0;
+        if (skyDayAlpha > 1) skyDayAlpha = 1;
+        if (gameTime >= 0.4f && gameTime < 0.85f && skyDayAlpha > 0) {
+            skyDay.setAlpha((skyDayAlpha > 0 + Gdx.graphics.getDeltaTime())? skyDayAlpha -= Gdx.graphics.getDeltaTime() : 0);
+            System.out.println("to night");
+        } else if (gameTime >= 0.85f && skyDayAlpha < 1) {
+            System.out.println("to day");
+            skyDay.setAlpha((skyDayAlpha < 1f - Gdx.graphics.getDeltaTime())? skyDayAlpha += Gdx.graphics.getDeltaTime() : 1);
+        }
+
+        // Night shadows off
         if (gameTime > 0.5) sun.setXray(true);
         else if (sun.isXray()) sun.setXray(false);
 
+        // Sun alpha
         float alpha;
         if (gameTime > 0.75) alpha = gameTime - 0.5f;
         else if (gameTime < 0.25) alpha = gameTime + 0.5f;
@@ -67,13 +101,11 @@ public class DayNightTest implements ApplicationListener {
 
 
         fixedStep(Gdx.graphics.getDeltaTime());
-
-        batch.setProjectionMatrix(camera.combined);
-        batch.disableBlending();
         batch.begin();
         {
-            batch.draw(sky, 0, 0, viewportWidth, viewportHeight);
-            batch.draw(bg, 0, -5, viewportWidth, viewportHeight);
+            skyNight.draw(batch);
+            skyDay.draw(batch);
+            //batch.draw(bg, 0, -5, viewportWidth, viewportHeight);
         }
         batch.end();
 
