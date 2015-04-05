@@ -27,7 +27,7 @@ blacksmith
   index: -1
 blank
   rotate: false
-  xy: 3115, 2426
+  xy: 3511, 2950
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
@@ -55,7 +55,7 @@ lantern
   index: -1
 node
   rotate: false
-  xy: 2289, 2199
+  xy: 675, 654
   size: 25, 50
   orig: 25, 50
   offset: 0, 0
@@ -69,9 +69,16 @@ npc
   index: -1
 particle
   rotate: false
-  xy: 675, 672
+  xy: 3115, 2404
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+plant
+  rotate: false
+  xy: 2289, 2121
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 playerhouse
