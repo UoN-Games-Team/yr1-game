@@ -54,6 +54,8 @@ public abstract class WKScreen implements Screen {
 
     }
 
+    public WKGame getGame() { return game; }
+
     /**
      * Gets the InputMultiplexer for this Screen. You should add any InputProcessors to this.
      * @return this Screen's InputMultiplexer instance

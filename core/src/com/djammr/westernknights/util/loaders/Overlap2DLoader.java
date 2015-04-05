@@ -239,6 +239,11 @@ public class Overlap2DLoader {
         }
         components.addAll(Arrays.asList(additionalComponents));
 
+        // --- Parallax
+        if (customVars.getStringVariable("parallax") != null) {
+            components.add(new ParallaxComponent(Float.valueOf(customVars.getStringVariable("parallax"))));
+        }
+
         String entityType = customVars.getStringVariable("entity_type");
         Entity entity;
         // --- Box2D Mesh
