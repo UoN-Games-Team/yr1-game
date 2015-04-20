@@ -1,0 +1,111 @@
+
+pack.png
+size: 4096,4096
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+achemist
+  rotate: false
+  xy: 1051, 2112
+  size: 1236, 848
+  orig: 1236, 848
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 2, 2962
+  size: 3785, 824
+  orig: 3785, 824
+  offset: 0, 0
+  index: -1
+blacksmith
+  rotate: false
+  xy: 2, 204
+  size: 671, 500
+  orig: 671, 500
+  offset: 0, 0
+  index: -1
+blank
+  rotate: false
+  xy: 3511, 2950
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+bountyoffice
+  rotate: false
+  xy: 2, 1708
+  size: 1047, 1252
+  orig: 1047, 1252
+  offset: 0, 0
+  index: -1
+fence
+  rotate: false
+  xy: 3115, 2438
+  size: 394, 522
+  orig: 394, 522
+  offset: 0, 0
+  index: -1
+lantern
+  rotate: false
+  xy: 1004, 635
+  size: 135, 1071
+  orig: 135, 1071
+  offset: 0, 0
+  index: -1
+node
+  rotate: false
+  xy: 675, 654
+  size: 25, 50
+  orig: 25, 50
+  offset: 0, 0
+  index: -1
+npc
+  rotate: false
+  xy: 3789, 3577
+  size: 87, 209
+  orig: 87, 209
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 3115, 2404
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+plant
+  rotate: false
+  xy: 2289, 2121
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+playerhouse
+  rotate: false
+  xy: 1051, 1895
+  size: 375, 215
+  orig: 375, 215
+  offset: 0, 0
+  index: -1
+sand
+  rotate: false
+  xy: 2, 2
+  size: 500, 200
+  orig: 500, 200
+  offset: 0, 0
+  index: -1
+sky
+  rotate: false
+  xy: 2, 706
+  size: 1000, 1000
+  orig: 1000, 1000
+  offset: 0, 0
+  index: -1
+stable
+  rotate: false
+  xy: 2289, 2251
+  size: 824, 709
+  orig: 824, 709
+  offset: 0, 0
+  index: -1
