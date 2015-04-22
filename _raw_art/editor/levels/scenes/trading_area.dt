@@ -1,0 +1,1 @@
+{"sceneName":"trading_area","composite":{"sImages":[{"x":-477.00024,"y":-53.99997,"scaleX":0.625,"zIndex":1,"layerName":"floor","tint":[1,1,1,1],"imageName":"floorsand"},{"x":-475,"y":126.50011,"scaleX":0.625,"layerName":"scenery","tint":[1,1,1,1],"imageName":"background"}],"layers":[{"layerName":"Default"},{"layerName":"scenery"},{"layerName":"floor"}]},"physicsPropertiesVO":{}}
