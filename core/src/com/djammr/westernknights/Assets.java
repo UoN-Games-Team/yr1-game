@@ -39,26 +39,28 @@ public class Assets {
     public static String overlap2DProject = "levels/test/project.dt";
     public static String overlap2DAtlas = "levels/test/orig/pack.atlas";
     public static String overlap2DFonts = "levels/test/freetypefonts";
-    
+
     //UI Project
     public static String overlap2DUIProject = "ui/project.dt";
     public static String overlap2DUIAtlas = "ui/orig/pack.atlas";
     public static String overlap2DUIFonts = "ui/freetypefonts";
-    
+
     //Level Project
     public static String overlap2DLevelProject = "levels/project.dt";
     public static String overlap2DLevelAtlas = "levels/orig/pack.atlas";
-    
+
     // Scenes
     public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestLevel = "levels/test/scenes/MainScene.dt";
     public static String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
     public static String lvlTradingArea = "levels/scenes/trading_area.dt";
+    public static String lvlRivertown = "levels/scenes/rivertown.dt";
     public static String uiHud = "ui/scenes/player_hud.dt";
 
     // Loaded Scene IDs
     public static String lvlTest = "lvlTest";
     public static String lvlTradingAreaID = "lvlTradingArea";
+    public static String lvlRivertownID = "lvlRivertown";
     public static String uiDebug = "uiDebug";
     public static String uiHudID = "uiHud";
 

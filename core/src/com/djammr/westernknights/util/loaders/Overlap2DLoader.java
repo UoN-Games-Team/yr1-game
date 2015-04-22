@@ -343,7 +343,7 @@ public class Overlap2DLoader {
                 spriterComponent.player.setScale(item.scale * WKGame.PIXELS_TO_METERS);
                 spriterComponent.player.setPosition(item.x, item.y);
                 //spriterComponent.player.setBaseAnimation(item.animation);
-                //spriterComponent.player.getFirstPlayer().setAnimation(item.animation);
+                spriterComponent.player.getFirstPlayer().setAnimation(item.animation);
                 spriterComponent.drawer = new LibGdxDrawer(spriterComponent.loader, null, null);
             }
         });

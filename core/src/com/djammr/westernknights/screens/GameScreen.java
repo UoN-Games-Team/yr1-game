@@ -5,6 +5,7 @@ import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.systems.InputSystem;
+import com.djammr.westernknights.levels.Rivertown;
 import com.djammr.westernknights.levels.TradingHub;
 import com.djammr.westernknights.ui.DebugUI;
 import com.djammr.westernknights.ui.PlayerHUD;
@@ -33,15 +34,17 @@ public class GameScreen extends WKScreen {
         super(game);
         Box2D.init();
         addWorld(Assets.lvlTradingAreaID, new TradingHub());
+        addWorld(Assets.lvlRivertownID, new Rivertown());
     }
 
     @Override
     public void load() {
-        setWorld(Assets.lvlTradingAreaID);
+        //setWorld(Assets.lvlTradingAreaID);
+        setWorld(Assets.lvlRivertownID);
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
         uiControllers.put("debug", dbgController);
-        
+
         PlayerHUDController hudController = new PlayerHUDController(this);
         uiControllers.put("player_hud", hudController);
 

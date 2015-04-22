@@ -72,7 +72,7 @@ public abstract class WKWorld {
     }
 
     public void dispose() {
-        entities.dispose();
+        if (entities != null) entities.dispose();
     }
 
     public EntityManager getEntities() {
