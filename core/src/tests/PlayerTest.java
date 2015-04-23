@@ -411,6 +411,7 @@ public class PlayerTest extends WKInput implements ApplicationListener, InputObs
                 }
                 spriterTweener.setWeight(0f);
                 //spriterTweener.getFirstPlayer().speed = 1;
+                playerLeft = false;
                 break;
             case GameActions.PLAYER_MOVE_NONE:
                 resetPlayerSpeed();

@@ -43,6 +43,6 @@ public class SpriterComponent extends Component {
         setAnim(1, name, weight);
     }
     public void setSecondAnim(String name) {
-        setFirstAnim(name, defaultWeight);
+        setAnim(1, name, defaultWeight);
     }
 }

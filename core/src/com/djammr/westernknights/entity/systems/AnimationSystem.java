@@ -38,8 +38,15 @@ public class AnimationSystem extends IteratingSystem {
         // TODO: Add bitwise operators for checking combined states
         String animName = null;
         switch (stc.state) {
+            case EntityStates.ATTACKING_MELEE:
             case EntityStates.ATTACKING_RANGED:
-                animName = "attack";
+                animName = null;
+                //sprtc.setFirstAnim("attack", 0f);
+                //sprtc.player.setBaseAnimation("idle");
+                //sprtc.player.getSecondPlayer().setAnimation("idle");
+                sprtc.player.getFirstPlayer().setAnimation("attack");
+                //sprtc.player.baseBoneName = "bone_006";
+                sprtc.player.setWeight(0f);
                 break;
             case EntityStates.JUMPING:
                 animName = "jump";
@@ -60,8 +67,8 @@ public class AnimationSystem extends IteratingSystem {
             animc.currentAnim = animc.animations.get(animName);
             visc.sprite.setRegion(animc.currentAnim.getKeyFrame(animc.stateTime += deltaTime));
         }
-        if (sprtc != null) {
-            sprtc.setFirstAnim(animName, 0f);
+        if (sprtc != null && animName != null) {
+            sprtc.setSecondAnim(animName, 1f);
         }
     }
 }

@@ -137,7 +137,7 @@
                     <bone x="42.085192" angle="13.677378"/>
                 </key>
                 <key id="1" time="300" spin="0">
-                    <bone x="42.085192" y="-0" angle="13.677378"/>
+                    <bone x="42.085192" angle="13.677378"/>
                 </key>
             </timeline>
         </animation>
@@ -275,16 +275,16 @@
             </timeline>
             <timeline id="11" obj="2" name="bone_008" object_type="bone">
                 <key id="0" spin="0">
-                    <bone x="42.085192" y="0" angle="13.677378"/>
+                    <bone x="42.085192" angle="13.677378"/>
                 </key>
                 <key id="1" time="124" spin="0">
-                    <bone x="42.085192" y="-0" angle="13.677378"/>
+                    <bone x="42.085192" angle="13.677378"/>
                 </key>
                 <key id="2" time="250" spin="0">
-                    <bone x="42.085192" y="-0" angle="13.677378"/>
+                    <bone x="42.085192" angle="13.677378"/>
                 </key>
                 <key id="3" time="375" spin="0">
-                    <bone x="42.085192" y="0" angle="13.677378"/>
+                    <bone x="42.085192" angle="13.677378"/>
                 </key>
             </timeline>
         </animation>

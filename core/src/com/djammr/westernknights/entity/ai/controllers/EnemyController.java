@@ -76,8 +76,8 @@ public class EnemyController extends AIController implements ProximityCallback {
             }
 
             // Attack!
-            ((Box2DUserData)neighbor.getUserData()).stateComponent.state = EntityStates.ATTACKING_RANGED;
-            
+            ((Box2DUserData)steerable.getBody().getUserData()).stateComponent.state = EntityStates.ATTACKING_RANGED;
+
             return true;
         }
         return false;

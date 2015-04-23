@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
 import com.djammr.westernknights.util.observers.InputObserver;
@@ -18,9 +19,11 @@ public class InputSystem extends IteratingSystem implements InputObserver {
 
     private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
     private ComponentMapper<StatComponent> statm = ComponentMapper.getFor(StatComponent.class);
+    private ComponentMapper<StateComponent> stm = ComponentMapper.getFor(StateComponent.class);
     private ComponentMapper<MessagingComponent> msgm = ComponentMapper.getFor(MessagingComponent.class);
     private MovementComponent mvc;
     private StatComponent statc;
+    private StateComponent stc;
     private MessagingComponent msgc;
 
 
@@ -50,6 +53,9 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                 case GameActions.PLAYER_RIGHT:
                     mvc.right = true;
                     break;
+                case GameActions.PLAYER_ATTACK_LIGHT:
+                    stc.state = EntityStates.ATTACKING_MELEE;
+                    break;
                 case GameActions.PLAYER_JUMP:
                     mvc.jump = true;
                     break;
@@ -72,6 +78,7 @@ public class InputSystem extends IteratingSystem implements InputObserver {
     public void setControllable(Entity entity) {
         mvc = mvm.get(entity);
         statc = statm.get(entity);
+        stc = stm.get(entity);
         msgc = msgm.get(entity);
     }
 }
