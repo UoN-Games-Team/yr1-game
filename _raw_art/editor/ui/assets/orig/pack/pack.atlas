@@ -4,16 +4,23 @@ size: 4096,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Smoke
+  rotate: false
+  xy: 2566, 690
+  size: 336, 330
+  orig: 336, 330
+  offset: 0, 0
+  index: -1
 bar
   rotate: false
-  xy: 2566, 975
+  xy: 2566, 643
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 2758, 1002
+  xy: 2758, 670
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
@@ -34,7 +41,7 @@ barBackhorizontalRight
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 22, 22
+  xy: 2924, 1002
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
@@ -48,28 +55,28 @@ barGreenhorizontalMid
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 260, 260
+  xy: 22, 22
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalLeft
   rotate: false
-  xy: 280, 280
+  xy: 2904, 982
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 2566, 955
+  xy: 2904, 1002
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 2566, 935
+  xy: 2566, 623
   size: 9, 18
   orig: 9, 18
   offset: 0, 0

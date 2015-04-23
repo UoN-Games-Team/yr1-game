@@ -37,6 +37,7 @@ public class MovementSystem extends IteratingSystem {
         if (mvc.stop) {
             resetSpeed();
             mvc.stop = false;
+            //stc.state = (stc.state != EntityStates.IDLE)? stc.state & EntityStates.IDLE : EntityStates.IDLE;
             stc.state = EntityStates.IDLE;
         }
 
@@ -45,14 +46,16 @@ public class MovementSystem extends IteratingSystem {
                 b2dc.body.applyLinearImpulse(mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
-            stc.state = EntityStates.MOVING;
+            stc.state = (stc.state != EntityStates.MOVING)? stc.state & EntityStates.MOVING : EntityStates.MOVING;
+            //stc.state = EntityStates.MOVING;
         }
         else if (mvc.left) {
             if (b2dc.body.getLinearVelocity().x > -mvc.speed) {
                 b2dc.body.applyLinearImpulse(-mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
-            stc.state = EntityStates.MOVING;
+            stc.state = (stc.state != EntityStates.MOVING)? stc.state & EntityStates.MOVING : EntityStates.MOVING;
+            //stc.state = EntityStates.MOVING;
         }
         else {
             resetSpeed();

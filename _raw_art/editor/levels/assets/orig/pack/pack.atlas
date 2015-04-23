@@ -4,6 +4,13 @@ size: 4096,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Smoke
+  rotate: false
+  xy: 2087, 115
+  size: 336, 330
+  orig: 336, 330
+  offset: 0, 0
+  index: -1
 alchemist
   rotate: false
   xy: 2087, 447
@@ -27,7 +34,7 @@ blacksmith
   index: -1
 bountyboard
   rotate: false
-  xy: 3089, 476
+  xy: 2425, 202
   size: 273, 243
   orig: 273, 243
   offset: 0, 0
@@ -62,7 +69,7 @@ outfitter
   index: -1
 playerhouse
   rotate: false
-  xy: 2087, 230
+  xy: 3089, 504
   size: 375, 215
   orig: 375, 215
   offset: 0, 0

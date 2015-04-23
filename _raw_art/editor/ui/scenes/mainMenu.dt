@@ -1,1 +1,1 @@
-{"sceneName":"mainMenu","composite":{"sImages":[{"x":-1.000061,"y":-0.49998474,"layerName":"Default","tint":[1,1,1,1],"imageName":"mainmenuBackground"}],"layers":[{"layerName":"Default"}]},"physicsPropertiesVO":{}}
+{"sceneName":"mainMenu","composite":{"sImages":[{"x":-1.000061,"y":-0.49998474,"layerName":"Default","tint":[1,1,1,1],"imageName":"mainmenuBackground"}],"sParticleEffects":[{"x":95,"y":25,"zIndex":1,"layerName":"Default","tint":[1,1,1,1],"particleName":"smoke_fx.txt"}],"layers":[{"layerName":"Default"}]},"physicsPropertiesVO":{}}
