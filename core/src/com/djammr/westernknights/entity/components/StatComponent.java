@@ -10,6 +10,7 @@ public class StatComponent extends Component {
     public float maxHealth = 1000;
     public float health = maxHealth;
     public float healthPercent = 1;
+    public float attack = 10;
 
 
     public void changeHealth(float amount) {

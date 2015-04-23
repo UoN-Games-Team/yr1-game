@@ -38,6 +38,9 @@ public class AnimationSystem extends IteratingSystem {
         // TODO: Add bitwise operators for checking combined states
         String animName = null;
         switch (stc.state) {
+            case EntityStates.ATTACKING_RANGED:
+                animName = "attack";
+                break;
             case EntityStates.JUMPING:
                 animName = "jump";
                 break;

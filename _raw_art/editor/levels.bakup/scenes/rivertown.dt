@@ -1,1 +1,152 @@
-{"sceneName":"rivertown","composite":{"sImages":[{"itemIdentifier":"border_right","x":3051.5,"y":-7.499954,"scaleX":0.53999025,"scaleY":1.4199872,"zIndex":4,"layerName":"nodes","tint":[1,1,1,1],"imageName":"node"}],"sComposites":[{"itemIdentifier":"ground","x":-54.000122,"y":-12,"layerName":"ground","tint":[1,1,1,1],"meshId":"12","physicsBodyData":{"allowSleep":true,"awake":true,"bullet":true,"friction":0.6},"composite":{"sImages":[{"x":1572.7498,"scaleX":0.5,"scaleY":0.5,"zIndex":1,"layerName":"Default","tint":[1,1,1,1],"imageName":"floorrivertown"},{"y":4.5776367E-5,"scaleX":0.5,"scaleY":0.5,"layerName":"Default","tint":[1,1,1,1],"imageName":"floorrivertown"}],"layers":[{"layerName":"Default"}]}}],"sLights":[{"itemIdentifier":"sun","customVars":"alpha:0.75","x":604.99994,"y":480.4997,"zIndex":3,"layerName":"nodes","tint":[1,1,0.84313726,1],"type":"POINT","rays":100,"distance":1000,"isStatic":false}],"sSpriterAnimations":[{"itemIdentifier":"enemy","x":833.3499,"y":112.69006,"zIndex":1,"layerName":"Default","tint":[1,1,1,1],"animationName":"enemy","scale":0.6},{"itemIdentifier":"player","x":134.99994,"y":120.499954,"zIndex":2,"layerName":"Default","tint":[1,1,1,1],"animationName":"spriter_character","scale":0.35}],"layers":[{"layerName":"ground"},{"layerName":"actors","isLocked":true},{"layerName":"nodes"}]},"ambientColor":[0.25882354,0.14117648,0.003921569,1],"physicsPropertiesVO":{}}
+{
+  "physicsPropertiesVO": {},
+  "ambientColor": [
+    0.25882354,
+    0.14117648,
+    0.003921569,
+    1
+  ],
+  "sceneName": "rivertown",
+  "composite": {
+    "sSpriterAnimations": [
+      {
+        "zIndex": 1,
+        "scale": 0.6,
+        "y": 112.69006,
+        "x": 833.3499,
+        "itemIdentifier": "enemy",
+        "animationName": "enemy",
+        "tint": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "layerName": "Default"
+      },
+      {
+        "zIndex": 2,
+        "scale": 0.35,
+        "y": 120.499954,
+        "x": 134.99994,
+        "itemIdentifier": "player",
+        "animationName": "spriter_character",
+        "tint": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "layerName": "Default"
+      }
+    ],
+    "layers": [
+      {
+        "layerName": "ground"
+      },
+      {
+        "isLocked": true,
+        "layerName": "actors"
+      },
+      {
+        "layerName": "nodes"
+      }
+    ],
+    "sComposites": [
+      {
+        "physicsBodyData": {
+          "bullet": true,
+          "friction": 0.6,
+          "awake": true,
+          "allowSleep": true
+        },
+        "y": -12,
+        "x": -54.000122,
+        "composite": {
+          "sImages": [
+            {
+              "zIndex": 1,
+              "scaleX": 0.5,
+              "x": 1572.7498,
+              "scaleY": 0.5,
+              "imageName": "floorrivertown",
+              "tint": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "layerName": "Default"
+            },
+            {
+              "layerName": "Default",
+              "scaleX": 0.5,
+              "imageName": "floorrivertown",
+              "scaleY": 0.5,
+              "tint": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "y": 4.5776367e-05
+            }
+          ],
+          "layers": [
+            {
+              "layerName": "Default"
+            }
+          ]
+        },
+        "itemIdentifier": "ground",
+        "tint": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "layerName": "ground",
+        "meshId": "12"
+      }
+    ],
+    "sImages": [
+      {
+        "zIndex": 4,
+        "scaleX": 0.53999025,
+        "x": 3051.5,
+        "scaleY": 1.4199872,
+        "itemIdentifier": "border_right",
+        "imageName": "node",
+        "layerName": "nodes",
+        "y": -7.499954,
+        "tint": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "sLights": [
+      {
+        "zIndex": 3,
+        "customVars": "alpha:0.75",
+        "distance": 1000,
+        "layerName": "nodes",
+        "x": 604.99994,
+        "rays": 100,
+        "itemIdentifier": "sun",
+        "type": "POINT",
+        "tint": [
+          1,
+          1,
+          0.84313726,
+          1
+        ],
+        "y": 480.4997,
+        "isStatic": false
+      }
+    ]
+  }
+}
+

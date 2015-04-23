@@ -1,5 +1,6 @@
 package com.djammr.westernknights.entity;
 
+import com.djammr.westernknights.entity.ai.SteeringEntity;
 import com.djammr.westernknights.entity.components.StateComponent;
 
 /**
@@ -10,4 +11,5 @@ public class Box2DUserData {
     public String id = "";
     public StateComponent stateComponent;
     public int footContacts = 0;
+    public SteeringEntity steeringEntity = null;
 }

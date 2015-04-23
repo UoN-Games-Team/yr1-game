@@ -20,6 +20,7 @@ public abstract class WKWorld {
     public static final String PLAYER_IDENTIFIER = "player";
     public static final String GROUND_IDENTIFIER = "ground";
     public static final String NPC_TYPE = "npc";
+    public static final String ENEMY_TYPE = "enemy";
     public static final String NODE_TYPE = "node";
     public static final String FOOT_SENSOR_IDENTIFIER = "foot_sensor";
 

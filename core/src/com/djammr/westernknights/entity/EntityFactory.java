@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.ai.controllers.EnemyController;
 import com.djammr.westernknights.entity.ai.controllers.NPCController;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.entity.components.ai.BehaviourComponent;
@@ -23,16 +24,20 @@ public class EntityFactory {
 
     /**
      * Creates a rectangular Box2D Entity of width, height with a wheel as it's base
+     * @param entityID ID of the entity
      * @param box2DSystem the {@link Box2DSystem} with the Box2D World to add the Body to
      * @param width full width of the body
      * @param height full height of the body
+     * @param friction optional custom friction
+     * @param density optional custom density
      * @param components List of Components to add to the entity
      * @return the created Entity
      */
-    public static Entity createActor(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
+    public static Entity createActor(String entityID, Box2DSystem box2DSystem, float width, float height, float friction, float density, List<Component> components) {
         float boxHeight = height - width/2;
         float boxOffset = width/2;
-        float density = 0.6f;
+        if (density == -1) density = 0.6f;
+        if (friction == -1) friction = 0.6f;
 
         Entity entity = new Entity();
         entity.add(new Box2DComponent());
@@ -70,12 +75,14 @@ public class EntityFactory {
         FixtureDef fixtureDefC = new FixtureDef();
         fixtureDefC.shape = circle;
         fixtureDefC.density = density;
-        fixtureDefC.friction = 0.6f;
+        fixtureDefC.friction = friction;
         fixtureDefC.filter.maskBits = PhysicsFilters.MASK_ACTOR;
         fixtureDefC.filter.groupIndex = PhysicsFilters.GROUP_ACTORS;
 
         Body wheel = box2DSystem.getB2World().createBody(bodyDef);
         wheel.setUserData(new Box2DUserData());
+        ((Box2DUserData)wheel.getUserData()).id = entityID;
+        ((Box2DUserData)wheel.getUserData()).stateComponent = entity.getComponent(StateComponent.class);
         wheel.createFixture(fixtureDefC);
         wheel.setFixedRotation(true);
 
@@ -104,25 +111,39 @@ public class EntityFactory {
 
         return entity;
     }
+    public static Entity createActor(String entityID, Box2DSystem box2DSystem, float width, float height, List<Component> components) {
+        return createActor(entityID, box2DSystem, width, height, -1, -1, components);
+    }
 
     /**
-     * Creates an actor with Player specific components and attributes. See {@link #createActor(com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
+     * Creates an actor with Player specific components and attributes. See {@link #createActor(String, com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
      * @return the created Entity
      */
-    public static Entity createPlayer(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
-        Entity entity = createActor(box2DSystem, width, height, components);
+    public static Entity createPlayer(String entityID, Box2DSystem box2DSystem, float width, float height, List<Component> components) {
+        Entity entity = createActor(entityID, box2DSystem, width, height, components);
         entity.add(new PlayerComponent());
         return entity;
     }
 
     /**
-     * Creates an actor with NPC specific components and attributes. See {@link #createActor(com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
+     * Creates an actor with NPC specific components and attributes. See {@link #createActor(String, com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
      * @return the created Entity
      */
-    public static Entity createNPC(Box2DSystem box2DSystem, float width, float height, List<Component> components) {
-        Entity entity = createActor(box2DSystem, width, height, components);
+    public static Entity createNPC(String entityID, Box2DSystem box2DSystem, float width, float height, List<Component> components) {
+        Entity entity = createActor(entityID, box2DSystem, width, height, components);
         entity.add(new BehaviourComponent());
         entity.getComponent(BehaviourComponent.class).controller = new NPCController(entity);
+        return entity;
+    }
+
+    /**
+     * Creates an actor with basic Enemy specific components and attributes. See {@link #createActor(String, com.djammr.westernknights.entity.systems.Box2DSystem, float, float, java.util.List)}
+     * @return the created Entity
+     */
+    public static Entity createEnemy(String entityID, Box2DSystem box2DSystem, float width, float height, List<Component> components, float patrolMinX, float patrolMaxX) {
+        Entity entity = createActor(entityID, box2DSystem, width, height, components);
+        entity.add(new BehaviourComponent());
+        entity.getComponent(BehaviourComponent.class).controller = new EnemyController(entity, patrolMinX, patrolMaxX);
         return entity;
     }
 

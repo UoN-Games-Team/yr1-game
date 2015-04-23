@@ -27,7 +27,8 @@ public class SpriterComponent extends Component {
             else player.getSecondPlayer().setAnimation(name);
             player.setWeight(weight);
         } catch (SpriterException ex) {
-            WKGame.logger.logDebug("Entity does not have animation: "+name);
+            if (name.equals("run")) setFirstAnim("idle");
+            else WKGame.logger.logDebug("Entity does not have animation: "+name);
         }
     }
 

@@ -1,0 +1,69 @@
+
+pack.png
+size: 4096,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+alchemist
+  rotate: false
+  xy: 2087, 447
+  size: 1000, 657
+  orig: 1000, 657
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 2, 1223
+  size: 4000, 713
+  orig: 4000, 713
+  offset: 0, 0
+  index: -1
+blacksmith
+  rotate: false
+  xy: 3089, 721
+  size: 671, 500
+  orig: 671, 500
+  offset: 0, 0
+  index: -1
+bountyboard
+  rotate: false
+  xy: 3089, 476
+  size: 273, 243
+  orig: 273, 243
+  offset: 0, 0
+  index: -1
+bountyoffice
+  rotate: false
+  xy: 2, 2
+  size: 949, 1219
+  orig: 949, 1219
+  offset: 0, 0
+  index: -1
+floorsand
+  rotate: false
+  xy: 953, 1106
+  size: 2000, 115
+  orig: 2000, 115
+  offset: 0, 0
+  index: -1
+lantern
+  rotate: false
+  xy: 3762, 150
+  size: 135, 1071
+  orig: 135, 1071
+  offset: 0, 0
+  index: -1
+outfitter
+  rotate: false
+  xy: 953, 142
+  size: 1132, 962
+  orig: 1132, 962
+  offset: 0, 0
+  index: -1
+playerhouse
+  rotate: false
+  xy: 2087, 230
+  size: 375, 215
+  orig: 375, 215
+  offset: 0, 0
+  index: -1

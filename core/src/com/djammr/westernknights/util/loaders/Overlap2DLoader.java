@@ -249,7 +249,7 @@ public class Overlap2DLoader {
         // --- Box2D Mesh
         // --- Player
         if (item.itemIdentifier.equals(WKWorld.PLAYER_IDENTIFIER)) {
-            entity = EntityFactory.createPlayer(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
+            entity = EntityFactory.createPlayer(item.itemIdentifier, b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
             customVars.setVariable("filter_category", "player");
             for (Fixture fixture : entity.getComponent(Box2DComponent.class).body.getFixtureList()) {
                 Filter filter = fixture.getFilterData();
@@ -257,9 +257,15 @@ public class Overlap2DLoader {
                 fixture.setFilterData(filter);
             }
         }
+        // --- Enemy
+        else if (entityType != null && entityType.equals(WKWorld.ENEMY_TYPE)) {
+            entity = EntityFactory.createEnemy(item.itemIdentifier, b2dSystem, 2.3f, 3f, components, 1f, WKGame.PIXELS_TO_METERS * 2500f);
+            customVars.setVariable("filter_category", "enemy");
+            //((NPCController)entity.getComponent(BehaviourComponent.class).controller).getSteerable().setBoundaries(0f, 3000f);
+        }
         // --- NPC
         else if (entityType != null && entityType.equals(WKWorld.NPC_TYPE)) {
-            entity = EntityFactory.createNPC(b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
+            entity = EntityFactory.createNPC(item.itemIdentifier, b2dSystem, WKWorld.PLAYER_WIDTH, WKWorld.PLAYER_HEIGHT, components);
             // --- Node data
             if (customVars.getStringVariable("nodes") != null) {
                 // Boundary nodes

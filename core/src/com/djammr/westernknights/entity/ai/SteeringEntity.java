@@ -7,6 +7,7 @@ import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.steer.behaviors.Wander;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.components.MovementComponent;
@@ -16,12 +17,13 @@ import com.djammr.westernknights.entity.components.MovementComponent;
  */
 public class SteeringEntity implements Steerable<Vector2> {
 
-    private Box2DComponent b2dc;
-    private MovementComponent mvc;
+    private Body body;
+    private MovementComponent mvc = null;
     private Float minX = null;
     private Float maxX = null;
     private float boundingRadius;
     private boolean tagged = false;
+    private Body targetEntity = null;
 
     protected SteeringBehavior<Vector2> steeringBehavior;
     private final SteeringAcceleration<Vector2> steeringOutput = new SteeringAcceleration<Vector2>(new Vector2());
@@ -29,22 +31,30 @@ public class SteeringEntity implements Steerable<Vector2> {
 
     public SteeringEntity(Entity entity, float boundingRadius) {
         this.boundingRadius = boundingRadius;
-        b2dc = ComponentMapper.getFor(Box2DComponent.class).get(entity);
+        body = ComponentMapper.getFor(Box2DComponent.class).get(entity).body;
         mvc = ComponentMapper.getFor(MovementComponent.class).get(entity);
     }
     public SteeringEntity(Entity entity) {
         this(entity, 1f);
     }
+    public SteeringEntity(Body body, float boundingRadius) {
+        this.body = body;
+        this.boundingRadius = boundingRadius;
+    }
 
     public void update(float deltaTime) {
-        if (steeringBehavior != null) {
+        if (steeringBehavior != null && mvc != null) {
             boolean applySteering = true;
             steeringBehavior.calculateSteering(steeringOutput);
 
             mvc.right = false;
             mvc.left = false;
-            if (minX != null && steeringOutput.linear.x < 0 && getPosition().x - 0.1 < minX) applySteering = false;
-            else if (maxX != null && steeringOutput.linear.x > 0 && getPosition().x + 0.1 > maxX) applySteering = false;
+            if (targetEntity == null) {
+                // TODO: Move to behaviour and track back to patrol area
+                if (minX != null && steeringOutput.linear.x < 0 && getPosition().x - 0.1 < minX) applySteering = false;
+                else if (maxX != null && steeringOutput.linear.x > 0 && getPosition().x + 0.1 > maxX)
+                    applySteering = false;
+            }
             if (applySteering) {
                 applySteering(steeringOutput, deltaTime);
             } else {
@@ -83,22 +93,26 @@ public class SteeringEntity implements Steerable<Vector2> {
 
     @Override
     public Vector2 getPosition() {
-        return b2dc.body.getPosition();
+        return body.getPosition();
+    }
+
+    public Body getBody() {
+        return body;
     }
 
     @Override
     public float getOrientation() {
-        return b2dc.body.getAngle();
+        return body.getAngle();
     }
 
     @Override
     public Vector2 getLinearVelocity() {
-        return b2dc.body.getLinearVelocity();
+        return body.getLinearVelocity();
     }
 
     @Override
     public float getAngularVelocity() {
-        return b2dc.body.getAngularVelocity();
+        return body.getAngularVelocity();
     }
 
     @Override
@@ -131,6 +145,17 @@ public class SteeringEntity implements Steerable<Vector2> {
         outVector.x = -(float)Math.sin(angle);
         outVector.y = (float)Math.cos(angle);
         return outVector;
+    }
+
+    /**
+     * Set entity to chase
+     * @param target Steerable<Vector2> to chase
+     */
+    public void setTargetEntity(Body target) {
+        targetEntity = target;
+    }
+    public Body getTargetEntity() {
+        return targetEntity;
     }
 
     // --- Limiters
