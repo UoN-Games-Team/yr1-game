@@ -1,19 +1,19 @@
 
 pack.png
-size: 2048,1024
+size: 4096,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bar
   rotate: false
-  xy: 1284, 975
+  xy: 2566, 975
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 1476, 1002
+  xy: 2758, 1002
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
@@ -62,14 +62,14 @@ barRedhorizontalLeft
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 1284, 955
+  xy: 2566, 955
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 1284, 935
+  xy: 2566, 935
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
@@ -77,6 +77,13 @@ barRedhorizontalRight
 loadingBackground01
   rotate: false
   xy: 2, 300
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+mainmenuBackground
+  rotate: false
+  xy: 1284, 300
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
