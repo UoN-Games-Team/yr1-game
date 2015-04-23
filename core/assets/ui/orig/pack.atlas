@@ -1,82 +1,89 @@
 
 pack.png
-size: 512,512
+size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bar
   rotate: false
-  xy: 2, 42
+  xy: 1284, 975
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 260, 307
+  xy: 1476, 1002
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barBackhorizontalMid
   rotate: false
-  xy: 260, 327
+  xy: 2, 22
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barBackhorizontalRight
   rotate: false
-  xy: 280, 327
+  xy: 2, 2
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 2, 2
+  xy: 22, 22
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalMid
   rotate: false
-  xy: 2, 22
+  xy: 260, 280
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 22, 22
+  xy: 260, 260
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalLeft
   rotate: false
-  xy: 194, 49
+  xy: 280, 280
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 194, 69
+  xy: 1284, 955
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 214, 69
+  xy: 1284, 935
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
+loadingBackground01
+  rotate: false
+  xy: 2, 300
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
 test
   rotate: false
-  xy: 2, 89
+  xy: 2, 42
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
