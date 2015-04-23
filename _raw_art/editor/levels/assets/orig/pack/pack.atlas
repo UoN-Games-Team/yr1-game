@@ -6,64 +6,92 @@ filter: Linear,Linear
 repeat: none
 alchemist
   rotate: false
-  xy: 2087, 447
-  size: 1000, 657
-  orig: 1000, 657
+  xy: 2989, 750
+  size: 800, 525
+  orig: 800, 525
   offset: 0, 0
   index: -1
 background
   rotate: false
-  xy: 2, 1223
+  xy: 2, 1277
   size: 4000, 713
   orig: 4000, 713
   offset: 0, 0
   index: -1
 blacksmith
   rotate: false
-  xy: 3089, 721
+  xy: 2087, 2
   size: 671, 500
   orig: 671, 500
   offset: 0, 0
   index: -1
 bountyboard
   rotate: false
-  xy: 3089, 476
+  xy: 3366, 505
   size: 273, 243
   orig: 273, 243
   offset: 0, 0
   index: -1
 bountyoffice
   rotate: false
-  xy: 2, 2
+  xy: 2, 56
   size: 949, 1219
   orig: 949, 1219
   offset: 0, 0
   index: -1
 floorsand
   rotate: false
-  xy: 953, 1106
+  xy: 953, 1160
   size: 2000, 115
   orig: 2000, 115
   offset: 0, 0
   index: -1
 lantern
   rotate: false
-  xy: 3762, 150
+  xy: 3791, 204
   size: 135, 1071
   orig: 135, 1071
   offset: 0, 0
   index: -1
+node
+  rotate: false
+  xy: 4004, 1940
+  size: 25, 50
+  orig: 25, 50
+  offset: 0, 0
+  index: -1
 outfitter
   rotate: false
-  xy: 953, 142
+  xy: 953, 196
   size: 1132, 962
   orig: 1132, 962
   offset: 0, 0
   index: -1
+plant
+  rotate: false
+  xy: 953, 66
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 playerhouse
   rotate: false
-  xy: 2087, 230
+  xy: 2989, 533
   size: 375, 215
   orig: 375, 215
+  offset: 0, 0
+  index: -1
+sky
+  rotate: false
+  xy: 2760, 246
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+stable
+  rotate: false
+  xy: 2087, 504
+  size: 900, 654
+  orig: 900, 654
   offset: 0, 0
   index: -1
