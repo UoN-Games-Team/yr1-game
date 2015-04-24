@@ -4,13 +4,6 @@ size: 4096,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Smoke
-  rotate: false
-  xy: 2087, 115
-  size: 336, 330
-  orig: 336, 330
-  offset: 0, 0
-  index: -1
 alchemist
   rotate: false
   xy: 2989, 750
@@ -34,11 +27,7 @@ blacksmith
   index: -1
 bountyboard
   rotate: false
-<<<<<<< HEAD
   xy: 3366, 505
-=======
-  xy: 2425, 202
->>>>>>> origin/master
   size: 273, 243
   orig: 273, 243
   offset: 0, 0
@@ -87,11 +76,7 @@ plant
   index: -1
 playerhouse
   rotate: false
-<<<<<<< HEAD
   xy: 2989, 533
-=======
-  xy: 3089, 504
->>>>>>> origin/master
   size: 375, 215
   orig: 375, 215
   offset: 0, 0
