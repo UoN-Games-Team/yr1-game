@@ -6,105 +6,119 @@ filter: Linear,Linear
 repeat: none
 Smoke
   rotate: false
-  xy: 2, 42
+  xy: 1284, 678
   size: 336, 330
   orig: 336, 330
   offset: 0, 0
   index: -1
 bar
   rotate: false
-  xy: 2566, 1771
+  xy: 607, 241
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 1542, 1076
+  xy: 2824, 1712
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barBackhorizontalMid
   rotate: false
-  xy: 2, 22
+  xy: 1284, 658
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barBackhorizontalRight
   rotate: false
-  xy: 2566, 1751
+  xy: 2, 2
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 2758, 1798
+  xy: 304, 54
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalMid
   rotate: false
-  xy: 340, 354
+  xy: 1622, 990
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 2, 2
+  xy: 607, 221
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalLeft
   rotate: false
-  xy: 22, 22
+  xy: 799, 268
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 1284, 818
+  xy: 2566, 1454
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 340, 334
+  xy: 1284, 638
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
+djammrlogo
+  rotate: false
+  xy: 2, 74
+  size: 603, 212
+  orig: 603, 212
+  offset: 0, 0
+  index: -1
+libgdxlogo
+  rotate: false
+  xy: 2, 22
+  size: 300, 50
+  orig: 300, 50
+  offset: 0, 0
+  index: -1
 loadingBackground01
   rotate: false
-  xy: 2, 1096
+  xy: 2, 1010
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuBackground
   rotate: false
-  xy: 2, 374
+  xy: 2, 288
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuDarkeningOverlay
   rotate: false
-  xy: 1284, 1096
+  xy: 1284, 1010
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 test
   rotate: false
-  xy: 1284, 838
+  xy: 2566, 1474
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
