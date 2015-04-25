@@ -1,152 +1,166 @@
 
 pack.png
-size: 4096,2048
+size: 4096,4096
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 PlayerModel Placeholder
   rotate: false
-  xy: 3848, 1584
+  xy: 3848, 2794
   size: 228, 446
   orig: 228, 446
   offset: 0, 0
   index: -1
 Smoke
   rotate: false
-  xy: 2, 42
+  xy: 2, 22
   size: 336, 330
   orig: 336, 330
   offset: 0, 0
   index: -1
+abilityMenu
+  rotate: false
+  xy: 2, 2520
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
 bar
   rotate: false
-  xy: 3848, 1537
+  xy: 3171, 2473
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 4078, 2012
+  xy: 4078, 3222
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barBackhorizontalMid
   rotate: false
-  xy: 2, 22
+  xy: 3848, 2774
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barBackhorizontalRight
   rotate: false
-  xy: 909, 568
+  xy: 1284, 798
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 3848, 1517
+  xy: 1542, 1056
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalMid
   rotate: false
-  xy: 340, 96
+  xy: 2, 2
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 4040, 1564
+  xy: 2566, 2234
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalLeft
   rotate: false
-  xy: 2, 2
+  xy: 2868, 2286
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 607, 516
+  xy: 340, 334
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 22, 22
+  xy: 3171, 2453
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 bountyMenu
   rotate: false
-  xy: 2, 1310
+  xy: 2, 1798
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+defaultMenu
+  rotate: false
+  xy: 1284, 2520
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 djammrlogo
   rotate: false
-  xy: 2, 374
+  xy: 2566, 2306
   size: 603, 212
   orig: 603, 212
   offset: 0, 0
   index: -1
 inventoryMenu
   rotate: false
-  xy: 2, 588
+  xy: 2, 1076
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 libgdxlogo
   rotate: false
-  xy: 607, 536
+  xy: 2566, 2254
   size: 300, 50
   orig: 300, 50
   offset: 0, 0
   index: -1
 loadingBackground01
   rotate: false
-  xy: 1284, 1310
+  xy: 1284, 1798
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuBackground
   rotate: false
-  xy: 1284, 588
+  xy: 2566, 2520
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuDarkeningOverlay
   rotate: false
-  xy: 2566, 1310
+  xy: 2, 354
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mapMenu
   rotate: false
-  xy: 2566, 588
+  xy: 1284, 1076
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 test
   rotate: false
-  xy: 340, 116
+  xy: 1284, 818
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
