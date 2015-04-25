@@ -19,6 +19,8 @@ public abstract class WKWorld {
     public static final float PLAYER_HEIGHT = 1.8f;
     public static final String PLAYER_IDENTIFIER = "player";
     public static final String GROUND_IDENTIFIER = "ground";
+    public static final String SKYBOX_DAY_IDENTIFIER = "skybox_day";
+    public static final String SKYBOX_NIGHT_IDENTIFIER = "skybox_night";
     public static final String NPC_TYPE = "npc";
     public static final String ENEMY_TYPE = "enemy";
     public static final String NODE_TYPE = "node";
@@ -47,6 +49,7 @@ public abstract class WKWorld {
             entities.getEngine().addSystem(new BehaviourSystem());
             entities.getEngine().addSystem(new AnimationSystem());
             entities.getEngine().addSystem(new ParallaxSystem());
+            entities.getEngine().addSystem(new DaySystem());
             entities.getEngine().addSystem(new VisualSystem());
             entities.getEngine().addSystem(new RenderingSystem());
             entities.getEngine().addSystem(new Box2DSystem());
@@ -54,6 +57,7 @@ public abstract class WKWorld {
             entities.getEngine().getSystem(RenderingSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
             entities.getEngine().getSystem(Box2DSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
             entities.getEngine().getSystem(ParallaxSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
+            entities.getEngine().getSystem(DaySystem.class).setRayHandler(entities.getEngine().getSystem(Box2DSystem.class).getRayHandler());
 
             // load subclass
             load();

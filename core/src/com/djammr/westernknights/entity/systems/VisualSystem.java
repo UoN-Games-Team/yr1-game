@@ -54,12 +54,12 @@ public class VisualSystem extends IteratingSystem {
             }
         }
         else if (transc != null) {
-            visc.sprite.setPosition(transc.x, transc.y);
             visc.sprite.setRotation(transc.rotation);
+            visc.sprite.setPosition(transc.x, transc.y);
             // Spriter
             if (sprtc != null) {
-                sprtc.player.setPosition(transc.x, transc.y);
                 sprtc.player.rotate(transc.rotation);
+                sprtc.player.setPosition(transc.x, transc.y);
             }
         }
     }

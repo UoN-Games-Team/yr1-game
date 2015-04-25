@@ -6,6 +6,7 @@ import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.systems.CameraSystem;
+import com.djammr.westernknights.entity.systems.DaySystem;
 import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.util.assetloaders.Overlap2DMapLoader;
 import com.djammr.westernknights.util.assetloaders.settings.Overlap2DMapSettings;
@@ -37,6 +38,8 @@ public class TradingHub extends WKWorld {
                         getEntities().getEntity(WKWorld.GROUND_IDENTIFIER).getComponent(Box2DComponent.class).body.getPosition().x,
                         getEntities().getEntity("border_right").getComponent(Box2DComponent.class).body.getPosition().x,
                         0f, null);
+                getEntities().getEngine().getSystem(DaySystem.class).setSkyBoxes(getEntities().getEntity(WKWorld.SKYBOX_DAY_IDENTIFIER),
+                                                                                 getEntities().getEntity(WKWorld.SKYBOX_NIGHT_IDENTIFIER));
             }
         };
 
