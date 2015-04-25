@@ -2,7 +2,7 @@
 pack.png
 size: 4096,4096
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 alchemist
   rotate: false
@@ -20,7 +20,7 @@ background
   index: -1
 blacksmith
   rotate: false
-  xy: 2224, 2510
+  xy: 2087, 2510
   size: 671, 500
   orig: 671, 500
   offset: 0, 0
@@ -55,14 +55,14 @@ floorsand
   index: -1
 lantern
   rotate: false
-  xy: 2087, 1939
-  size: 135, 1071
-  orig: 135, 1071
+  xy: 4004, 3741
+  size: 35, 330
+  orig: 35, 330
   offset: 0, 0
   index: -1
 node
   rotate: false
-  xy: 4004, 4021
+  xy: 904, 851
   size: 25, 50
   orig: 25, 50
   offset: 0, 0
@@ -76,7 +76,7 @@ outfitter
   index: -1
 plant
   rotate: false
-  xy: 2897, 2882
+  xy: 2087, 2048
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -90,9 +90,16 @@ playerhouse
   index: -1
 sky
   rotate: false
-  xy: 2224, 2252
+  xy: 2760, 2754
   size: 256, 256
   orig: 256, 256
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 2087, 2178
+  size: 336, 330
+  orig: 336, 330
   offset: 0, 0
   index: -1
 stable
