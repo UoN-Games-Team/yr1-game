@@ -76,7 +76,7 @@ outfitter
   index: -1
 plant
   rotate: false
-  xy: 2087, 2048
+  xy: 2760, 2560
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -90,9 +90,23 @@ playerhouse
   index: -1
 sky
   rotate: false
-  xy: 2760, 2754
+  xy: 2425, 2252
   size: 256, 256
   orig: 256, 256
+  offset: 0, 0
+  index: -1
+skyday
+  rotate: false
+  xy: 2760, 2690
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+skynight
+  rotate: false
+  xy: 2087, 1856
+  size: 320, 320
+  orig: 320, 320
   offset: 0, 0
   index: -1
 smoke
