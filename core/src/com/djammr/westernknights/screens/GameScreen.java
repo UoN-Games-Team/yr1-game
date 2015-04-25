@@ -39,8 +39,8 @@ public class GameScreen extends WKScreen {
 
     @Override
     public void load() {
-        //setWorld(Assets.lvlTradingAreaID);
-        setWorld(Assets.lvlRivertownID);
+        setWorld(Assets.lvlTradingAreaID);
+        //setWorld(Assets.lvlRivertownID);
         DebugController dbgController = new DebugController(this);
         dbgController.setView(new DebugUI(dbgController));
         uiControllers.put("debug", dbgController);

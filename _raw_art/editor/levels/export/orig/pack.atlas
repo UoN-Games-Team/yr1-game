@@ -2,7 +2,7 @@
 pack.png
 size: 4096,4096
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 alchemist
   rotate: false

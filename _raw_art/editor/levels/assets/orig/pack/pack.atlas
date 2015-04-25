@@ -1,96 +1,103 @@
 
 pack.png
-size: 4096,2048
+size: 4096,4096
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 alchemist
   rotate: false
-  xy: 2989, 750
-  size: 800, 525
-  orig: 800, 525
+  xy: 2, 903
+  size: 1000, 657
+  orig: 1000, 657
   offset: 0, 0
   index: -1
 background
   rotate: false
-  xy: 2, 1277
-  size: 4000, 713
-  orig: 4000, 713
+  xy: 2, 3129
+  size: 4000, 942
+  orig: 4000, 942
   offset: 0, 0
   index: -1
 blacksmith
   rotate: false
-  xy: 2087, 2
+  xy: 2224, 2510
   size: 671, 500
   orig: 671, 500
   offset: 0, 0
   index: -1
 bountyboard
   rotate: false
-  xy: 3366, 505
+  xy: 2, 2
   size: 273, 243
   orig: 273, 243
   offset: 0, 0
   index: -1
 bountyoffice
   rotate: false
-  xy: 2, 56
+  xy: 2, 1562
   size: 949, 1219
   orig: 949, 1219
   offset: 0, 0
   index: -1
+fence
+  rotate: false
+  xy: 2, 2783
+  size: 2044, 344
+  orig: 2044, 344
+  offset: 0, 0
+  index: -1
 floorsand
   rotate: false
-  xy: 953, 1160
+  xy: 2048, 3012
   size: 2000, 115
   orig: 2000, 115
   offset: 0, 0
   index: -1
 lantern
   rotate: false
-  xy: 3791, 204
+  xy: 2087, 1939
   size: 135, 1071
   orig: 135, 1071
   offset: 0, 0
   index: -1
 node
   rotate: false
-  xy: 4004, 1940
+  xy: 4004, 4021
   size: 25, 50
   orig: 25, 50
   offset: 0, 0
   index: -1
 outfitter
   rotate: false
-  xy: 953, 196
+  xy: 953, 1819
   size: 1132, 962
   orig: 1132, 962
   offset: 0, 0
   index: -1
 plant
   rotate: false
-  xy: 953, 66
+  xy: 2897, 2882
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 playerhouse
   rotate: false
-  xy: 2989, 533
+  xy: 953, 1602
   size: 375, 215
   orig: 375, 215
   offset: 0, 0
   index: -1
 sky
   rotate: false
-  xy: 2760, 246
+  xy: 2224, 2252
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 stable
   rotate: false
-  xy: 2087, 504
+  xy: 2, 247
   size: 900, 654
   orig: 900, 654
   offset: 0, 0
