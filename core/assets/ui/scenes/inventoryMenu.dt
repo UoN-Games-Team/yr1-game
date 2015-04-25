@@ -1,0 +1,1 @@
+{"sceneName":"inventoryMenu","composite":{"sImages":[{"x":-1.000061,"y":0.5,"layerName":"Default","tint":[1,1,1,1],"imageName":"inventoryMenu"},{"x":109.99988,"y":123.5,"zIndex":1,"layerName":"Default","tint":[1,1,1,1],"imageName":"PlayerModel Placeholder"}],"layers":[{"layerName":"Default"}]},"physicsPropertiesVO":{}}
