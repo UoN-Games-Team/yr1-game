@@ -14,7 +14,7 @@ import com.djammr.westernknights.util.observers.ObserverKeys;
 import java.util.Map;
 
 /**
- * Debug Overlay to display key information
+ * Play HUD View
  */
 public class PlayerHUD extends UIView {
 
@@ -38,7 +38,7 @@ public class PlayerHUD extends UIView {
                 loadUI();
             }
         };
-        Assets.manager.load(Assets.uiHud, Overlap2DUISettings.class, params);
+        Assets.manager.load(Assets.uiHudID, Overlap2DUISettings.class, params);
     }
 
     public void loadUI() {

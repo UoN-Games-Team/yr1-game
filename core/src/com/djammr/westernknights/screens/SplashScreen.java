@@ -18,37 +18,35 @@ public class SplashScreen extends WKScreen{
 
 	Sprite libgdxlogoSprite;
 	Sprite studiologoSprite;
-	
+
 	public SplashScreen(WKGame game) {
         super(game);
     }
-	
+
 	@Override
 	public void load() {
-		 
+
 	}
-	
+
 	@Override
 	public void loadComplete() {
-		
+
 	}
-	
+
 	@Override
 	public void show() {
-		
+
 		libgdxlogoSprite.setPosition(Gdx.graphics.getWidth()/2 - libgdxlogoSprite.getWidth()/2, Gdx.graphics.getHeight()/2 - libgdxlogoSprite.getHeight()/2);
-		
-		
 		studiologoSprite.setPosition(Gdx.graphics.getWidth()/2 - studiologoSprite.getWidth()/2, Gdx.graphics.getHeight()/2 - studiologoSprite.getHeight()/2);
 	}
-	
-	@Override  
+
+	@Override
 	public void render(float delta) {
-		
+
 	}
 
 	@Override
 	public void dispose() {
-		
+
 	}
 }

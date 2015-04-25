@@ -41,6 +41,7 @@ import com.djammr.westernknights.entity.components.ai.BehaviourComponent;
 import com.djammr.westernknights.entity.components.ai.NodeComponent;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.entity.systems.RenderingSystem;
+import com.djammr.westernknights.ui.Actors.ParticleEffectActor;
 import com.djammr.westernknights.util.spriter.LibGdxDrawer;
 import com.djammr.westernknights.util.spriter.LibGdxLoader;
 import com.uwsoft.editor.renderer.Overlap2D;
@@ -67,7 +68,7 @@ import java.util.*;
  */
 public class Overlap2DLoader {
 
-    public static enum SceneType {
+    public enum SceneType {
         UI, MAP
     }
 
@@ -188,7 +189,8 @@ public class Overlap2DLoader {
                 addLight((LightVO) item);
             }
             else if (item instanceof ParticleEffectVO) {
-                addParticle((ParticleEffectVO) item);
+                if (sceneType.equals(SceneType.MAP)) addParticle((ParticleEffectVO) item);
+                else if (sceneType.equals(SceneType.UI)) addUiParticle((ParticleEffectVO) item);
             }
             else if (item instanceof LabelVO) {
                 addUiLabel((LabelVO) item);
@@ -438,6 +440,24 @@ public class Overlap2DLoader {
             emitter.setPosition(item.x * WKGame.PIXELS_TO_METERS, item.y * WKGame.PIXELS_TO_METERS);
         }
         entityManager.getEngine().getSystem(RenderingSystem.class).addParticle(particleEffect);
+    }
+
+    /**
+     * Adds a ParticleEffect from a ParticleEffectVO to the Stage
+     * @param item ParticleEffectVO to add
+     */
+    private static void addUiParticle(ParticleEffectVO item) {
+        ParticleEffectActor particleEffect = new ParticleEffectActor(Gdx.files.internal(particlesPath + "/" + item.particleName), atlas);
+        //particleEffect.getEffect().scaleEffect(item.scaleX);
+
+        /*for (int i=0; i < particleEffect.getEffect().getEmitters().size; i++) {
+            particleEffect.getEffect().getEmitters().set(i, new ParticleEmitter());
+            ParticleEmitter emitter = particleEffect.getEffect().getEmitters().get(i);
+
+            emitter.setPosition(item.x, item.y);
+        }*/
+        particleEffect.start();
+        addUiItem(particleEffect, item);
     }
 
     /**

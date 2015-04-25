@@ -56,6 +56,7 @@ public class Assets {
     public static String lvlTradingArea = "levels/scenes/trading_area.dt";
     public static String lvlRivertown = "levels/scenes/rivertown.dt";
     public static String uiHud = "ui/scenes/player_hud.dt";
+    public static String uiMainMenu = "ui/scenes/mainMenu.dt";
 
     // Loaded Scene IDs
     public static String lvlTest = "lvlTest";
@@ -63,6 +64,7 @@ public class Assets {
     public static String lvlRivertownID = "lvlRivertown";
     public static String uiDebug = "uiDebug";
     public static String uiHudID = "uiHud";
+    public static String uiMainMenuID = "uiMainmenu";
 
     // Key Maps
     public static String keyMapDefault = "data/keymaps/default_key_map.json";
