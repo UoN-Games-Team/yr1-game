@@ -1,6 +1,7 @@
 package com.djammr.westernknights.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +18,7 @@ public class SplashScreen extends WKScreen{
 
 	private float timer;
 	/** Time to display each logo for in seconds */
-	private float logoTime = 3;
+	private float logoTime = 2;
 	/** Current splash being displayed, corresponds to splashes index */
 	private int currentSplash = 0;
 	/** Total splashes to display, starting from 0 */
@@ -46,11 +47,11 @@ public class SplashScreen extends WKScreen{
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 		timer += delta;
 		if (timer >= logoTime) {
-			// Fade splash out
-			splashAlpha -= delta;
 			if (splashAlpha <= 0) {
 				splashAlpha = 0;
 				currentSplash++;
@@ -60,6 +61,8 @@ public class SplashScreen extends WKScreen{
 					timer = 0;
 				}
 			}
+			// Fade splash out
+			splashAlpha -= delta;
 		} else {
 			// Fade splash in
 			splashAlpha += delta;
