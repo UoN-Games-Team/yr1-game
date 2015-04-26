@@ -11,6 +11,7 @@ import com.djammr.westernknights.ui.UIView;
 import com.djammr.westernknights.util.controllers.UIController;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,8 +20,8 @@ import java.util.Map;
 public abstract class WKScreen implements Screen {
 
     protected InputMultiplexer inputMultiplexer;
-    protected Map<String, UIController> uiControllers = new HashMap<String, UIController>();
-    protected Map<String, UIView> uiViews = new HashMap<String, UIView>();
+    protected Map<String, UIController> uiControllers = new LinkedHashMap<String, UIController>();
+    protected Map<String, UIView> uiViews = new LinkedHashMap<String, UIView>();
     protected WKGame game;
     private boolean loaded = false;
     private boolean paused = false;

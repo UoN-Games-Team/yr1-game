@@ -41,7 +41,7 @@ public class StatSystem extends IteratingSystem {
         }
     }
 
-    public void changeHealth(float amount) {
+    private void changeHealth(float amount) {
         statc.health += amount;
         statc.healthPercent = statc.health / statc.maxHealth;
     }
@@ -49,21 +49,21 @@ public class StatSystem extends IteratingSystem {
     /**
      * Deducts health, capping at 0
      */
-    public void damage() {
+    private void damage() {
         changeHealth((statc.health + statc.healthChange > 0)? statc.healthChange : -statc.health);
     }
 
     /**
      * Adds health, capping at max health
      */
-    public void heal() {
+    private void heal() {
         changeHealth((statc.health < statc.maxHealth - statc.healthChange) ? statc.healthChange : statc.maxHealth - statc.health);
     }
 
     /**
      * Increases XP, levelling up if full and adding the remainder
      */
-    public void xpGain() {
+    private void xpGain() {
         if (statc.xp + statc.xpChange >= statc.xpToLevel) {
             float remainder = (statc.xp + statc.xpChange) - statc.xpToLevel;
             statc.xp = 0 + remainder;

@@ -14,7 +14,6 @@ import com.djammr.westernknights.util.Utils;
  */
 public class Patrol2D extends SteeringBehavior<Vector2> {
 
-    private int wanderOrientation;
     private float targetPosition;
     private boolean stopped = false;
     private float minStopTime = 3f;
@@ -72,11 +71,6 @@ public class Patrol2D extends SteeringBehavior<Vector2> {
      */
     public void setMaxStopTime(float seconds) {
         maxStopTime = seconds;
-    }
-
-    /** Returns the current orientation of the wander target. */
-    public float getWanderOrientation () {
-        return wanderOrientation;
     }
 
     /** Returns the current x position of the wander target. This method is useful for debug purpose. */

@@ -31,6 +31,7 @@ public class Loading extends UIView {
         this.controller = controller;
     }
 
+    @Override
     public void loadUI() {
 
     }

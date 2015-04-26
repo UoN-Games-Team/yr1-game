@@ -121,16 +121,6 @@ public class MainMenu extends UIView {
     }
 
     @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-    @Override
     public void update(Observable obs, Map<String, Object> data) {
     }
 }
