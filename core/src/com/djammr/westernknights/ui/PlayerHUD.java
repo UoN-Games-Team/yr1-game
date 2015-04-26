@@ -29,9 +29,9 @@ public class PlayerHUD extends UIView {
     }
 
     public void loadUI() {
-        imgHealthBar = (Image)actors.get("health_bar");
+        imgHealthBar = (Image)actors.get("hp_bar");
         imgXpBar = (Image)actors.get("xp_bar");
-        healthBarFullWidth = imgXpBar.getWidth();
+        healthBarFullWidth = imgHealthBar.getWidth();
     }
 
     @Override
@@ -47,7 +47,9 @@ public class PlayerHUD extends UIView {
     @Override
     public void update(Observable obs, Map<String, Object> data) {
         if (data.containsKey(ObserverKeys.PLAYER_HEALTH_PERCENT)) {
-            imgHealthBar.setWidth(healthBarFullWidth * (float)data.get(ObserverKeys.PLAYER_HEALTH_PERCENT));
+            float widthChange = imgHealthBar.getWidth() - (healthBarFullWidth * (float) data.get(ObserverKeys.PLAYER_HEALTH_PERCENT));
+            imgHealthBar.setWidth(imgHealthBar.getWidth() - widthChange);
+            imgHealthBar.moveBy(widthChange*imgHealthBar.getScaleX(), 0);
         }
     }
 }
