@@ -50,21 +50,23 @@ public class Assets {
     public static String overlap2DLevelAtlas = "levels/orig/pack.atlas";
 
     // Scenes
-    public static String uiDebugScene = "levels/test/scenes/DebugUI.dt";
     public static String lvlTestLevel = "levels/test/scenes/MainScene.dt";
     public static String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
     public static String lvlTradingArea = "levels/scenes/trading_area.dt";
     public static String lvlRivertown = "levels/scenes/rivertown.dt";
+    public static String uiDebug = "levels/test/scenes/DebugUI.dt";
     public static String uiHud = "ui/scenes/player_hud.dt";
     public static String uiMainMenu = "ui/scenes/mainMenu.dt";
+    public static String uiLoading = "ui/scenes/loadingScreen.dt";
 
     // Loaded Scene IDs
     public static String lvlTest = "lvlTest";
     public static String lvlTradingAreaID = "lvlTradingArea";
     public static String lvlRivertownID = "lvlRivertown";
-    public static String uiDebug = "uiDebug";
+    public static String uiDebugID = "uiDebug";
     public static String uiHudID = "uiHud";
-    public static String uiMainMenuID = "uiMainmenu";
+    public static String uiMainMenuID = "uiMainMenu";
+    public static String uiLoadingID = "uiLoading";
 
     // Key Maps
     public static String keyMapDefault = "data/keymaps/default_key_map.json";

@@ -42,7 +42,7 @@ public class ScreenManager {
                 ((LoadingScreen) game.getScreen()).setTarget(screen);
             } else {
                 WKGame.logger.logDebug("Setting Screen: " + screen);
-                registeredScreens.get(screen).loadComplete();
+                if (!registeredScreens.get(screen).isLoaded()) registeredScreens.get(screen).loadComplete();
                 game.setScreen(registeredScreens.get(screen));
             }
         } else {

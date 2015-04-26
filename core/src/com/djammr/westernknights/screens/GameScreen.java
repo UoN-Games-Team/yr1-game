@@ -25,7 +25,6 @@ import java.util.Map;
 public class GameScreen extends WKScreen {
 
     private InputMapper inputMapper = new InputMapper();
-    private Map<String, UIController> uiControllers = new HashMap<String, UIController>();
     private Map<String, WKWorld> worlds = new HashMap<String, WKWorld>();
     private WKWorld currentWorld;
 
@@ -41,50 +40,30 @@ public class GameScreen extends WKScreen {
     public void load() {
         setWorld(Assets.lvlTradingAreaID);
         //setWorld(Assets.lvlRivertownID);
-        DebugController dbgController = new DebugController(this);
-        dbgController.setView(new DebugUI(dbgController));
-        uiControllers.put("debug", dbgController);
 
-        PlayerHUDController hudController = new PlayerHUDController(this);
-        uiControllers.put("player_hud", hudController);
+        uiControllers.put("debug", new DebugController(this));
+        uiViews.put("debug", new DebugUI((DebugController)uiControllers.get("debug")));
+        uiControllers.get("debug").setView(uiViews.get("debug"));
 
-        //super.load();
+        uiControllers.put("player_hud", new PlayerHUDController(this));
+        uiViews.put("player_hud", new PlayerHUD((PlayerHUDController)uiControllers.get("player_hud")));
     }
 
     @Override
     public void loadComplete() {
-        uiControllers.get("player_hud").setView(new PlayerHUD((PlayerHUDController)uiControllers.get("player_hud")));
+        super.loadComplete();
+        uiControllers.get("player_hud").setView(uiViews.get("player_hud"));
         getInputMultiplexer().addProcessor(inputMapper);
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
     public void render(float delta) {
         if (currentWorld != null) currentWorld.update(delta);
-
-        for (UIController controller : uiControllers.values()) {
-            controller.update(delta);
-        }
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        for (UIController controller : uiControllers.values()) {
-            controller.resize(width, height);
-        }
+        super.render(delta);
     }
 
     @Override
     public void dispose() {
-        for (UIController controller : uiControllers.values()) {
-            controller.dispose();
-        }
-        uiControllers.clear();
-
         for (WKWorld world : worlds.values()) {
             world.dispose();
         }

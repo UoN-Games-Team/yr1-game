@@ -6,6 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.ui.UIView;
+import com.djammr.westernknights.util.controllers.UIController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Abstract screen implementation for Western Knights screens
@@ -13,12 +18,19 @@ import com.djammr.westernknights.WKGame;
 public abstract class WKScreen implements Screen {
 
     protected InputMultiplexer inputMultiplexer;
+    protected Map<String, UIController> uiControllers = new HashMap<String, UIController>();
+    protected Map<String, UIView> uiViews = new HashMap<String, UIView>();
     protected WKGame game;
+    private boolean loaded = false;
 
 
     public WKScreen(WKGame game) {
         this.game = game;
         inputMultiplexer = new InputMultiplexer();
+    }
+
+    @Override
+    public void show() {
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -32,11 +44,22 @@ public abstract class WKScreen implements Screen {
     /**
      * Call when loading has finished
      */
-    public abstract void loadComplete();
+    public void loadComplete() {
+        loaded = true;
+    }
+
+    @Override
+    public void render(float delta) {
+        for (UIController controller : uiControllers.values()) {
+            controller.update(delta);
+        }
+    }
 
     @Override
     public void resize(int width, int height) {
-
+        for (UIController controller : uiControllers.values()) {
+            controller.resize(width, height);
+        }
     }
 
     @Override
@@ -52,6 +75,22 @@ public abstract class WKScreen implements Screen {
     @Override
     public void hide() {
 
+    }
+
+    @Override
+    public void dispose() {
+        for (UIController controller : uiControllers.values()) {
+            controller.dispose();
+        }
+        uiControllers.clear();
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setScreen(String screen) {
+        getGame().getScreens().setScreen(screen);
     }
 
     public WKGame getGame() { return game; }

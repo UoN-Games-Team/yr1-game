@@ -1,5 +1,6 @@
 package com.djammr.westernknights.util.controllers;
 
+import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.screens.GameScreen;
 
 /**
@@ -22,5 +23,9 @@ public class DebugController extends UIController {
         } else {
             return 0;
         }
+    }
+
+    public boolean debugEnabled() {
+        return WKGame.debugEnabled;
     }
 }

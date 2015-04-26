@@ -16,9 +16,6 @@ import java.util.Map;
  */
 public class MainMenuScreen extends WKScreen {
 
-    private InputMapper inputMapper = new InputMapper();
-    private Map<String, UIController> uiControllers = new HashMap<String, UIController>();
-
 
     public MainMenuScreen(WKGame game) {
         super(game);
@@ -26,40 +23,13 @@ public class MainMenuScreen extends WKScreen {
 
     @Override
     public void load() {
-        MainMenuController menuController = new MainMenuController(this);
-        uiControllers.put("main_menu", menuController);
+        uiControllers.put("main_menu", new MainMenuController(this));
+        uiViews.put("main_menu", new MainMenu((MainMenuController) uiControllers.get("main_menu")));
     }
 
     @Override
     public void loadComplete() {
-        uiControllers.get("main_menu").setView(new MainMenu((MainMenuController)uiControllers.get("main_menu")));
-        getInputMultiplexer().addProcessor(inputMapper);
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-        for (UIController controller : uiControllers.values()) {
-            controller.update(delta);
-        }
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        for (UIController controller : uiControllers.values()) {
-            controller.resize(width, height);
-        }
-    }
-
-    @Override
-    public void dispose() {
-        for (UIController controller : uiControllers.values()) {
-            controller.dispose();
-        }
-        uiControllers.clear();
+        super.loadComplete();
+        uiControllers.get("main_menu").setView(uiViews.get("main_menu"));
     }
 }

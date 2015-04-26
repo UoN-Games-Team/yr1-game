@@ -24,21 +24,8 @@ public class PlayerHUD extends UIView {
     private Image imgXpBar;
 
     public PlayerHUD(PlayerHUDController controller) {
-        super(controller);
+        super(controller, Assets.uiHud, Assets.uiHudID);
         this.controller = controller;
-    }
-
-    @Override
-    public void createUI() {
-        Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
-        params.set(Assets.overlap2DUIProject, Assets.uiHud,  Assets.overlap2DUIAtlas, Assets.overlap2DUIFonts, stage, actors);
-        params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
-            @Override
-            public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
-                loadUI();
-            }
-        };
-        Assets.manager.load(Assets.uiHudID, Overlap2DUISettings.class, params);
     }
 
     public void loadUI() {

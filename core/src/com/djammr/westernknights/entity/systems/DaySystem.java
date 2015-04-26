@@ -21,7 +21,6 @@ public class DaySystem extends EntitySystem {
 
     private float skyDayAlpha = 1;
     private double alpha;
-    private double gameTime = 0;
     private int speed = 256;
     private boolean toDay = false; // Transition: to day=1, to night=0
     private Entity skyboxDay;
@@ -42,8 +41,8 @@ public class DaySystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         double gameTimeStep = deltaTime / speed;
-        if (!toDay) gameTime += gameTimeStep;
-        else gameTime -= gameTimeStep;
+        if (!toDay) WKGame.gameTime += gameTimeStep;
+        else WKGame.gameTime -= gameTimeStep;
 
         // Rotation
         //sun.setDirection(-(360 * gameTime));
@@ -54,8 +53,8 @@ public class DaySystem extends EntitySystem {
         night_transc.rotation -= rotationStep;
         if (day_transc.rotation >= 360) day_transc.rotation = 0;
         if (night_transc.rotation >= 360) night_transc.rotation = 0;
-        if (gameTime <= 0 && toDay) toDay = false;
-        else if (gameTime >= 1 && !toDay) toDay = true;
+        if (WKGame.gameTime <= 0 && toDay) toDay = false;
+        else if (WKGame.gameTime >= 1 && !toDay) toDay = true;
 
 
         // Skybox Fading
@@ -68,14 +67,14 @@ public class DaySystem extends EntitySystem {
             //WKGame.logger.logDebug("to day");
             day_visc.sprite.setAlpha((skyDayAlpha < 1f - Gdx.graphics.getDeltaTime())? skyDayAlpha += Gdx.graphics.getDeltaTime() : 1);
         }*/
-        skyDayAlpha = 1 - (float)gameTime;
+        skyDayAlpha = 1 - (float)WKGame.gameTime;
         if (skyDayAlpha < 0) skyDayAlpha = 0;
         if (skyDayAlpha > 1) skyDayAlpha = 1;
         day_visc.sprite.setAlpha(skyDayAlpha);
 
 
         // Sun alpha
-        alpha = 1 - gameTime;
+        alpha = 1 - WKGame.gameTime;
         if (alpha < WKWorld.AMBIENT_ALPHA_NIGHT) alpha = WKWorld.AMBIENT_ALPHA_NIGHT;
         else if (alpha > WKWorld.AMBIENT_ALPHA_DAY) alpha = WKWorld.AMBIENT_ALPHA_DAY;
         //if (alpha >= WKWorld.AMBIENT_ALPHA_DAY && toDay) toDay = false;

@@ -1,7 +1,13 @@
 package com.djammr.westernknights.ui;
 
+import com.badlogic.gdx.assets.AssetLoaderParameters;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.djammr.westernknights.Assets;
+import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.util.assetloaders.Overlap2DUILoader;
+import com.djammr.westernknights.util.assetloaders.settings.Overlap2DUISettings;
 import com.djammr.westernknights.util.controllers.UIController;
 import com.djammr.westernknights.util.View;
 
@@ -15,19 +21,44 @@ public abstract class UIView extends View {
 
     protected Map<String, Actor> actors;
     protected Stage stage;
+    protected String uiScenePath;
+    protected String uiSceneID;
+
 
     public UIView(UIController controller) {
         super(controller);
         stage = new Stage();
         actors = new HashMap<String, Actor>();
         controller.addInputProcessor(stage);
+    }
+
+    /**
+     * @param scenePath path to Overlap2D scene
+     * @param sceneID AssetManager ID for the loaded scene
+     */
+    public UIView(UIController controller, String scenePath, String sceneID) {
+        this(controller);
+        uiScenePath = scenePath;
+        uiSceneID = sceneID;
         createUI();
     }
+
+    public void createUI() {
+        Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
+        params.set(Assets.overlap2DUIProject, uiScenePath,  Assets.overlap2DUIAtlas, Assets.overlap2DUIFonts, stage, actors);
+        params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
+            @Override
+            public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
+                loadUI();
+            }
+        };
+        Assets.manager.load(uiSceneID, Overlap2DUISettings.class, params);
+    };
 
     /**
      * Load your UI here
      */
-    public abstract void createUI();
+    public abstract void loadUI();
 
     /**
      * Should be called each frame from the {@link UIController}. Make sure you call super.render()!

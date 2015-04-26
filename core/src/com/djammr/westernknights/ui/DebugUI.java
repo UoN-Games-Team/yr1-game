@@ -27,7 +27,6 @@ public class DebugUI extends UIView {
     private int cpuPercent = -1;
 
     private DebugController controller;
-    private boolean debugEnabled = true;
     public Label txtCodename;
     public Label txtFPS;
     public Label txtCPU;
@@ -37,28 +36,13 @@ public class DebugUI extends UIView {
 
 
     public DebugUI(DebugController controller) {
-        super(controller);
+        super(controller, Assets.uiDebug, Assets.uiDebugID);
         this.controller = controller;
     }
 
-    @Override
-    public void createUI() {
-        TMB = ManagementFactory.getThreadMXBean();
-        /*Overlap2DLoader.loadUI(Gdx.files.internal(Assets.overlap2DProject),
-                               Gdx.files.internal(Assets.uiDebugScene),
-                               Assets.overlap2DFonts, stage, actors);*/
-        Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
-        params.set(Assets.overlap2DProject, Assets.uiDebugScene, Assets.overlap2DAtlas, Assets.overlap2DFonts, stage, actors);
-        params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
-            @Override
-            public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
-                loadUI();
-            }
-        };
-        Assets.manager.load(Assets.uiDebug, Overlap2DUISettings.class, params);
-    }
-
     public void loadUI() {
+        TMB = ManagementFactory.getThreadMXBean();
+
         txtCodename = (Label)actors.get("txtCodename");
         txtFPS = (Label)actors.get("txtFPS");
         txtCPU = (Label)actors.get("txtCPU");
@@ -72,7 +56,7 @@ public class DebugUI extends UIView {
 
     @Override
     public void render(float delta) {
-        if (debugEnabled) {
+        if (controller.debugEnabled()) {
             super.render(delta);
             txtFPS.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
             txtCPU.setText("CPU: " + getCPUUsage() + "%");
@@ -80,14 +64,6 @@ public class DebugUI extends UIView {
             txtNHeap.setText("Native Heap: " + String.valueOf(Math.round(Gdx.app.getNativeHeap() * 0.000001)) + "MB");
             txtEntites.setText("World Entities:" + controller.getEntities());
         }
-        if (Gdx.input.isKeyJustPressed(WKGame.DEBUG_KEY)) {
-            debugEnabled = !debugEnabled;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 
     @Override

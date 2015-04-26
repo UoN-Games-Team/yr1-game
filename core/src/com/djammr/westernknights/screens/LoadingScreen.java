@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.ui.Loading;
+import com.djammr.westernknights.util.controllers.LoadingController;
 
 /**
  * Loading Screen
@@ -15,67 +17,39 @@ import com.djammr.westernknights.WKGame;
 public class LoadingScreen extends WKScreen {
 
     private String targetScreen;
-    private SpriteBatch batch;
-    //private Texture loadingTexture;
-    private Sprite loadingSprite;
-    private float rotation = 0;
 
 
     public LoadingScreen(WKGame game) {
         super(game);
-        load();
     }
 
     @Override
-    public void show() {
+    public void load() {
+        uiControllers.put("loading", new LoadingController(this));
+        uiViews.put("loading", new Loading((LoadingController)uiControllers.get("loading")));
+        uiControllers.get("loading").setView(uiViews.get("loading"));
+    }
+
+    @Override
+    public void loadComplete() {
+        super.loadComplete();
 
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
-        batch.begin();
-        //batch.draw(loadingSprite, loadingSprite.getWidth()/2f, loadingSprite.getHeight()/2f);
-        loadingSprite.draw(batch);
-        batch.end();
-
+        super.render(delta);
         if (Assets.manager.update()) {
             if (targetScreen == null) WKGame.logger.logDebug("Target screen is null!");
             else {
                 game.getScreens().setScreen(targetScreen, false);
             }
         }
-        loadingSprite.rotate(rotation--);
-    }
-
-    @Override
-    public void load() {
-        batch = new SpriteBatch();
-        Assets.load(Assets.loadingTexture, Texture.class);
-        Assets.manager.finishLoading();
-
-        loadingSprite = new Sprite(Assets.manager.get(Assets.loadingTexture, Texture.class));
-        loadingSprite.setPosition(Gdx.graphics.getWidth()/2 - loadingSprite.getWidth()/2, Gdx.graphics.getHeight()/2 - loadingSprite.getHeight()/2);
-        //loadingTexture = Assets.manager.get(Assets.loadingTexture, Texture.class);
-        //super.load();
-    }
-
-    @Override
-    public void loadComplete() {
-
     }
 
     /** Set the target screen to load */
     public LoadingScreen setTarget(String screen) {
         targetScreen = screen;
         return this;
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
-        //loadingTexture.dispose();
     }
 }

@@ -21,4 +21,8 @@ public class MainMenuController extends UIController {
     public void setView(UIView view) {
         super.setView(view);
     }
+
+    public void exitGame() {
+        screen.getGame().exit();
+    }
 }

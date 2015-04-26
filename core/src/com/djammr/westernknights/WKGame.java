@@ -1,6 +1,7 @@
 package com.djammr.westernknights;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
@@ -27,7 +28,8 @@ public class WKGame extends Game {
 	public static final Logger logger = new ConsoleLogger();
 	public static final SaveManager saveManager = new SaveManager();
 	public static final KeyMapManager keyMaps = new KeyMapManager();
-    public static boolean debugEnabled = true;
+	public static double gameTime = 0;
+    public static boolean debugEnabled = false;
 
 	private ScreenManager screenManager;
 
@@ -58,6 +60,13 @@ public class WKGame extends Game {
 	public void dispose() {
 		screenManager.dispose();
 		Assets.dispose();
+	}
+
+	/**
+	 * Closes the game
+	 */
+	public void exit() {
+		Gdx.app.exit();
 	}
 
 	public ScreenManager getScreens() {

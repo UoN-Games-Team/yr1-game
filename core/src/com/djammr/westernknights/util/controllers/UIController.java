@@ -35,6 +35,14 @@ public class UIController implements Controller {
     }
 
     /**
+     * Changes to the specified screen
+     * @param screen Screen to change to
+     */
+    public void setScreen(String screen) {
+        this.screen.setScreen(screen);
+    }
+
+    /**
      * Adds an InputProcessor to the {@link WKScreen}'s InputMultiplexer
      * @param processor InputProcessor to add
      */

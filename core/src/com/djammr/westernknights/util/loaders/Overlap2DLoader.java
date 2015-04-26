@@ -474,6 +474,7 @@ public class Overlap2DLoader {
             @Override
             public void run() {
                 label.setStyle(new Label.LabelStyle(Assets.getFont(item.style + "-" + item.size, fontPath + "/" + item.style + ".ttf"), new Color(item.tint[0], item.tint[1], item.tint[2], item.tint[3])));
+                label.setSize(item.width, item.height);
             }
         });
     }

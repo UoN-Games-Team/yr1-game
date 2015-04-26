@@ -30,7 +30,7 @@ public class SplashScreen extends WKScreen{
 
 	@Override
 	public void loadComplete() {
-
+		super.loadComplete();
 	}
 
 	@Override
