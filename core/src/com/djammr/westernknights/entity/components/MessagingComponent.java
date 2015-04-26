@@ -25,7 +25,7 @@ public class MessagingComponent extends Component implements Observable{
 
 
     public void notifyObservers() {
-        throw new UnsupportedOperationException("MessagingSystem handles the notifying of ECS oberservers");
+        throw new UnsupportedOperationException("MessagingSystem handles the notifying of ECS observers");
     }
 
     /**

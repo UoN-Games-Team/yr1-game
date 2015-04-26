@@ -39,6 +39,9 @@ public class InputMapper extends WKInput {
         } else if (keycode == Input.Keys.RIGHT_BRACKET) {
             notifyObservers(GameActions.HEAL);
         }
+        else if (keycode == Input.Keys.EQUALS) {
+            notifyObservers(GameActions.XP_GAIN);
+        }
         return true;
     }
 

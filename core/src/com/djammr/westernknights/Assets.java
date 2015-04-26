@@ -74,7 +74,7 @@ public class Assets {
 
 
     /**
-     * Creates the AssetManager instance
+     * Creates the AssetManager instance=
      */
     public static void init() {
         manager = new AssetManager();

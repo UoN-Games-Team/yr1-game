@@ -20,11 +20,11 @@ public class InputSystem extends IteratingSystem implements InputObserver {
     private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
     private ComponentMapper<StatComponent> statm = ComponentMapper.getFor(StatComponent.class);
     private ComponentMapper<StateComponent> stm = ComponentMapper.getFor(StateComponent.class);
-    private ComponentMapper<MessagingComponent> msgm = ComponentMapper.getFor(MessagingComponent.class);
+    //private ComponentMapper<MessagingComponent> msgm = ComponentMapper.getFor(MessagingComponent.class);
     private MovementComponent mvc;
     private StatComponent statc;
     private StateComponent stc;
-    private MessagingComponent msgc;
+    //private MessagingComponent msgc;
 
 
     public InputSystem() {
@@ -61,12 +61,13 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                     break;
 
                 case GameActions.DAMAGE:
-                    statc.damage(50);
-                    msgc.addObserverData(ObserverKeys.PLAYER_HEALTH_PERCENT, statc.health / statc.maxHealth);
+                    statc.healthChange -= 50;
                     break;
                 case GameActions.HEAL:
-                    statc.heal(50);
-                    msgc.addObserverData(ObserverKeys.PLAYER_HEALTH_PERCENT, statc.health / statc.maxHealth);
+                    statc.healthChange += 50;
+                    break;
+                case GameActions.XP_GAIN:
+                    statc.xpChange += 15;
                     break;
             }
         }
@@ -79,6 +80,6 @@ public class InputSystem extends IteratingSystem implements InputObserver {
         mvc = mvm.get(entity);
         statc = statm.get(entity);
         stc = stm.get(entity);
-        msgc = msgm.get(entity);
+        //msgc = msgm.get(entity);
     }
 }

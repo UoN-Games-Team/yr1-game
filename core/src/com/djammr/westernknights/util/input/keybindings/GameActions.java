@@ -30,6 +30,8 @@ public class GameActions {
 
     public static final int DAMAGE = 21;
     public static final int HEAL = 22;
+    public static final int XP_GAIN = 23;
+    public static final int LEVEL_UP = 24;
 
 
 

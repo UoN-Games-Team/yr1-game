@@ -6,196 +6,196 @@ filter: Linear,Linear
 repeat: none
 1
   rotate: false
-  xy: 2, 1836
-  size: 1238, 1336
-  orig: 1238, 1336
+  xy: 2886, 2954
+  size: 409, 376
+  orig: 409, 376
   offset: 0, 0
   index: -1
 PlayerModel Placeholder
   rotate: false
-  xy: 2886, 3231
+  xy: 2566, 2593
   size: 228, 446
   orig: 228, 446
   offset: 0, 0
   index: -1
 Smoke
   rotate: false
-  xy: 2566, 1398
+  xy: 2796, 2622
   size: 336, 330
   orig: 336, 330
   offset: 0, 0
   index: -1
 abilityMenu
   rotate: false
-  xy: 1242, 2452
+  xy: 2, 2319
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 bar
   rotate: false
-  xy: 607, 241
+  xy: 2, 2
   size: 190, 45
   orig: 190, 45
   offset: 0, 0
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 2566, 1378
+  xy: 3134, 2934
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barBackhorizontalMid
   rotate: false
-  xy: 1203, 372
+  xy: 3297, 3312
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barBackhorizontalRight
   rotate: false
-  xy: 2, 2
+  xy: 1203, 81
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 3828, 3714
+  xy: 3828, 3581
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalMid
   rotate: false
-  xy: 2886, 3211
+  xy: 2566, 2573
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 304, 54
+  xy: 1505, 133
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalLeft
   rotate: false
-  xy: 2904, 1710
+  xy: 2796, 3021
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 1242, 2432
+  xy: 3491, 3526
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 3116, 3659
+  xy: 2796, 2602
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 bountyMenu
   rotate: false
-  xy: 1284, 1730
+  xy: 2, 875
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 defaultMenu
   rotate: false
-  xy: 1284, 286
+  xy: 2, 153
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 djammrlogo
   rotate: false
-  xy: 2, 74
+  xy: 2886, 3332
   size: 603, 212
   orig: 603, 212
   offset: 0, 0
   index: -1
 hpbar
   rotate: false
-  xy: 2, 288
+  xy: 2, 49
   size: 1199, 50
   orig: 1199, 50
   offset: 0, 0
   index: -1
 hud
   rotate: false
-  xy: 2, 3174
+  xy: 2, 3041
   size: 2882, 816
   orig: 2882, 816
   offset: 0, 0
   index: -1
 inventoryMenu
   rotate: false
-  xy: 2566, 1730
+  xy: 1284, 153
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 libgdxlogo
   rotate: false
-  xy: 2, 22
+  xy: 1203, 101
   size: 300, 50
   orig: 300, 50
   offset: 0, 0
   index: -1
 loadingBackground01
   rotate: false
-  xy: 2, 1114
+  xy: 2, 1597
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuBackground
   rotate: false
-  xy: 1284, 1008
+  xy: 1284, 1597
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuDarkeningOverlay
   rotate: false
-  xy: 2, 392
+  xy: 1284, 2319
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mapMenu
   rotate: false
-  xy: 2524, 2452
+  xy: 1284, 875
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 ragebar
   rotate: false
-  xy: 2886, 3679
+  xy: 2886, 3546
   size: 940, 311
   orig: 940, 311
   offset: 0, 0
   index: -1
 test
   rotate: false
-  xy: 3828, 3734
+  xy: 3828, 3601
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 xpbar
   rotate: false
-  xy: 2, 340
+  xy: 2, 101
   size: 1199, 50
   orig: 1199, 50
   offset: 0, 0
