@@ -34,6 +34,8 @@ public class Assets {
     // UI
     public static Skin skinDefault;
     public static String skinDefaultJson = "images/ui/skins/default/uiskin.json";
+    public static String libGDXLogo = "images/ui/libgdx_logo.png";
+    public static String studioLogo = "images/ui/djammr_logo.png";
 
     // Overlap2D Project
     public static String overlap2DProject = "levels/test/project.dt";

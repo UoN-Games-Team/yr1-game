@@ -34,9 +34,9 @@ public class InputMapper extends WKInput {
         if (keycode == WKGame.DEBUG_KEY) {
             WKGame.debugEnabled = !WKGame.debugEnabled;
         }
-        else if (keycode == Input.Keys.LEFT_BRACKET) {
+        else if (keycode == Input.Keys.RIGHT_BRACKET) {
             notifyObservers(GameActions.DAMAGE);
-        } else if (keycode == Input.Keys.RIGHT_BRACKET) {
+        } else if (keycode == Input.Keys.LEFT_BRACKET) {
             notifyObservers(GameActions.HEAL);
         }
         else if (keycode == Input.Keys.EQUALS) {

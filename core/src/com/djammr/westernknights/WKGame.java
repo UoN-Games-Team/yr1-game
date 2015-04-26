@@ -21,7 +21,7 @@ import javax.naming.ldap.Control;
  */
 public class WKGame extends Game {
 
-	public static final String VERSION = "0.0.4";
+	public static final String VERSION = "0.0.5";
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
 	public static final float METERS_TO_PIXELS = 60f;
@@ -49,8 +49,10 @@ public class WKGame extends Game {
 		screenManager.addScreen("splash_screen", new SplashScreen(this));
 		screenManager.addScreen("main_menu", new MainMenuScreen(this));
 		screenManager.addScreen("game", new GameScreen(this));
+
+		screenManager.getScreen("splash_screen").load();
+		screenManager.setScreen("splash_screen", false);
 		screenManager.getScreen("main_menu").load();
-		screenManager.setScreen("main_menu", false);
 	}
 
 	@Override

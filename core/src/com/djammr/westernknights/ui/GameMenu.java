@@ -66,7 +66,7 @@ public class GameMenu extends UIView implements InputObserver {
                 for (Label button : buttons)
                     if (!button.getName().equals("active")) button.setColor(button.getColor().r, button.getColor().g, button.getColor().b, 0.6f);
                 event.getTarget().setColor(event.getTarget().getColor().r, event.getTarget().getColor().g, event.getTarget().getColor().b, 1f);
-                return true;
+                return false;
             }
 
             @Override
