@@ -37,6 +37,7 @@ public class SaveTest implements ApplicationListener {
         keyMap.put("btn-"+Input.Keys.W, (float)GameActions.PLAYER_JUMP);
         keyMap.put("btn-"+Input.Keys.UP, (float)GameActions.PLAYER_JUMP);
         keyMap.put("btn-"+Input.Keys.I, (float)GameActions.GAME_MENU);
+        keyMap.put("btn-"+Input.Keys.E, (float)GameActions.PLAYER_INTERACT);
         keyMap.put("btn-"+Input.Buttons.LEFT, (float)GameActions.PLAYER_ATTACK_LIGHT);
 
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_X+"-", (float)GameActions.PLAYER_LEFT);
@@ -45,6 +46,7 @@ public class SaveTest implements ApplicationListener {
         controllerMap.put("btn-"+XboxOne.BUTTON_B, (float)GameActions.PLAYER_DODGE);
         controllerMap.put("btn-"+XboxOne.BUTTON_X, (float)GameActions.PLAYER_ATTACK_LIGHT);
         controllerMap.put("btn-"+XboxOne.BUTTON_Y, (float)GameActions.PLAYER_ATTACK_HEAVY);
+        controllerMap.put("btn-"+XboxOne.BUTTON_Y, (float)GameActions.PLAYER_INTERACT);
         controllerMap.put("btn-"+XboxOne.BUTTON_LB, (float)GameActions.PLAYER_BLOCK);
         controllerMap.put("btn-"+XboxOne.BUTTON_RB, (float)GameActions.PLAYER_ATTACK_RANGED);
         controllerMap.put("axis-"+XboxOne.AXIS_LEFT_TRIGGER+"+", (float)GameActions.PLAYER_ABILITY_1);

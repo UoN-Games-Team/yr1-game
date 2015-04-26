@@ -51,8 +51,9 @@ public class WKGame extends Game {
 		screenManager.addScreen("game", new GameScreen(this));
 
 		screenManager.getScreen("splash_screen").load();
-		screenManager.setScreen("splash_screen", false);
+		//screenManager.setScreen("splash_screen", false);
 		screenManager.getScreen("main_menu").load();
+		screenManager.setScreen("main_menu", false);
 	}
 
 	@Override

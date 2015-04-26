@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.ai.controllers.EnemyController;
 import com.djammr.westernknights.entity.ai.controllers.NPCController;
@@ -149,12 +150,13 @@ public class EntityFactory {
 
     /**
      * Creates an new Entity based on the follow:
+     * @param entityID ID of this entity
      * @param box2DSystem the {@link Box2DSystem} with the Box2D World to add the Body to
      * @param meshData {@link MeshData} object to load from
      * @param components List of Components to add to the entity
      * @return the created Entity
      */
-    public static Entity createEntity(Box2DSystem box2DSystem, MeshData meshData, List<Component> components) {
+    public static Entity createEntity(String entityID, Box2DSystem box2DSystem, MeshData meshData, List<Component> components) {
         Entity entity = new Entity();
 
         if (meshData != null) {
@@ -165,6 +167,7 @@ public class EntityFactory {
             for (FixtureDef fixtureDef : meshData.fixtureDefs) {
                 body.createFixture(fixtureDef);
             }
+            ((Box2DUserData)body.getUserData()).id = entityID;
             entity.getComponent(Box2DComponent.class).body = body;
         }
 

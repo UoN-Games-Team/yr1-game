@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
@@ -24,6 +25,7 @@ public class InputSystem extends IteratingSystem implements InputObserver {
     private MovementComponent mvc;
     private StatComponent statc;
     private StateComponent stc;
+    private Box2DUserData playerUserData;
     //private MessagingComponent msgc;
 
 
@@ -65,6 +67,13 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                         mvc.jump = true;
                         break;
 
+                    case GameActions.PLAYER_INTERACT:
+                        WKGame.logger.logDebug(playerUserData.collidingSensor);
+                        if (playerUserData.collidingSensor.equals("bounty_board")) {
+                            WKGame.logger.logDebug("Loading RiverTown");
+                        }
+                        break;
+
                     case GameActions.DAMAGE:
                         statc.healthChange -= 50;
                         break;
@@ -86,6 +95,7 @@ public class InputSystem extends IteratingSystem implements InputObserver {
         mvc = mvm.get(entity);
         statc = statm.get(entity);
         stc = stm.get(entity);
+        playerUserData = (Box2DUserData)entity.getComponent(Box2DComponent.class).body.getUserData();
         //msgc = msgm.get(entity);
     }
 }

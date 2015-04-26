@@ -56,9 +56,9 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             night = !night;
             rayHandler.setAmbientLight(WKWorld.AMBIENT_COLOUR.r, WKWorld.AMBIENT_COLOUR.g, WKWorld.AMBIENT_COLOUR.b, (night)? WKWorld.AMBIENT_ALPHA_NIGHT : WKWorld.AMBIENT_ALPHA_DAY);
-            for (Light light : lights) {
+            /*for (Light light : lights) {
                 //light.setColor(light.getColor().r, light.getColor().b, light.getColor().g, (night)? 0.75f : 0.4f);
-            }
+            }*/
         }
         if (WKGame.debugEnabled) debugRenderer.render(b2World, camera.combined);
         rayHandler.setCombinedMatrix(camera.combined);
@@ -81,6 +81,18 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         TransformComponent posc = transm.get(entity);
         Box2DComponent b2dc = b2dm.get(entity);
         //b2dc.body.setTransform(posc.x, posc.y, posc.rotation * MathUtils.degRad);
+        if (((Box2DUserData)b2dc.body.getUserData()).id.equals(WKWorld.PLAYER_IDENTIFIER)) {
+            for (Contact contact : b2World.getContactList()) {
+                Box2DUserData userDataA = (Box2DUserData)contact.getFixtureA().getBody().getUserData();
+                Box2DUserData userDataB = (Box2DUserData)contact.getFixtureB().getBody().getUserData();
+                if ((userDataA != null && userDataA.id.equals(WKWorld.PLAYER_IDENTIFIER)) && (userDataB != null && userDataB.id.equals("bounty_board"))) {
+                    userDataA.collidingSensor = userDataB.id;
+                }
+                else if ((userDataB != null && userDataB.id.equals(WKWorld.PLAYER_IDENTIFIER)) && (userDataA != null && userDataA.id.equals("bounty_board"))) {
+                    userDataB.collidingSensor = userDataA.id;
+                }
+            }
+        }
     }
 
     @Override

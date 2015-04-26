@@ -290,7 +290,7 @@ public class Overlap2DLoader {
             // --- Nodes
             if (entityType != null && entityType.equals(WKWorld.NODE_TYPE)) components.add(new NodeComponent());
             // Create the entity
-            entity = EntityFactory.createEntity(b2dSystem, meshData, components);
+            entity = EntityFactory.createEntity(item.itemIdentifier, b2dSystem, meshData, components);
         }
 
         // --- Physics Category
@@ -577,6 +577,10 @@ public class Overlap2DLoader {
             fixtureDef.density = item.physicsBodyData.density;
             fixtureDef.friction = item.physicsBodyData.friction;
             fixtureDef.restitution = item.physicsBodyData.restitution;
+            if (customVars.getStringVariable("body_type") != null) {
+                if (customVars.getStringVariable("body_type").equals("sensor"))
+                    fixtureDef.isSensor = true;
+            }
             fixtureDefs[i] = fixtureDef;
         }
 

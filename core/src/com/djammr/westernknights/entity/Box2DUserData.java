@@ -12,4 +12,5 @@ public class Box2DUserData {
     public StateComponent stateComponent;
     public int footContacts = 0;
     public SteeringEntity steeringEntity = null;
+    public String collidingSensor = "";
 }
