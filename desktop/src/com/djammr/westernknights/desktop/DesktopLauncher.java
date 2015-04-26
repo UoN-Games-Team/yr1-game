@@ -10,8 +10,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Manus-Terra: Legacy of Alathos";
 		cfg.useGL30 = false;
-		cfg.width = 1280;
-		cfg.height = 720;
+		cfg.width = WKGame.SCREEN_WIDTH;
+		cfg.height = WKGame.SCREEN_HEIGHT;
 		cfg.fullscreen = false;
 
 		/* Borderless Window

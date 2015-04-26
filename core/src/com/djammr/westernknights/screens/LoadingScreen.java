@@ -1,11 +1,6 @@
 package com.djammr.westernknights.screens;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.ui.Loading;
@@ -21,6 +16,7 @@ public class LoadingScreen extends WKScreen {
 
     public LoadingScreen(WKGame game) {
         super(game);
+        load();
     }
 
     @Override
@@ -33,7 +29,6 @@ public class LoadingScreen extends WKScreen {
     @Override
     public void loadComplete() {
         super.loadComplete();
-
     }
 
     @Override

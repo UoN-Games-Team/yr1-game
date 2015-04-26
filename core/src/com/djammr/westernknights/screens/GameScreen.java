@@ -74,7 +74,7 @@ public class GameScreen extends WKScreen {
      * @param name name/ID the world was registered as
      */
     public void setWorld(String name) {
-        game.getScreens().setScreen("loading");
+        if (game.getScreens().getCurrentScreenID().equals("game")) game.getScreens().setScreen("loading");
         if (currentWorld != null) {
             inputMapper.removeObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
         }

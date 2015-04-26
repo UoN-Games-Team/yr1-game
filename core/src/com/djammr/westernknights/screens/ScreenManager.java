@@ -26,24 +26,25 @@ public class ScreenManager {
     /**
      * Changes the game screen to the requested screen
      * @param screen Name of the registered screen to set
-     * @param preLoad Whether to show the loading screen while loading the target screen
+     * @param preLoad Whether to call load on the target screen
      */
     public void setScreen(String screen, boolean preLoad) {
         if (preLoad && !currentScreen.equals("loading")) {
+            WKGame.logger.logDebug("Setting Screen: loading");
             game.setScreen(registeredScreens.get("loading"));
         }
         if (registeredScreens.containsKey(screen)) {
             WKGame.logger.logDebug("Loading Screen: " + screen);
-            prevScreen = currentScreen;
-            currentScreen = screen;
 
             if (preLoad) {
-                registeredScreens.get(screen).load();
+                if (!registeredScreens.get(screen).isLoaded()) registeredScreens.get(screen).load();
                 ((LoadingScreen) game.getScreen()).setTarget(screen);
             } else {
                 WKGame.logger.logDebug("Setting Screen: " + screen);
                 if (!registeredScreens.get(screen).isLoaded()) registeredScreens.get(screen).loadComplete();
                 game.setScreen(registeredScreens.get(screen));
+                prevScreen = currentScreen;
+                currentScreen = screen;
             }
         } else {
             WKGame.logger.logError("Screen does not exist! Use addScreen()", new NullPointerException());
@@ -92,10 +93,17 @@ public class ScreenManager {
     }
 
     /**
-     * @return currently set ZbeScreen instance
+     * @return currently set WKScreen instance
      */
     public WKScreen getScreen() {
         return (WKScreen)game.getScreen();
+    }
+
+    /**
+     * @return WKScreen with ID screenID
+     */
+    public WKScreen getScreen(String screenID) {
+        return registeredScreens.get(screenID);
     }
 
     /**

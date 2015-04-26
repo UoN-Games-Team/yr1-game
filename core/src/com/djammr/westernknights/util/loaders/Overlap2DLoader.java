@@ -42,6 +42,7 @@ import com.djammr.westernknights.entity.components.ai.NodeComponent;
 import com.djammr.westernknights.entity.systems.Box2DSystem;
 import com.djammr.westernknights.entity.systems.RenderingSystem;
 import com.djammr.westernknights.ui.Actors.ParticleEffectActor;
+import com.djammr.westernknights.ui.Actors.SpriteAnimationActor;
 import com.djammr.westernknights.util.spriter.LibGdxDrawer;
 import com.djammr.westernknights.util.spriter.LibGdxLoader;
 import com.uwsoft.editor.renderer.Overlap2D;
@@ -180,7 +181,8 @@ public class Overlap2DLoader {
                 else if (sceneType.equals(SceneType.UI)) addUiImage((SimpleImageVO) item);
             }
             else if (item instanceof SpriteAnimationVO) {
-                addEntity((SpriteAnimationVO)item);
+                if (sceneType.equals(SceneType.MAP)) addEntity((SpriteAnimationVO)item);
+                else if (sceneType.equals(SceneType.UI)) addUiSpriteAnimation((SpriteAnimationVO)item);
             }
             else if (item instanceof SpriterVO) {
                 addEntity((SpriterVO)item);
@@ -461,6 +463,33 @@ public class Overlap2DLoader {
     }
 
     /**
+     * Adds a Sprite Animation from a SpriteAnimationVO to the Stage
+     * @param item SpriteAnimationVO to add
+     */
+    private static void addUiSpriteAnimation(final SpriteAnimationVO item) {
+        final SpriteAnimationActor spriteActor = new SpriteAnimationActor();
+        // Animations
+        final HashMap<String, Animation> animations = new HashMap<String, Animation>();
+        animations.putAll(Animation.constructJsonObject(item.animations));
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                // Animation Atlas
+                Assets.load(spriteAnimationsPath + "/" + item.animationName + "/" + item.animationName + ".atlas", TextureAtlas.class);
+                Assets.manager.finishLoading();
+                TextureAtlas ta = Assets.manager.get(spriteAnimationsPath + "/" + item.animationName + "/" + item.animationName + ".atlas", TextureAtlas.class);
+
+                for (String animName : animations.keySet()) {
+                    spriteActor.getAnimations().put(animName, Assets.createAnimation(1f / item.fps, ta, animations.get(animName).startFrame, animations.get(animName).endFrame));
+                }
+                spriteActor.setAnimation(spriteActor.getAnimations().get(animations.keySet().iterator().next()));
+            }
+        });
+
+        addUiItem(spriteActor, item);
+    }
+
+    /**
      * Adds a Label to the stage from a LabelVO
      * @param item LabelVO to add
      */
@@ -494,10 +523,12 @@ public class Overlap2DLoader {
      * @param item MainItemVO to configure from
      */
     private static void addUiItem(Actor actor, MainItemVO item) {
-        actor.setPosition(item.x, item.y);
+        float screenWidthScale = stage.getWidth() / WKGame.SCREEN_WIDTH;
+        float screenHeightScale = stage.getHeight() / WKGame.SCREEN_HEIGHT;
+        actor.setPosition(item.x * screenWidthScale, item.y * screenHeightScale);
         actor.setRotation(item.rotation);
-        actor.setScaleX(item.scaleX);
-        actor.setScaleY(item.scaleY);
+        actor.setScaleX(item.scaleX * screenWidthScale);
+        actor.setScaleY(item.scaleY * screenHeightScale);
         actor.setZIndex(Integer.parseInt(layers.indexOf(item.layerName) + "" + item.zIndex));
 
         stage.addActor(actor);
