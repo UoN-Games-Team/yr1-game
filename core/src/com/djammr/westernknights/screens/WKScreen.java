@@ -22,6 +22,7 @@ public abstract class WKScreen implements Screen {
     protected Map<String, UIView> uiViews = new HashMap<String, UIView>();
     protected WKGame game;
     private boolean loaded = false;
+    private boolean paused = false;
 
 
     public WKScreen(WKGame game) {
@@ -64,12 +65,12 @@ public abstract class WKScreen implements Screen {
 
     @Override
     public void pause() {
-
+        paused = true;
     }
 
     @Override
     public void resume() {
-
+        paused = false;
     }
 
     @Override
@@ -83,6 +84,10 @@ public abstract class WKScreen implements Screen {
             controller.dispose();
         }
         uiControllers.clear();
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     public boolean isLoaded() {

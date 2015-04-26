@@ -26,4 +26,6 @@ public class MessagingSystem extends IteratingSystem {
         for (Observer observer : msgc.observers) observer.update(msgc, msgc.data);
         msgc.data.clear();
     }
+
+
 }

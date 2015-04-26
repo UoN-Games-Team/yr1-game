@@ -8,8 +8,10 @@ import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.levels.Rivertown;
 import com.djammr.westernknights.levels.TradingHub;
 import com.djammr.westernknights.ui.DebugUI;
+import com.djammr.westernknights.ui.GameMenu;
 import com.djammr.westernknights.ui.PlayerHUD;
 import com.djammr.westernknights.util.controllers.DebugController;
+import com.djammr.westernknights.util.controllers.GameMenuController;
 import com.djammr.westernknights.util.controllers.PlayerHUDController;
 import com.djammr.westernknights.util.controllers.UIController;
 import com.djammr.westernknights.util.input.InputMapper;
@@ -46,20 +48,36 @@ public class GameScreen extends WKScreen {
         uiControllers.get("debug").setView(uiViews.get("debug"));
 
         uiControllers.put("player_hud", new PlayerHUDController(this));
-        uiViews.put("player_hud", new PlayerHUD((PlayerHUDController)uiControllers.get("player_hud")));
+        uiViews.put("player_hud", new PlayerHUD((PlayerHUDController) uiControllers.get("player_hud")));
+
+        uiControllers.put("game_menu", new GameMenuController(this));
+        uiViews.put("game_menu", new GameMenu((GameMenuController)uiControllers.get("game_menu")));
     }
 
     @Override
     public void loadComplete() {
         super.loadComplete();
         uiControllers.get("player_hud").setView(uiViews.get("player_hud"));
+        uiControllers.get("game_menu").setView(uiViews.get("game_menu"));
         getInputMultiplexer().addProcessor(inputMapper);
     }
 
     @Override
     public void render(float delta) {
-        if (currentWorld != null) currentWorld.update(delta);
+        if (currentWorld != null && !isPaused()) currentWorld.update(delta);
         super.render(delta);
+    }
+
+    @Override
+    public void pause() {
+        super.pause();
+        currentWorld.getEntities().pauseSystems(true);
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+        currentWorld.getEntities().pauseSystems(false);
     }
 
     @Override
@@ -98,5 +116,9 @@ public class GameScreen extends WKScreen {
 
     public Map<String, WKWorld> getWorlds() {
         return worlds;
+    }
+
+    public InputMapper getInputMapper() {
+        return inputMapper;
     }
 }

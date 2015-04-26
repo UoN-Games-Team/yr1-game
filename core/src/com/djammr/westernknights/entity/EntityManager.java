@@ -84,7 +84,7 @@ public class EntityManager {
      */
     public void pauseSystems(boolean pause) {
         for (int i=0; i < ashley.getSystems().size(); i++) {
-            ashley.getSystems().get(i).setProcessing(pause);
+            ashley.getSystems().get(i).setProcessing(!pause);
         }
     }
 

@@ -21,8 +21,7 @@ public abstract class UIView extends View {
 
     protected Map<String, Actor> actors;
     protected Stage stage;
-    protected String uiScenePath;
-    protected String uiSceneID;
+    private boolean visible = true;
 
 
     public UIView(UIController controller) {
@@ -38,21 +37,19 @@ public abstract class UIView extends View {
      */
     public UIView(UIController controller, String scenePath, String sceneID) {
         this(controller);
-        uiScenePath = scenePath;
-        uiSceneID = sceneID;
-        createUI();
+        createUI(scenePath, sceneID);
     }
 
-    public void createUI() {
+    public void createUI(String scenePath, String sceneID) {
         Overlap2DUILoader.Parameters params = new Overlap2DUILoader.Parameters();
-        params.set(Assets.overlap2DUIProject, uiScenePath,  Assets.overlap2DUIAtlas, Assets.overlap2DUIFonts, stage, actors);
+        params.set(Assets.overlap2DUIProject, scenePath,  Assets.overlap2DUIAtlas, Assets.overlap2DUIFonts, stage, actors);
         params.loadedCallback = new AssetLoaderParameters.LoadedCallback() {
             @Override
             public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
                 loadUI();
             }
         };
-        Assets.manager.load(uiSceneID, Overlap2DUISettings.class, params);
+        Assets.manager.load(sceneID, Overlap2DUISettings.class, params);
     };
 
     /**
@@ -74,5 +71,22 @@ public abstract class UIView extends View {
 
     public void dispose() {
         stage.dispose();
+    }
+
+    /**
+     * Sets visible property for all actors on the stage
+     */
+    public void setVisible(boolean visible) {
+        for (Actor actor : stage.getActors()) {
+            actor.setVisible(visible);
+        }
+        this.visible = visible;
+    }
+
+    /**
+     * @return Whether the stage is visible
+     */
+    public boolean isVisible() {
+        return visible;
     }
 }

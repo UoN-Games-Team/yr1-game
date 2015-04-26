@@ -41,34 +41,40 @@ public class InputSystem extends IteratingSystem implements InputObserver {
     public void inputEvent(int event) {
         WKGame.logger.logDebug("Received event: " + GameActions.toString(event));
         if (mvc != null) {
+            // Events that can be process when paused
             switch (event) {
                 case GameActions.PLAYER_MOVE_NONE:
                     mvc.stop = true;
                     mvc.left = false;
                     mvc.right = false;
                     break;
-                case GameActions.PLAYER_LEFT:
-                    mvc.left = true;
-                    break;
-                case GameActions.PLAYER_RIGHT:
-                    mvc.right = true;
-                    break;
-                case GameActions.PLAYER_ATTACK_LIGHT:
-                    stc.state = EntityStates.ATTACKING_MELEE;
-                    break;
-                case GameActions.PLAYER_JUMP:
-                    mvc.jump = true;
-                    break;
+            }
+            // Events that should only be process when not paused
+            if (checkProcessing()) {
+                switch (event) {
+                    case GameActions.PLAYER_LEFT:
+                        mvc.left = true;
+                        break;
+                    case GameActions.PLAYER_RIGHT:
+                        mvc.right = true;
+                        break;
+                    case GameActions.PLAYER_ATTACK_LIGHT:
+                        stc.state = EntityStates.ATTACKING_MELEE;
+                        break;
+                    case GameActions.PLAYER_JUMP:
+                        mvc.jump = true;
+                        break;
 
-                case GameActions.DAMAGE:
-                    statc.healthChange -= 50;
-                    break;
-                case GameActions.HEAL:
-                    statc.healthChange += 50;
-                    break;
-                case GameActions.XP_GAIN:
-                    statc.xpChange += 15;
-                    break;
+                    case GameActions.DAMAGE:
+                        statc.healthChange -= 50;
+                        break;
+                    case GameActions.HEAL:
+                        statc.healthChange += 50;
+                        break;
+                    case GameActions.XP_GAIN:
+                        statc.xpChange += 15;
+                        break;
+                }
             }
         }
     }

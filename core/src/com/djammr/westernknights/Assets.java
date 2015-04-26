@@ -58,6 +58,7 @@ public class Assets {
     public static String uiHud = "ui/scenes/player_hud.dt";
     public static String uiMainMenu = "ui/scenes/mainMenu.dt";
     public static String uiLoading = "ui/scenes/loadingScreen.dt";
+    public static String uiInventory = "ui/scenes/inventoryMenu.dt";
 
     // Loaded Scene IDs
     public static String lvlTest = "lvlTest";
@@ -67,6 +68,7 @@ public class Assets {
     public static String uiHudID = "uiHud";
     public static String uiMainMenuID = "uiMainMenu";
     public static String uiLoadingID = "uiLoading";
+    public static String uiInventoryID = "uiInventory";
 
     // Key Maps
     public static String keyMapDefault = "data/keymaps/default_key_map.json";

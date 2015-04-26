@@ -3,16 +3,36 @@
 	"class": "java.lang.Float",
 	"value": 0
 },
+"btn-19": {
+	"class": "java.lang.Float",
+	"value": 2
+},
 "btn-0": {
 	"class": "java.lang.Float",
 	"value": 4
+},
+"btn-21": {
+	"class": "java.lang.Float",
+	"value": 0
+},
+"btn-22": {
+	"class": "java.lang.Float",
+	"value": 1
 },
 "btn-32": {
 	"class": "java.lang.Float",
 	"value": 1
 },
+"btn-51": {
+	"class": "java.lang.Float",
+	"value": 2
+},
 "btn-62": {
 	"class": "java.lang.Float",
 	"value": 2
+},
+"btn-37": {
+	"class": "java.lang.Float",
+	"value": 13
 }
 }
