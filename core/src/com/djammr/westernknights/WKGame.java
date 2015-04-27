@@ -38,7 +38,7 @@ public class WKGame extends Game {
 
 	@Override
 	public void create () {
-		logger.setLogLevel(Logger.LOG_DEBUG);
+		logger.setLogLevel(Logger.LOG_NONE);
 		logger.logDebug("Starting game");
 
 		Assets.init();
@@ -51,9 +51,9 @@ public class WKGame extends Game {
 		screenManager.addScreen(Assets.SCREEN_GAME, new GameScreen(this));
 
 		screenManager.getScreen(Assets.SCREEN_SPLASH).load();
-		//screenManager.setScreen(Assets.SCREEN_SPLASH, false);
+		screenManager.setScreen(Assets.SCREEN_SPLASH, false);
 		screenManager.getScreen(Assets.SCREEN_MAIN_MENU).load();
-		screenManager.setScreen(Assets.SCREEN_MAIN_MENU, false);
+		//screenManager.setScreen(Assets.SCREEN_MAIN_MENU, false);
 	}
 
 	@Override
