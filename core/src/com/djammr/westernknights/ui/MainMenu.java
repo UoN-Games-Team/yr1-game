@@ -118,6 +118,8 @@ public class MainMenu extends UIView {
         btnCredits.setVisible(false);
         btnAchievements.setVisible(false);
         btnPlayerStats.setVisible(false);
+
+        Assets.mainTheme.play();
     }
 
     @Override

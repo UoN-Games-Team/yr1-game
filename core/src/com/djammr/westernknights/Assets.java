@@ -2,6 +2,7 @@ package com.djammr.westernknights;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -36,6 +37,9 @@ public class Assets {
     public static final String skinDefaultJson = "images/ui/skins/default/uiskin.json";
     public static final String libGDXLogo = "images/ui/libgdx_logo.png";
     public static final String studioLogo = "images/ui/djammr_logo.png";
+
+    // Sounds
+    public static Music mainTheme;
 
     // Overlap2D Project
     public static final String overlap2DProject = "levels/test/project.dt";
@@ -92,6 +96,9 @@ public class Assets {
         manager.setLoader(Overlap2DUISettings.class, new Overlap2DUILoader());
         // Put assets you want to cache at the start of the game here
         skinDefault = new Skin(Gdx.files.internal(skinDefaultJson));
+
+        mainTheme = Gdx.audio.newMusic(Gdx.files.internal("audio/wild_west.mp3"));
+        mainTheme.setLooping(true);
     }
 
     /**
