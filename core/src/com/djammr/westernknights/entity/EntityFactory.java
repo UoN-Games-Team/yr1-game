@@ -142,7 +142,7 @@ public class EntityFactory {
      * @return the created Entity
      */
     public static Entity createEnemy(String entityID, Box2DSystem box2DSystem, float width, float height, List<Component> components, float patrolMinX, float patrolMaxX) {
-        Entity entity = createActor(entityID, box2DSystem, width, height, components);
+        Entity entity = createActor(entityID, box2DSystem, width, height, 0.5f, 0.3f, components);
         entity.add(new BehaviourComponent());
         entity.getComponent(BehaviourComponent.class).controller = new EnemyController(entity, patrolMinX, patrolMaxX);
         return entity;

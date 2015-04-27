@@ -28,53 +28,59 @@ public class Assets {
     public static Map<String, BitmapFont> fonts = new HashMap<String, BitmapFont>();
 
     // Add all asset paths here and reference when loading assets
-    public static String testTexture = "images/test.png";
-    public static String loadingTexture = "images/loading.png";
+    public static final String testTexture = "images/test.png";
+    public static final String loadingTexture = "images/loading.png";
 
     // UI
     public static Skin skinDefault;
-    public static String skinDefaultJson = "images/ui/skins/default/uiskin.json";
-    public static String libGDXLogo = "images/ui/libgdx_logo.png";
-    public static String studioLogo = "images/ui/djammr_logo.png";
+    public static final String skinDefaultJson = "images/ui/skins/default/uiskin.json";
+    public static final String libGDXLogo = "images/ui/libgdx_logo.png";
+    public static final String studioLogo = "images/ui/djammr_logo.png";
 
     // Overlap2D Project
-    public static String overlap2DProject = "levels/test/project.dt";
-    public static String overlap2DAtlas = "levels/test/orig/pack.atlas";
-    public static String overlap2DFonts = "levels/test/freetypefonts";
+    public static final String overlap2DProject = "levels/test/project.dt";
+    public static final String overlap2DAtlas = "levels/test/orig/pack.atlas";
+    public static final String overlap2DFonts = "levels/test/freetypefonts";
 
     //UI Project
-    public static String overlap2DUIProject = "ui/project.dt";
-    public static String overlap2DUIAtlas = "ui/orig/pack.atlas";
-    public static String overlap2DUIFonts = "ui/freetypefonts";
+    public static final String overlap2DUIProject = "ui/project.dt";
+    public static final String overlap2DUIAtlas = "ui/orig/pack.atlas";
+    public static final String overlap2DUIFonts = "ui/freetypefonts";
 
     //Level Project
-    public static String overlap2DLevelProject = "levels/project.dt";
-    public static String overlap2DLevelAtlas = "levels/orig/pack.atlas";
+    public static final String overlap2DLevelProject = "levels/project.dt";
+    public static final String overlap2DLevelAtlas = "levels/orig/pack.atlas";
 
     // Scenes
-    public static String lvlTestLevel = "levels/test/scenes/MainScene.dt";
-    public static String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
-    public static String lvlTradingArea = "levels/scenes/trading_area.dt";
-    public static String lvlRivertown = "levels/scenes/rivertown.dt";
-    public static String uiDebug = "levels/test/scenes/DebugUI.dt";
-    public static String uiHud = "ui/scenes/player_hud.dt";
-    public static String uiMainMenu = "ui/scenes/mainMenu.dt";
-    public static String uiLoading = "ui/scenes/loadingScreen.dt";
-    public static String uiInventory = "ui/scenes/inventoryMenu.dt";
+    public static final String lvlTestLevel = "levels/test/scenes/MainScene.dt";
+    public static final String lvlTestLevelNight = "levels/test/scenes/TestLevel_night.dt";
+    public static final String lvlTradingArea = "levels/scenes/trading_area.dt";
+    public static final String lvlRivertown = "levels/scenes/rivertown.dt";
+    public static final String uiDebug = "levels/test/scenes/DebugUI.dt";
+    public static final String uiHud = "ui/scenes/player_hud.dt";
+    public static final String uiMainMenu = "ui/scenes/mainMenu.dt";
+    public static final String uiLoading = "ui/scenes/loadingScreen.dt";
+    public static final String uiInventory = "ui/scenes/inventoryMenu.dt";
 
     // Loaded Scene IDs
-    public static String lvlTest = "lvlTest";
-    public static String lvlTradingAreaID = "lvlTradingArea";
-    public static String lvlRivertownID = "lvlRivertown";
-    public static String uiDebugID = "uiDebug";
-    public static String uiHudID = "uiHud";
-    public static String uiMainMenuID = "uiMainMenu";
-    public static String uiLoadingID = "uiLoading";
-    public static String uiInventoryID = "uiInventory";
+    public static final String lvlTest = "lvlTest";
+    public static final String lvlTradingAreaID = "lvlTradingArea";
+    public static final String lvlRivertownID = "lvlRivertown";
+    public static final String uiDebugID = "uiDebug";
+    public static final String uiHudID = "uiHud";
+    public static final String uiMainMenuID = "uiMainMenu";
+    public static final String uiLoadingID = "uiLoading";
+    public static final String uiInventoryID = "uiInventory";
 
     // Key Maps
     public static String keyMapDefault = "data/keymaps/default_key_map.json";
     public static String controllerMapDefault = "data/keymaps/default_controller_map.json";
+
+    // Screen IDs
+    public static final String SCREEN_SPLASH = "splash";
+    public static final String SCREEN_MAIN_MENU = "main_menu";
+    public static final String SCREEN_GAME = "game";
+    public static final String SCREEN_LOADING = "loading";
 
 
     /**

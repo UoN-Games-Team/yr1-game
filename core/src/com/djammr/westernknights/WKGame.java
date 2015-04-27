@@ -46,14 +46,14 @@ public class WKGame extends Game {
 		keyMaps.loadDefaultControllerMap();
 
 		screenManager = new ScreenManager(this);
-		screenManager.addScreen("splash_screen", new SplashScreen(this));
-		screenManager.addScreen("main_menu", new MainMenuScreen(this));
-		screenManager.addScreen("game", new GameScreen(this));
+		screenManager.addScreen(Assets.SCREEN_SPLASH, new SplashScreen(this));
+		screenManager.addScreen(Assets.SCREEN_MAIN_MENU, new MainMenuScreen(this));
+		screenManager.addScreen(Assets.SCREEN_GAME, new GameScreen(this));
 
-		screenManager.getScreen("splash_screen").load();
-		//screenManager.setScreen("splash_screen", false);
-		screenManager.getScreen("main_menu").load();
-		screenManager.setScreen("main_menu", false);
+		screenManager.getScreen(Assets.SCREEN_SPLASH).load();
+		//screenManager.setScreen(Assets.SCREEN_SPLASH, false);
+		screenManager.getScreen(Assets.SCREEN_MAIN_MENU).load();
+		screenManager.setScreen(Assets.SCREEN_MAIN_MENU, false);
 	}
 
 	@Override

@@ -4,19 +4,27 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.*;
 import com.djammr.westernknights.util.input.keybindings.GameActions;
 import com.djammr.westernknights.util.observers.InputObserver;
+import com.djammr.westernknights.util.observers.Observable;
+import com.djammr.westernknights.util.observers.Observer;
 import com.djammr.westernknights.util.observers.ObserverKeys;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Executes commands best on input events from an {@link com.djammr.westernknights.util.observers.InputObservable} <br/>
- * This should ideally act as a Controller type object for specific Components
+ * Dispatches messages on certain input events after checks have been performed
  */
-public class InputSystem extends IteratingSystem implements InputObserver {
+public class InputSystem extends IteratingSystem implements InputObserver, Observable {
 
     private ComponentMapper<MovementComponent> mvm = ComponentMapper.getFor(MovementComponent.class);
     private ComponentMapper<StatComponent> statm = ComponentMapper.getFor(StatComponent.class);
@@ -33,6 +41,12 @@ public class InputSystem extends IteratingSystem implements InputObserver {
         super(Family.all(PlayerComponent.class, MovementComponent.class, Box2DComponent.class).get());
     }
 
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        removeObservers();
+        notifyObservers();
+    }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
@@ -56,9 +70,11 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                 switch (event) {
                     case GameActions.PLAYER_LEFT:
                         mvc.left = true;
+                        mvc.right = false;
                         break;
                     case GameActions.PLAYER_RIGHT:
                         mvc.right = true;
+                        mvc.left = false;
                         break;
                     case GameActions.PLAYER_ATTACK_LIGHT:
                         stc.state = EntityStates.ATTACKING_MELEE;
@@ -70,7 +86,7 @@ public class InputSystem extends IteratingSystem implements InputObserver {
                     case GameActions.PLAYER_INTERACT:
                         WKGame.logger.logDebug(playerUserData.collidingSensor);
                         if (playerUserData.collidingSensor.equals("bounty_board")) {
-                            WKGame.logger.logDebug("Loading RiverTown");
+                            addObserverData(ObserverKeys.CHANGE_WORLD, Assets.lvlRivertownID);
                         }
                         break;
 
@@ -97,5 +113,41 @@ public class InputSystem extends IteratingSystem implements InputObserver {
         stc = stm.get(entity);
         playerUserData = (Box2DUserData)entity.getComponent(Box2DComponent.class).body.getUserData();
         //msgc = msgm.get(entity);
+    }
+
+    // Observer stuff
+    private List<Observer> observers = new ArrayList<>();
+    private List<Observer> observerRemoveQueue = new ArrayList<>();
+    private final Map<String, Object> data = new HashMap<String, Object>();
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+    public void removeObserver(Observer o) {
+        //observers.remove(o);
+        observerRemoveQueue.add(o);
+    }
+
+    private void removeObservers() {
+        for (Observer observer : observerRemoveQueue) {
+            observers.remove(observer);
+        }
+    }
+
+    /**
+     * Sends this instance and a data HashMap<String, Object> to all Observers, use for a push implementation.<br/>
+     * The data map is cleared once all observers have been notified.
+     */
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            if (!observerRemoveQueue.contains(observer)) observer.update(this, data);
+        }
+        data.clear();
+    }
+
+    /**
+     * Add data item to be sent to observers when notifyObservers() is called
+     */
+    public void addObserverData(String key, Object data) {
+        this.data.put(key, data);
     }
 }

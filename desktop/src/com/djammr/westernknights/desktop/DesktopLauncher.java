@@ -1,5 +1,6 @@
 package com.djammr.westernknights.desktop;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.djammr.westernknights.WKGame;
@@ -13,6 +14,7 @@ public class DesktopLauncher {
 		cfg.width = WKGame.SCREEN_WIDTH;
 		cfg.height = WKGame.SCREEN_HEIGHT;
 		cfg.fullscreen = false;
+		cfg.addIcon("images/game_logo.png", Files.FileType.Internal);
 
 		/* Borderless Window
 		System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");

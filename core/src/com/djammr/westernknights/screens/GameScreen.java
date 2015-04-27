@@ -15,6 +15,9 @@ import com.djammr.westernknights.util.controllers.GameMenuController;
 import com.djammr.westernknights.util.controllers.PlayerHUDController;
 import com.djammr.westernknights.util.controllers.UIController;
 import com.djammr.westernknights.util.input.InputMapper;
+import com.djammr.westernknights.util.observers.Observable;
+import com.djammr.westernknights.util.observers.Observer;
+import com.djammr.westernknights.util.observers.ObserverKeys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +27,7 @@ import java.util.Map;
 /**
  * Main Game screen
  */
-public class GameScreen extends WKScreen {
+public class GameScreen extends WKScreen implements Observer {
 
     private InputMapper inputMapper = new InputMapper();
     private Map<String, WKWorld> worlds = new HashMap<String, WKWorld>();
@@ -51,7 +54,7 @@ public class GameScreen extends WKScreen {
         uiViews.put("player_hud", new PlayerHUD((PlayerHUDController) uiControllers.get("player_hud")));
 
         uiControllers.put("game_menu", new GameMenuController(this));
-        uiViews.put("game_menu", new GameMenu((GameMenuController)uiControllers.get("game_menu")));
+        uiViews.put("game_menu", new GameMenu((GameMenuController) uiControllers.get("game_menu")));
     }
 
     @Override
@@ -92,13 +95,18 @@ public class GameScreen extends WKScreen {
      * @param name name/ID the world was registered as
      */
     public void setWorld(String name) {
-        if (game.getScreens().getCurrentScreenID().equals("game")) game.getScreens().setScreen("loading");
+        if (game.getScreens().getCurrentScreenID().equals("game")) {
+            game.getScreens().setScreen("loading", false);
+            ((LoadingScreen)game.getScreens().getScreen()).setTarget("game");
+        }
         if (currentWorld != null) {
             inputMapper.removeObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
+            currentWorld.getEntities().getEngine().getSystem(InputSystem.class).removeObserver(this);
         }
         currentWorld = worlds.get(name);
         currentWorld.doLoad();
         inputMapper.registerObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
+        currentWorld.getEntities().getEngine().getSystem(InputSystem.class).registerObserver(this);
     }
 
     /**
@@ -120,5 +128,14 @@ public class GameScreen extends WKScreen {
 
     public InputMapper getInputMapper() {
         return inputMapper;
+    }
+
+    @Override
+    public void update(Observable obs, Map<String, Object> data) {
+        if (data.containsKey(ObserverKeys.CHANGE_WORLD)) {
+            if (worlds.containsKey(data.get(ObserverKeys.CHANGE_WORLD))) {
+                setWorld((String)data.get(ObserverKeys.CHANGE_WORLD));
+            }
+        }
     }
 }

@@ -263,9 +263,12 @@ public class Overlap2DLoader {
         }
         // --- Enemy
         else if (entityType != null && entityType.equals(WKWorld.ENEMY_TYPE)) {
-            entity = EntityFactory.createEnemy(item.itemIdentifier, b2dSystem, 2.3f, 3f, components, 1f, WKGame.PIXELS_TO_METERS * 2500f);
+            float minX;
+            float maxX;
+            minX = entityManager.getEntity(item.itemIdentifier + "_node_" + 1).getComponent(TransformComponent.class).x;
+            maxX = entityManager.getEntity(item.itemIdentifier + "_node_" + 2).getComponent(TransformComponent.class).x;
+            entity = EntityFactory.createEnemy(item.itemIdentifier, b2dSystem, 2.3f, 3f, components, minX, maxX);
             customVars.setVariable("filter_category", "enemy");
-            //((NPCController)entity.getComponent(BehaviourComponent.class).controller).getSteerable().setBoundaries(0f, 3000f);
         }
         // --- NPC
         else if (entityType != null && entityType.equals(WKWorld.NPC_TYPE)) {
@@ -544,7 +547,7 @@ public class Overlap2DLoader {
     public static MeshData loadMesh(ProjectInfoVO projectVO, MainItemVO item) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.values()[item.physicsBodyData.bodyType];
-        bodyDef.allowSleep = item.physicsBodyData.allowSleep;
+        bodyDef.allowSleep = true; //item.physicsBodyData.allowSleep;
         bodyDef.gravityScale = item.physicsBodyData.gravityScale;
         bodyDef.awake = item.physicsBodyData.awake;
         bodyDef.bullet = item.physicsBodyData.bullet;

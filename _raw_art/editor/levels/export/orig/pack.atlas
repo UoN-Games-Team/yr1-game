@@ -6,120 +6,169 @@ filter: Linear,Linear
 repeat: none
 alchemist
   rotate: false
-  xy: 2, 903
+  xy: 2564, 2410
   size: 1000, 657
   orig: 1000, 657
   offset: 0, 0
   index: -1
 background
   rotate: false
-  xy: 2, 3129
+  xy: 2, 3069
   size: 4000, 942
   orig: 4000, 942
   offset: 0, 0
   index: -1
+black
+  rotate: false
+  xy: 953, 780
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 blacksmith
   rotate: false
-  xy: 2087, 2510
+  xy: 2564, 1908
   size: 671, 500
   orig: 671, 500
   offset: 0, 0
   index: -1
+blank
+  rotate: false
+  xy: 3566, 2434
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
 bountyboard
   rotate: false
-  xy: 2, 2
+  xy: 2087, 1231
   size: 273, 243
   orig: 273, 243
   offset: 0, 0
   index: -1
 bountyoffice
   rotate: false
-  xy: 2, 1562
+  xy: 2, 780
   size: 949, 1219
   orig: 949, 1219
   offset: 0, 0
   index: -1
 fence
   rotate: false
-  xy: 2, 2783
+  xy: 2, 2001
   size: 2044, 344
   orig: 2044, 344
   offset: 0, 0
   index: -1
+floorrivertown
+  rotate: false
+  xy: 953, 915
+  size: 1579, 120
+  orig: 1579, 120
+  offset: 0, 0
+  index: -1
+floorrivertownsingle
+  rotate: false
+  xy: 2, 2
+  size: 403, 120
+  orig: 403, 120
+  offset: 0, 0
+  index: -1
 floorsand
   rotate: false
-  xy: 2048, 3012
+  xy: 953, 798
   size: 2000, 115
   orig: 2000, 115
   offset: 0, 0
   index: -1
 lantern
   rotate: false
-  xy: 4004, 3741
+  xy: 2386, 2015
   size: 35, 330
   orig: 35, 330
   offset: 0, 0
   index: -1
 node
   rotate: false
-  xy: 904, 851
+  xy: 904, 728
   size: 25, 50
   orig: 25, 50
   offset: 0, 0
   index: -1
 outfitter
   rotate: false
-  xy: 953, 1819
+  xy: 953, 1037
   size: 1132, 962
   orig: 1132, 962
   offset: 0, 0
   index: -1
 plant
   rotate: false
-  xy: 2760, 2560
+  xy: 2087, 1101
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 playerhouse
   rotate: false
-  xy: 953, 1602
+  xy: 2087, 1476
   size: 375, 215
   orig: 375, 215
   offset: 0, 0
   index: -1
+rivertownbackground
+  rotate: false
+  xy: 2, 2347
+  size: 2560, 720
+  orig: 2560, 720
+  offset: 0, 0
+  index: -1
 sky
   rotate: false
-  xy: 2425, 2252
+  xy: 3237, 1830
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 skyday
   rotate: false
-  xy: 2760, 2690
+  xy: 3237, 2088
   size: 320, 320
   orig: 320, 320
   offset: 0, 0
   index: -1
 skynight
   rotate: false
-  xy: 2087, 1856
+  xy: 2087, 1693
   size: 320, 320
   orig: 320, 320
   offset: 0, 0
   index: -1
 smoke
   rotate: false
-  xy: 2087, 2178
+  xy: 2048, 2015
   size: 336, 330
   orig: 336, 330
   offset: 0, 0
   index: -1
 stable
   rotate: false
-  xy: 2, 247
+  xy: 2, 124
   size: 900, 654
   orig: 900, 654
+  offset: 0, 0
+  index: -1
+torch
+  rotate: false
+  xy: 4004, 3933
+  size: 62, 78
+  orig: 62, 78
+  offset: 0, 0
+  index: -1
+watchtower
+  rotate: false
+  xy: 3566, 2446
+  size: 502, 621
+  orig: 502, 621
   offset: 0, 0
   index: -1

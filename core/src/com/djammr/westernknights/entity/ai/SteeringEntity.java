@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
+import com.badlogic.gdx.ai.steer.behaviors.Seek;
 import com.badlogic.gdx.ai.steer.behaviors.Wander;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -49,7 +50,7 @@ public class SteeringEntity implements Steerable<Vector2> {
 
             mvc.right = false;
             mvc.left = false;
-            if (targetEntity == null) {
+            if (!(getSteeringBehavior() instanceof Seek)) {
                 // TODO: Move to behaviour and track back to patrol area
                 if (minX != null && steeringOutput.linear.x < 0 && getPosition().x - 0.1 < minX) applySteering = false;
                 else if (maxX != null && steeringOutput.linear.x > 0 && getPosition().x + 0.1 > maxX)
