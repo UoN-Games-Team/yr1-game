@@ -23,7 +23,9 @@ public class MessagingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         msgc = msgm.get(entity);
-        for (Observer observer : msgc.observers) observer.update(msgc, msgc.data);
+        for (Observer observer : msgc.observers) {
+            if (!msgc.data.isEmpty()) observer.update(msgc, msgc.data);
+        }
         msgc.data.clear();
     }
 

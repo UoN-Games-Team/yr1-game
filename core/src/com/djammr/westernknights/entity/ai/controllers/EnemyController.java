@@ -59,6 +59,13 @@ public class EnemyController extends AIController implements ProximityCallback {
         //renderer.rect(steerable.getPosition().x - proximityBehaviour.getDetectionRadius(), steerable.getPosition().y-proximityBehaviour.getDetectionRadius(), proximityBehaviour.getDetectionRadius()*2, proximityBehaviour.getDetectionRadius()*2);
     }
 
+    @Override
+    public void reset() {
+        proximityBehaviour = new RadiusProximity(steerable, steerable.getBody().getWorld(), 6);
+        steerable.setSteeringBehavior(new Patrol2D(steerable));
+        steerable.setMaxLinearSpeed(patrolSpeed);
+    }
+
     public SteeringEntity getSteerable() {
         return steerable;
     }

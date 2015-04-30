@@ -11,7 +11,7 @@ import com.djammr.westernknights.util.spriter.LibGdxLoader;
 /**
  * Holds Spriter data
  */
-public class SpriterComponent extends Component {
+public class SpriterComponent extends WKComponent {
 
     public PlayerTweener player;
     public LibGdxLoader loader;
@@ -44,5 +44,10 @@ public class SpriterComponent extends Component {
     }
     public void setSecondAnim(String name) {
         setAnim(1, name, defaultWeight);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

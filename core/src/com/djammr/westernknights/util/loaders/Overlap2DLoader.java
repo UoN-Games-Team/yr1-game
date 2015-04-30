@@ -119,13 +119,11 @@ public class Overlap2DLoader {
         Overlap2DLoader.entityManager = entityManager;
 
         // Global Stuff
-        //entityManager.getEngine().getSystem(RenderingSystem.class).bgColour = sceneVO.ambientColor;
-        //b2dSystem.getRayHandler().setAmbientLight(0.2f, 0.2f, 0.2f, (scenePath.toString().contains("night"))? 0.1f : 0.8f); // TODO: no longer using the _night suffix
-        WKWorld.AMBIENT_COLOUR.r = sceneVO.ambientColor[0];
-        WKWorld.AMBIENT_COLOUR.g = sceneVO.ambientColor[1];
-        WKWorld.AMBIENT_COLOUR.b = sceneVO.ambientColor[2];
-        WKWorld.AMBIENT_COLOUR.a = (scenePath.toString().contains("night"))? WKWorld.AMBIENT_ALPHA_NIGHT : WKWorld.AMBIENT_ALPHA_DAY;
-        b2dSystem.getRayHandler().setAmbientLight(WKWorld.AMBIENT_COLOUR);
+        b2dSystem.ambientColour.r = sceneVO.ambientColor[0];
+        b2dSystem.ambientColour.g = sceneVO.ambientColor[1];
+        b2dSystem.ambientColour.b = sceneVO.ambientColor[2];
+        b2dSystem.ambientColour.a = (scenePath.toString().contains("night"))? WKWorld.AMBIENT_ALPHA_NIGHT : WKWorld.AMBIENT_ALPHA_DAY;
+        b2dSystem.getRayHandler().setAmbientLight(b2dSystem.ambientColour);
 
         // Add Scene
         addScene(sceneVO, SceneType.MAP);
@@ -307,10 +305,10 @@ public class Overlap2DLoader {
 
         // --- Set Position
         TransformComponent transc = transm.get(entity);
-        transc.x = item.x * WKGame.PIXELS_TO_METERS;
-        transc.y = item.y * WKGame.PIXELS_TO_METERS;
+        transc.x = transc.origX = item.x * WKGame.PIXELS_TO_METERS;
+        transc.y = transc.origY = item.y * WKGame.PIXELS_TO_METERS;
         transc.z = Integer.parseInt(layers.indexOf(item.layerName) + "" + item.zIndex); // resolves z-index layer clashes
-        transc.rotation = item.rotation;
+        transc.rotation = transc.origRotation= item.rotation;
         if (entity.getComponent(Box2DComponent.class) != null) {
             entity.getComponent(Box2DComponent.class).body.setTransform(transc.x, transc.y, transc.rotation * MathUtils.degRad);
             ((Box2DUserData)entity.getComponent(Box2DComponent.class).body.getUserData()).id = item.itemIdentifier;

@@ -17,4 +17,5 @@ public abstract class AIController {
 
     public abstract void update(float deltaTime);
     public abstract void debugRender(ShapeRenderer renderer);
+    public abstract void reset();
 }

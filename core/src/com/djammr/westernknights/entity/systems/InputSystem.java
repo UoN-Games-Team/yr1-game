@@ -86,6 +86,8 @@ public class InputSystem extends IteratingSystem implements InputObserver, Obser
                     case GameActions.PLAYER_INTERACT:
                         if (playerUserData.collidingSensor.equals("bounty_board")) {
                             addObserverData(ObserverKeys.CHANGE_WORLD, Assets.lvlRivertownID);
+                        } else if (playerUserData.collidingSensor.equals("sensor_ta")) {
+                            addObserverData(ObserverKeys.CHANGE_WORLD, Assets.lvlTradingAreaID);
                         }
                         break;
 
@@ -119,7 +121,7 @@ public class InputSystem extends IteratingSystem implements InputObserver, Obser
     private List<Observer> observerRemoveQueue = new ArrayList<>();
     private final Map<String, Object> data = new HashMap<String, Object>();
     public void registerObserver(Observer o) {
-        observers.add(o);
+        if (!observers.contains(o)) observers.add(o);
     }
     public void removeObserver(Observer o) {
         //observers.remove(o);

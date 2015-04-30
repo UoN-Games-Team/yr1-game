@@ -88,6 +88,12 @@ public abstract class WKScreen implements Screen {
         uiControllers.clear();
     }
 
+    public void resetViews() {
+        for (UIController controller : uiControllers.values()) {
+            controller.resetView();
+        }
+    }
+
     public boolean isPaused() {
         return paused;
     }

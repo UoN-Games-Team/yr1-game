@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Observable based component for event messaging
  */
-public class MessagingComponent extends Component implements Observable{
+public class MessagingComponent extends WKComponent implements Observable{
 
     public List<Observer> observers = new ArrayList<>();
     public final Map<String, Object> data = new HashMap<String, Object>();
@@ -23,7 +23,6 @@ public class MessagingComponent extends Component implements Observable{
         observers.remove(o);
     }
 
-
     public void notifyObservers() {
         throw new UnsupportedOperationException("MessagingSystem handles the notifying of ECS observers");
     }
@@ -33,5 +32,10 @@ public class MessagingComponent extends Component implements Observable{
      */
     public void addObserverData(String key, Object data) {
         this.data.put(key, data);
+    }
+
+    @Override
+    public void reset() {
+        // Possibly remove observers
     }
 }

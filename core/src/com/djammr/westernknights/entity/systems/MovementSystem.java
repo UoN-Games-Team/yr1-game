@@ -10,6 +10,7 @@ import com.djammr.westernknights.entity.EntityStates;
 import com.djammr.westernknights.entity.components.Box2DComponent;
 import com.djammr.westernknights.entity.components.MovementComponent;
 import com.djammr.westernknights.entity.components.StateComponent;
+import com.djammr.westernknights.entity.components.TransformComponent;
 
 /**
  * Handles movement via flags
@@ -46,6 +47,7 @@ public class MovementSystem extends IteratingSystem {
                 b2dc.body.applyLinearImpulse(mvc.speed / 2, ((stc.onGround)? -1f : 0),
                         b2dc.body.getWorldCenter().x, b2dc.body.getWorldCenter().y, true);
             }
+
             //stc.state = (stc.state != EntityStates.MOVING)? stc.state & EntityStates.MOVING : EntityStates.MOVING;
             stc.state = EntityStates.MOVING;
         }

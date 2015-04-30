@@ -21,11 +21,11 @@ public class DaySystem extends EntitySystem {
 
     private float skyDayAlpha = 1;
     private double alpha;
-    private int speed = 45; // 256
+    private int speed = 256; // 256
     private boolean toDay = false; // Transition: to day=1, to night=0
     private Entity skyboxDay;
     private Entity skyboxNight;
-    private RayHandler rayHandler;
+    private Box2DSystem b2dSystem;
 
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private ComponentMapper<VisualComponent> vism = ComponentMapper.getFor(VisualComponent.class);
@@ -80,11 +80,11 @@ public class DaySystem extends EntitySystem {
         else if (alpha > WKWorld.AMBIENT_ALPHA_DAY) alpha = WKWorld.AMBIENT_ALPHA_DAY;
         //if (alpha >= WKWorld.AMBIENT_ALPHA_DAY && toDay) toDay = false;
         //else if (alpha <= WKWorld.AMBIENT_ALPHA_NIGHT && !toDay) toDay = true;
-        if (rayHandler != null) rayHandler.setAmbientLight(WKWorld.AMBIENT_COLOUR.r, WKWorld.AMBIENT_COLOUR.g, WKWorld.AMBIENT_COLOUR.b, (float)alpha);
+        if (b2dSystem != null) b2dSystem.getRayHandler().setAmbientLight(b2dSystem.ambientColour.r, b2dSystem.ambientColour.g, b2dSystem.ambientColour.b, (float)alpha);
     }
 
-    public void setRayHandler(RayHandler rayHandler) {
-        this.rayHandler = rayHandler;
+    public void setB2dSystem(Box2DSystem b2dSystem) {
+        this.b2dSystem = b2dSystem;
     }
 
     public void setSkyBoxes(Entity skyboxDay, Entity skyboxNight) {

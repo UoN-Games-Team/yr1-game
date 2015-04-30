@@ -35,6 +35,11 @@ public class NPCController extends AIController {
                 steerable.getPosition().y, 0.2f);
     }
 
+    @Override
+    public void reset() {
+
+    }
+
     public SteeringEntity getSteerable() {
         return steerable;
     }

@@ -21,4 +21,9 @@ public class PlayerHUDController extends UIController {
         super.setView(view);
         ((GameScreen)screen).getWorld().getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER).getComponent(MessagingComponent.class).registerObserver(this.view);
     }
+
+    @Override
+    public void resetView() {
+        ((GameScreen)screen).getWorld().getEntities().getEntity(WKWorld.PLAYER_IDENTIFIER).getComponent(MessagingComponent.class).removeObserver(this.view);
+    }
 }

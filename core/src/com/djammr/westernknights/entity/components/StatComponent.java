@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Holds stat data
  */
-public class StatComponent extends Component {
+public class StatComponent extends WKComponent {
 
     public float healthChange = 0; // Amount of health to add/subtract this tick
     public float maxHealth = 1000;
@@ -19,4 +19,9 @@ public class StatComponent extends Component {
     public int level = 1;
 
     public float attack = 10;
+
+    @Override
+    public void reset() {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.djammr.westernknights.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
@@ -99,11 +100,15 @@ public class GameScreen extends WKScreen implements Observer {
             game.getScreens().setScreen("loading", false);
             ((LoadingScreen)game.getScreens().getScreen()).setTarget("game");
         }
+        // Clean up observers if switching from a world
         if (currentWorld != null) {
             inputMapper.removeObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
-            currentWorld.getEntities().getEngine().getSystem(InputSystem.class).removeObserver(this);
+            //currentWorld.getEntities().getEngine().getSystem(InputSystem.class).removeObserver(this);
+            resetViews();
         }
+        // TODO: (Full Game) Player stats or instance needs copying to the new level
         currentWorld = worlds.get(name);
+        if (currentWorld.isLoaded()) currentWorld.reset();
         currentWorld.doLoad(new Runnable() {
             @Override
             public void run() {

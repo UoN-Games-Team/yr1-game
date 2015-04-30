@@ -17,7 +17,7 @@ public class WKObservable implements Observable {
 
 
     public void registerObserver(Observer o) {
-        observers.add(o);
+        if (!observers.contains(o)) observers.add(o);
     }
 
     public void removeObserver(Observer o) {

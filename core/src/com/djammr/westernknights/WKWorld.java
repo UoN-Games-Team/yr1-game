@@ -13,7 +13,7 @@ public abstract class WKWorld {
     // Lighting
     public static float AMBIENT_ALPHA_DAY = 0.8f;
     public static float AMBIENT_ALPHA_NIGHT = 0.1f;
-    public static final Color AMBIENT_COLOUR = new Color();  // Update from Overlap2DLoader and RayHandler ambient light should be set from this.
+    //public static final Color AMBIENT_COLOUR = new Color();  // Update from Overlap2DLoader and RayHandler ambient light should be set from this. UPDATE: A Box2D System has it's own ambient color
     // Entities
     public static final float PLAYER_WIDTH = 0.5f;
     public static final float PLAYER_HEIGHT = 1.8f;
@@ -59,11 +59,13 @@ public abstract class WKWorld {
             entities.getEngine().getSystem(RenderingSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
             entities.getEngine().getSystem(Box2DSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
             entities.getEngine().getSystem(ParallaxSystem.class).setCamera(entities.getEngine().getSystem(CameraSystem.class).getCamera());
-            entities.getEngine().getSystem(DaySystem.class).setRayHandler(entities.getEngine().getSystem(Box2DSystem.class).getRayHandler());
+            entities.getEngine().getSystem(DaySystem.class).setB2dSystem(entities.getEngine().getSystem(Box2DSystem.class));
 
             // load subclass
             load(callBack);
             loaded = true;
+        } else {
+            if (callBack != null) callBack.run();
         }
     }
     public final void doLoad() {
@@ -78,7 +80,6 @@ public abstract class WKWorld {
      */
     public abstract void load(final Runnable callBack);
 
-
     public void update(float delta) {
         entities.update(delta);
     }
@@ -87,7 +88,16 @@ public abstract class WKWorld {
         if (entities != null) entities.dispose();
     }
 
+    /** Resets all entity components */
+    public void reset() {
+        entities.reset();
+    }
+
     public EntityManager getEntities() {
         return entities;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
     }
 }

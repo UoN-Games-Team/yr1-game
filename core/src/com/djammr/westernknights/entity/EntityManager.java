@@ -1,9 +1,19 @@
 package com.djammr.westernknights.entity;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.WKWorld;
+import com.djammr.westernknights.entity.components.Box2DComponent;
+import com.djammr.westernknights.entity.components.TransformComponent;
+import com.djammr.westernknights.entity.components.WKComponent;
+import com.djammr.westernknights.entity.systems.Box2DSystem;
+import com.djammr.westernknights.entity.systems.InputSystem;
+import com.djammr.westernknights.entity.systems.MovementSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +76,24 @@ public class EntityManager {
      */
     public Entity getEntity(String type) {
         return entities.get(type).get(0);
+    }
+
+    public void reset() {
+        for (Entity entity : ashley.getEntitiesFor(Family.all().get())) {
+            for (Component component : entity.getComponents()) {
+                ((WKComponent)component).reset();
+            }
+            if (entity.getComponent(Box2DComponent.class) != null
+                    && !((Box2DUserData)(entity.getComponent(Box2DComponent.class).body.getUserData())).id.equals(WKWorld.PLAYER_IDENTIFIER))
+            {
+                entity.getComponent(Box2DComponent.class).body.setAwake(true);
+                entity.getComponent(Box2DComponent.class).body.setTransform(
+                        entity.getComponent(TransformComponent.class).origX,
+                        entity.getComponent(TransformComponent.class).origY,
+                        entity.getComponent(TransformComponent.class).origRotation * MathUtils.degRad
+                );
+            }
+        }
     }
 
     /**

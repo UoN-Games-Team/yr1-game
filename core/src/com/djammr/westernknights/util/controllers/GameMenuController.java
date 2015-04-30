@@ -25,6 +25,11 @@ public class GameMenuController extends UIController {
         ((GameScreen)screen).getInputMapper().registerObserver((GameMenu)view);
     }
 
+    @Override
+    public void resetView() {
+        ((GameScreen)screen).getInputMapper().removeObserver((GameMenu) view);
+    }
+
     /**
      * Resumes or Pauses the game
      */

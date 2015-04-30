@@ -22,6 +22,9 @@ public class UIController implements Controller {
         this.view = view;
     }
 
+    /** Reset the view. Remove observers etc. */
+    public void resetView() {}
+
     public void update(float delta) {
         view.render(delta);
     }

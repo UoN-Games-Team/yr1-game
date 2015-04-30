@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Component for Parallax Settings
  */
-public class ParallaxComponent extends Component{
+public class ParallaxComponent extends WKComponent {
 
     public float intensity = 0;
 
@@ -18,5 +18,10 @@ public class ParallaxComponent extends Component{
     }
     public ParallaxComponent() {
         this(0);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }
