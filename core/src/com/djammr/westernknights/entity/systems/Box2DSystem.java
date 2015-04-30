@@ -13,8 +13,10 @@ import com.djammr.westernknights.WKGame;
 import com.djammr.westernknights.WKWorld;
 import com.djammr.westernknights.entity.Box2DUserData;
 import com.djammr.westernknights.entity.components.Box2DComponent;
+import com.djammr.westernknights.entity.components.MessagingComponent;
 import com.djammr.westernknights.entity.components.StateComponent;
 import com.djammr.westernknights.entity.components.TransformComponent;
+import com.djammr.westernknights.util.observers.ObserverKeys;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
 
     private ComponentMapper<TransformComponent> transm = ComponentMapper.getFor(TransformComponent.class);
     private ComponentMapper<Box2DComponent> b2dm = ComponentMapper.getFor(Box2DComponent.class);
+    private ComponentMapper<MessagingComponent> msgm = ComponentMapper.getFor(MessagingComponent.class);
 
     private final float physicsTimeStep = 1/45f;
     private final int maxFrameSkip = 3;
@@ -80,17 +83,23 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent posc = transm.get(entity);
         Box2DComponent b2dc = b2dm.get(entity);
+        MessagingComponent msgc = msgm.get(entity);
         //b2dc.body.setTransform(posc.x, posc.y, posc.rotation * MathUtils.degRad);
         if (((Box2DUserData)b2dc.body.getUserData()).id.equals(WKWorld.PLAYER_IDENTIFIER)) {
+            ((Box2DUserData) b2dc.body.getUserData()).collidingSensor = "";
             for (Contact contact : b2World.getContactList()) {
-                Box2DUserData userDataA = (Box2DUserData)contact.getFixtureA().getBody().getUserData();
-                Box2DUserData userDataB = (Box2DUserData)contact.getFixtureB().getBody().getUserData();
+                Box2DUserData userDataA = (Box2DUserData) contact.getFixtureA().getBody().getUserData();
+                Box2DUserData userDataB = (Box2DUserData) contact.getFixtureB().getBody().getUserData();
                 if ((userDataA != null && userDataA.id.equals(WKWorld.PLAYER_IDENTIFIER)) && (userDataB != null && userDataB.id.equals("bounty_board"))) {
                     userDataA.collidingSensor = userDataB.id;
-                }
-                else if ((userDataB != null && userDataB.id.equals(WKWorld.PLAYER_IDENTIFIER)) && (userDataA != null && userDataA.id.equals("bounty_board"))) {
+                    msgc.addObserverData(ObserverKeys.PLAYER_CAN_INTERACT, true);
+                } else if ((userDataB != null && userDataB.id.equals(WKWorld.PLAYER_IDENTIFIER)) && (userDataA != null && userDataA.id.equals("bounty_board"))) {
                     userDataB.collidingSensor = userDataA.id;
+                    msgc.addObserverData(ObserverKeys.PLAYER_CAN_INTERACT, true);
                 }
+            }
+            if (!((Box2DUserData) b2dc.body.getUserData()).collidingSensor.equals("bounty_board")) {
+                msgc.addObserverData(ObserverKeys.PLAYER_CAN_INTERACT, false);
             }
         }
     }
@@ -135,11 +144,11 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         userDataA = (Box2DUserData)bodyA.getUserData();
         userDataB = (Box2DUserData)bodyB.getUserData();
 
-        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER) && !bodyB.isSensor()) {
             userDataA.footContacts++;
             if (userDataA.footContacts > 0) userDataA.stateComponent.onGround = true;
         }
-        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER) && !bodyA.isSensor()) {
             userDataB.footContacts++;
             if (userDataB.footContacts > 0) userDataB.stateComponent.onGround = true;
         }
@@ -151,11 +160,11 @@ public class Box2DSystem extends IteratingSystem implements ContactListener {
         userDataA = (Box2DUserData)bodyA.getUserData();
         userDataB = (Box2DUserData)bodyB.getUserData();
 
-        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+        if (userDataA != null && userDataA.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER) && !bodyB.isSensor()) {
             userDataA.footContacts--;
             if (userDataA.footContacts < 1) userDataA.stateComponent.onGround = false;
         }
-        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER)) {
+        if (userDataB != null && userDataB.id.equals(WKWorld.FOOT_SENSOR_IDENTIFIER) && !bodyA.isSensor()) {
             userDataB.footContacts--;
             if (userDataB.footContacts < 1) userDataB.stateComponent.onGround = false;
         }

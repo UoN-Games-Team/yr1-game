@@ -22,7 +22,7 @@ public class Test extends WKWorld {
 
 
     @Override
-    public void load() {
+    public void load(final Runnable callBack) {
         // Box texture
         //Assets.load(Assets.testTexture, Texture.class);
 

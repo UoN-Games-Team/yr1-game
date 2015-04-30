@@ -21,7 +21,7 @@ public class DaySystem extends EntitySystem {
 
     private float skyDayAlpha = 1;
     private double alpha;
-    private int speed = 256;
+    private int speed = 45; // 256
     private boolean toDay = false; // Transition: to day=1, to night=0
     private Entity skyboxDay;
     private Entity skyboxNight;
@@ -45,28 +45,29 @@ public class DaySystem extends EntitySystem {
         else WKGame.gameTime -= gameTimeStep;
 
         // Rotation
-        //sun.setDirection(-(360 * gameTime));
-        //day_transc.rotation = (toDay)? 360 * (float)gameTime : -360 * (float)gameTime;
-        //night_transc.rotation = (toDay)? 360 * (float)gameTime : -360 * (float)gameTime;
-        double rotationStep = 180 * gameTimeStep;
+        /*double rotationStep = 180 * gameTimeStep;
         day_transc.rotation -= rotationStep;
         night_transc.rotation -= rotationStep;
         if (day_transc.rotation >= 360) day_transc.rotation = 0;
-        if (night_transc.rotation >= 360) night_transc.rotation = 0;
+        if (night_transc.rotation >= 360) night_transc.rotation = 0;*/
+        float rotation;
+        if (!toDay) {
+            rotation = (float)(180 * WKGame.gameTime + 90);
+        } else {
+            if (WKGame.gameTime > 0) {
+                rotation = (float)(360 - (180 * WKGame.gameTime - 90));
+            } else {
+                rotation = (float)(180 * WKGame.gameTime);
+            }
+        }
+        day_transc.rotation = -rotation;
+        night_transc.rotation = -rotation;
+
         if (WKGame.gameTime <= 0 && toDay) toDay = false;
         else if (WKGame.gameTime >= 1 && !toDay) toDay = true;
 
 
         // Skybox Fading
-        /*if (skyDayAlpha < 0) skyDayAlpha = 0;
-        if (skyDayAlpha > 1) skyDayAlpha = 1;
-        if (gameTime >= 0.4f && gameTime < 0.85f && skyDayAlpha > 0) {
-            day_visc.sprite.setAlpha((skyDayAlpha > 0 + Gdx.graphics.getDeltaTime())? skyDayAlpha -= Gdx.graphics.getDeltaTime() : 0);
-            //WKGame.logger.logDebug("to night");
-        } else if (gameTime >= 0.85f && skyDayAlpha < 1) {
-            //WKGame.logger.logDebug("to day");
-            day_visc.sprite.setAlpha((skyDayAlpha < 1f - Gdx.graphics.getDeltaTime())? skyDayAlpha += Gdx.graphics.getDeltaTime() : 1);
-        }*/
         skyDayAlpha = 1 - (float)WKGame.gameTime;
         if (skyDayAlpha < 0) skyDayAlpha = 0;
         if (skyDayAlpha > 1) skyDayAlpha = 1;

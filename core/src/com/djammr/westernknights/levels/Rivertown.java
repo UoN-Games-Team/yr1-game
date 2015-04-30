@@ -24,7 +24,7 @@ public class Rivertown extends WKWorld {
 
 
     @Override
-    public void load() {
+    public void load(final Runnable callBack) {
         // Level
         Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();
         params.set(Assets.overlap2DLevelProject, Assets.lvlRivertown, Assets.overlap2DLevelAtlas, getEntities());
@@ -38,6 +38,7 @@ public class Rivertown extends WKWorld {
                         0f, null);
                 getEntities().getEngine().getSystem(DaySystem.class).setSkyBoxes(getEntities().getEntity(WKWorld.SKYBOX_DAY_IDENTIFIER),
                         getEntities().getEntity(WKWorld.SKYBOX_NIGHT_IDENTIFIER));
+                if (callBack != null) callBack.run();
             }
         };
 

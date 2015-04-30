@@ -41,42 +41,42 @@ bar
   index: -1
 barBackhorizontalLeft
   rotate: false
-  xy: 1284, 964
+  xy: 4078, 3347
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barBackhorizontalMid
   rotate: false
-  xy: 1203, 459
+  xy: 2485, 1181
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barBackhorizontalRight
   rotate: false
-  xy: 1862, 1129
+  xy: 3508, 2367
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalLeft
   rotate: false
-  xy: 3848, 2899
+  xy: 2904, 2098
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalMid
   rotate: false
-  xy: 2485, 1181
+  xy: 1862, 1129
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barGreenhorizontalRight
   rotate: false
-  xy: 4078, 3347
+  xy: 3766, 2625
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
@@ -90,28 +90,28 @@ barRedhorizontalLeft
   index: -1
 barRedhorizontalMid
   rotate: false
-  xy: 413, 407
+  xy: 1203, 459
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 barRedhorizontalRight
   rotate: false
-  xy: 2904, 2098
+  xy: 3848, 2899
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 bountyMenu
   rotate: false
-  xy: 2, 1923
+  xy: 2, 1201
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 defaultMenu
   rotate: false
-  xy: 1284, 2645
+  xy: 2566, 2645
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
@@ -123,9 +123,16 @@ djammrlogo
   orig: 603, 212
   offset: 0, 0
   index: -1
+ekey
+  rotate: false
+  xy: 1284, 918
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 hpbar
   rotate: false
-  xy: 2, 427
+  xy: 1284, 1149
   size: 1199, 50
   orig: 1199, 50
   offset: 0, 0
@@ -139,7 +146,7 @@ hud
   index: -1
 inventoryMenu
   rotate: false
-  xy: 2, 1201
+  xy: 1284, 1201
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
@@ -153,28 +160,28 @@ libgdxlogo
   index: -1
 loadingBackground01
   rotate: false
-  xy: 1284, 1923
+  xy: 2, 1923
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuBackground
   rotate: false
-  xy: 2566, 2645
+  xy: 1284, 1923
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mainmenuDarkeningOverlay
   rotate: false
-  xy: 2, 479
+  xy: 1284, 2645
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 mapMenu
   rotate: false
-  xy: 1284, 1201
+  xy: 2, 479
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
@@ -195,8 +202,15 @@ test
   index: -1
 xpbar
   rotate: false
-  xy: 1284, 1149
+  xy: 2, 427
   size: 1199, 50
   orig: 1199, 50
+  offset: 0, 0
+  index: -1
+ybutton
+  rotate: false
+  xy: 413, 361
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1

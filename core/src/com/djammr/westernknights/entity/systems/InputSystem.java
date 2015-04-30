@@ -84,7 +84,6 @@ public class InputSystem extends IteratingSystem implements InputObserver, Obser
                         break;
 
                     case GameActions.PLAYER_INTERACT:
-                        WKGame.logger.logDebug(playerUserData.collidingSensor);
                         if (playerUserData.collidingSensor.equals("bounty_board")) {
                             addObserverData(ObserverKeys.CHANGE_WORLD, Assets.lvlRivertownID);
                         }

@@ -23,10 +23,7 @@ public class TradingHub extends WKWorld {
 
 
     @Override
-    public void load() {
-        // Box texture
-        //Assets.load(Assets.testTexture, Texture.class);
-
+    public void load(final Runnable callBack) {
         // Level
         Overlap2DMapLoader.Parameters params = new Overlap2DMapLoader.Parameters();
         params.set(Assets.overlap2DLevelProject, Assets.lvlTradingArea, Assets.overlap2DLevelAtlas, getEntities());
@@ -40,6 +37,8 @@ public class TradingHub extends WKWorld {
                         0f, null);
                 getEntities().getEngine().getSystem(DaySystem.class).setSkyBoxes(getEntities().getEntity(WKWorld.SKYBOX_DAY_IDENTIFIER),
                                                                                  getEntities().getEntity(WKWorld.SKYBOX_NIGHT_IDENTIFIER));
+
+                if (callBack != null) callBack.run();
             }
         };
 

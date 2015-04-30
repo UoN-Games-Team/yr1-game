@@ -104,7 +104,15 @@ public class GameScreen extends WKScreen implements Observer {
             currentWorld.getEntities().getEngine().getSystem(InputSystem.class).removeObserver(this);
         }
         currentWorld = worlds.get(name);
-        currentWorld.doLoad();
+        currentWorld.doLoad(new Runnable() {
+            @Override
+            public void run() {
+                if (isLoaded()) {
+                    uiControllers.get("player_hud").setView(uiViews.get("player_hud"));
+                    uiControllers.get("game_menu").setView(uiViews.get("game_menu"));
+                }
+            }
+        });
         inputMapper.registerObserver(currentWorld.getEntities().getEngine().getSystem(InputSystem.class));
         currentWorld.getEntities().getEngine().getSystem(InputSystem.class).registerObserver(this);
     }

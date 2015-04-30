@@ -37,8 +37,9 @@ public abstract class WKWorld {
 
     /**
      * Call externally to load the world
+     * @param callBack Optional load complete callback
      */
-    public final void doLoad() {
+    public final void doLoad(Runnable callBack) {
         if (!loaded) {
             WKGame.logger.logDebug("Loading World");
             entities = new EntityManager();
@@ -61,16 +62,21 @@ public abstract class WKWorld {
             entities.getEngine().getSystem(DaySystem.class).setRayHandler(entities.getEngine().getSystem(Box2DSystem.class).getRayHandler());
 
             // load subclass
-            load();
+            load(callBack);
             loaded = true;
         }
+    }
+    public final void doLoad() {
+        doLoad(null);
     }
 
     /**
      * Load assets and entities here. Will only run once during the world's life cycle. <br/>
      * Asset.manager.finishloading() is called automatically
+     * @param callBack Optional load complete callback
+     * TODO: (Full Game) Refactor to work like UIViews where the asset loading is handled by super (this) which runs a callback
      */
-    public abstract void load();
+    public abstract void load(final Runnable callBack);
 
 
     public void update(float delta) {

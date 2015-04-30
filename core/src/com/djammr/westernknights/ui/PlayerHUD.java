@@ -1,5 +1,8 @@
 package com.djammr.westernknights.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -7,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.djammr.westernknights.Assets;
 import com.djammr.westernknights.WKGame;
+import com.djammr.westernknights.entity.systems.InputSystem;
 import com.djammr.westernknights.util.controllers.PlayerHUDController;
 import com.djammr.westernknights.util.observers.Observable;
 import com.djammr.westernknights.util.observers.ObserverKeys;
@@ -24,6 +28,8 @@ public class PlayerHUD extends UIView {
     private Image imgHealthBar;
     private Image imgXpBar;
     private Image crest;
+    private Image imgE;
+    private Image imgY;
 
     public PlayerHUD(PlayerHUDController controller) {
         super(controller, Assets.uiHud, Assets.uiHudID);
@@ -36,6 +42,11 @@ public class PlayerHUD extends UIView {
         healthBarFullWidth = imgHealthBar.getWidth();
         xpBarFullWidth = imgXpBar.getWidth();
         imgXpBar.setWidth(0);
+
+        imgE = (Image)actors.get("img_e");
+        imgY = (Image)actors.get("img_y");
+        imgE.setVisible(false);
+        imgY.setVisible(false);
 
         crest = (Image)actors.get("crest");
     }
@@ -74,6 +85,14 @@ public class PlayerHUD extends UIView {
             catch (GdxRuntimeException ex) {
                 // No crest for target level
             }
+        }
+
+        // Interact Button
+        if (data.containsKey(ObserverKeys.PLAYER_CAN_INTERACT)) {
+            boolean canInteract = (boolean)data.get(ObserverKeys.PLAYER_CAN_INTERACT);
+            // In full game, keys would be taken from control map
+            if (Controllers.getControllers().size > 0) imgY.setVisible(canInteract);
+            else imgE.setVisible(canInteract);
         }
     }
 }
